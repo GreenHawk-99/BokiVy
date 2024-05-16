@@ -1,0 +1,9 @@
+.server-card {
+  cursor:pointer;
+  box-shadow: #1a1a1a 0 0 10px 0;
+  transition: box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: #1a1a1a 0 0 10px 2px;
+  }
+}
