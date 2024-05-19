@@ -13,8 +13,19 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                   colorPrimaryBorder: "#8d42ff"
                   //colorPrimary:'linear-gradient(135deg, rgba(1,233,115,1) 20%, rgba(141,66,255,1) 80%)'
                   //colorPrimary:'linear-gradient(135deg, #01e973 ,#8d42ff )'
+
+                  /*
+                  {
+  "token": {
+    "colorPrimary": "#01e973",
+    "colorInfo": "#01e973",
+    "colorBgBase": "#202020"
+  },
+  "algorithm": "dark"
+}
+                   */
               },
-              algorithm: [theme.darkAlgorithm, theme.defaultAlgorithm],
+              // algorithm: [theme.darkAlgorithm, theme.defaultAlgorithm]
           }}>
           <App />
       </ConfigProvider>

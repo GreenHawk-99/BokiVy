@@ -1,22 +1,21 @@
-import './App.css'
+import './App.scss'
 import { useState } from 'react';
 import {
-    AppstoreOutlined,
-    DesktopOutlined, FileOutlined,
-    MailOutlined,
-    PieChartOutlined, RadarChartOutlined,
-    SettingOutlined, TeamOutlined,
-    UserOutlined
+    AppstoreOutlined, MoonOutlined,
+    RadarChartOutlined,
+    SettingOutlined, SunOutlined, UserOutlined,
 } from '@ant-design/icons';
-import {Breadcrumb, Layout, MenuProps, theme, Typography} from 'antd';
+import {Breadcrumb, Button, Flex, Layout, MenuProps, Space, theme} from 'antd';
 import { Menu } from 'antd';
-import {GameServerVy} from "./server/GameServerVy.tsx";
+import {Router} from "./router.tsx";
+import {Header} from "antd/es/layout/layout";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 export function App() {
-    const [current, setCurrent] = useState('overview');
+    const [current, setCurrent] = useState('applications');
     const [collapsed, setCollapsed] = useState(false);
+    const [isDarkModeOn, setIsDarkModeOn] = useState<boolean>(false);
     const {token: { colorBgContainer, borderRadiusLG },} = theme.useToken();
 
     const { Content, Footer, Sider } = Layout;
@@ -28,14 +27,14 @@ export function App() {
 
     const items: MenuItem[] = [
         {
-            label: 'Overview',
-            key: 'overview',
-            icon: <RadarChartOutlined />,
-        },
-        {
             label: 'Applications',
             key: 'applications',
             icon: <AppstoreOutlined />,
+        },
+        {
+            label: 'Overview',
+            key: 'overview',
+            icon: <RadarChartOutlined />,
         },
         {
             label: 'Navigation Three - Submenu',
@@ -52,18 +51,7 @@ export function App() {
                 },
             ],
         },
-        {
-            label: "Work In Progress",
-            key: 'alipay',
-            // label: (
-            //     <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-            //         Navigation Four - Link
-            //     </a>
-            // ),
-            disabled: true
-        },
     ];
-
 
     /*function getItem(
         label: React.ReactNode,
@@ -91,6 +79,10 @@ export function App() {
         getItem('Files', '9', <FileOutlined />),
     ];*/
 
+    const toggleDarkMode = () => {
+        setIsDarkModeOn((prevMode) => !prevMode);
+    };
+
     return (
         <Layout style={{ minHeight: '100vh' }}>
             {/*<Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
@@ -98,7 +90,14 @@ export function App() {
                 <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
             </Sider>*/}
             <Layout>
-                <Menu selectedKeys={[current]} mode="horizontal" items={items} onClick={onClick} />
+                <Header style={{ display: 'flex', alignItems: 'center' }}  >
+                    <Flex className="logo" justify={"center"} align={"center"}>BOKIVY</Flex>
+                    <Menu style={{ flex: 1, minWidth: 0 }} mode="horizontal" selectedKeys={[current]} items={items} onClick={onClick} />
+                    <Space.Compact>
+                        <Button><UserOutlined /></Button>
+                        <Button onClick={toggleDarkMode}>{isDarkModeOn ? <SunOutlined /> : <MoonOutlined />}</Button>
+                    </Space.Compact>
+                </Header>
                 {/*<Header style={{ padding: 0, background: colorBgContainer }} />*/}
                 <Content style={{ margin: '0 16px' }}>
                     <Breadcrumb style={{ margin: '16px 0' }}>
@@ -114,7 +113,8 @@ export function App() {
                         }}
                     >
                         {/*Bill is a cat.*/}
-                        <GameServerVy />
+                        {/*<AppVy />*/}
+                        <Router />
                     </div>
                 </Content>
                 <Footer style={{ textAlign: 'center' }}>

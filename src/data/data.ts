@@ -56,6 +56,61 @@ export const gameServers: Array<GameServer> = [
         status:true,
         currentPlayer:6,
         maxPlayer:12
-
-    }
+    },
+    {
+        name:"Valheim",
+        ipAddress:"192.22.169.19",
+        port:"4040",
+        status:false,
+        currentPlayer:0,
+        maxPlayer:10
+    },
+    {
+        name:"Starbound",
+        ipAddress:"192.22.169.20",
+        port:"4040",
+        status:true,
+        currentPlayer:4,
+        maxPlayer:10
+    },
+    {
+        name:"Conan Exile",
+        ipAddress:"192.22.169.21",
+        port:"4040",
+        status:true,
+        currentPlayer:1,
+        maxPlayer:40
+    },
+    {
+        name:"Palworld",
+        ipAddress:"192.22.169.21",
+        port:"4040",
+        status:true,
+        currentPlayer:1,
+        maxPlayer:40
+    },
+    {
+        name:"Counter Strike 2",
+        ipAddress:"192.22.169.21",
+        port:"4040",
+        status:true,
+        currentPlayer:1,
+        maxPlayer:40
+    },
+    {
+        name:"Garry's Mod",
+        ipAddress:"192.22.169.21",
+        port:"4040",
+        status:true,
+        currentPlayer:1,
+        maxPlayer:40
+    },
+    {
+        name:"Enshrouded",
+        ipAddress:"192.22.169.21",
+        port:"4040",
+        status:true,
+        currentPlayer:1,
+        maxPlayer:40
+    },
 ]
