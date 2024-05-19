@@ -3,9 +3,9 @@ import {Button, Divider, Space, Tour, TourProps} from "antd";
 import {EllipsisOutlined, InfoCircleOutlined} from "@ant-design/icons";
 
 interface TourAppVyProps {
-    ref1: React.MutableRefObject<null>
-    ref2: React.MutableRefObject<null>
-    ref3: React.MutableRefObject<null>
+    ref1: Function,
+    ref2: Function,
+    ref3: Function,
 }
 
 export function TourAppVy({ref1,ref2,ref3}: TourAppVyProps) {

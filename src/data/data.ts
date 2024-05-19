@@ -79,38 +79,38 @@ export const gameServers: Array<GameServer> = [
         port:"4040",
         status:true,
         currentPlayer:1,
-        maxPlayer:40
+        maxPlayer:100
     },
     {
         name:"Palworld",
-        ipAddress:"192.22.169.21",
+        ipAddress:"192.22.169.22",
         port:"4040",
         status:true,
-        currentPlayer:1,
-        maxPlayer:40
+        currentPlayer:2,
+        maxPlayer:8
     },
     {
         name:"Counter Strike 2",
-        ipAddress:"192.22.169.21",
+        ipAddress:"192.22.169.23",
         port:"4040",
         status:true,
-        currentPlayer:1,
-        maxPlayer:40
+        currentPlayer:5,
+        maxPlayer:18
     },
     {
         name:"Garry's Mod",
-        ipAddress:"192.22.169.21",
+        ipAddress:"192.22.169.24",
         port:"4040",
         status:true,
         currentPlayer:1,
-        maxPlayer:40
+        maxPlayer:20
     },
     {
         name:"Enshrouded",
-        ipAddress:"192.22.169.21",
+        ipAddress:"192.22.169.25",
         port:"4040",
-        status:true,
-        currentPlayer:1,
-        maxPlayer:40
+        status:false,
+        currentPlayer:0,
+        maxPlayer:16
     },
 ]

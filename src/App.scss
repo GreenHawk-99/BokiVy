@@ -1,11 +1,17 @@
 .logo {
-  width: 120px;
-  min-width: 120px;
-  height: 32px;
-  background: rgba(255, 255, 255, .2);
-  border-radius: 6px;
-  margin-inline-end: 24px;
-  align-content: center;
+  font-size: xx-large;
+  font-style: italic;
+  font-weight: 900;
+  //color: #01e973;
+  background-image: linear-gradient(135deg, #01e973 20%, #8d42ff 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-inline: 0.4vw;
+}
+
+.logo-header {
+
 }
 
 .server-card {

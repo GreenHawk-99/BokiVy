@@ -7,7 +7,7 @@ import {imageRender} from "../utils/Checker.tsx";
 import {GameServer} from "../model/gameServer.ts";
 import {SearchAppVy} from "./SearchAppVy.tsx";
 
-export function AppVy() {
+export function AppListVy() {
     const [listSize, setListSize] = useState<number>(6);
     const [messageApi, contextHolder] = message.useMessage();
 
