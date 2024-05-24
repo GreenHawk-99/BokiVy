@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import {App} from "./App.tsx";
 import {ConfigProvider} from "antd";
+import {RouterProvider} from "react-router-dom";
+import {router} from "./router.tsx";
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -27,7 +28,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
               },
               // algorithm: [theme.darkAlgorithm, theme.defaultAlgorithm]
           }}>
-          <App />
+          <RouterProvider router={router} />
       </ConfigProvider>
   </React.StrictMode>,
 )

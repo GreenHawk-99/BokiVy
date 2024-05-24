@@ -3,11 +3,11 @@
 --------------
 
 ### BKV-En:
-- [ ] _**AppListVy**_ - Initialize project structure with the games servers view "AppListVy" and some mock up data | Component Searchbar and Tour on AppListVy include
+- [ ] _**AppListVy**_ - Initialize project structure with the games servers view "AppListVy" and some mock up data
 ### BKV-Två:
 - [ ] _**AppVy**_ - View about one application
 ### BKV-Tre:
-- [ ] _**KontoVy**_ - View about account setting
+- [ ] _**SearchAppVy**_ - Component Searchbar and Tour on AppListVy
 ### BKV-Fyra:
 - [ ] _**Hemma**_ - Home Page
 ### BKV-Fem:
