@@ -3,22 +3,22 @@
 --------------
 
 ### BKV-En:
-- [ ] _**AppListVy**_ - Initialize project structure with the games servers view "AppListVy" and some mock up data
+- [ ] _**AppListVy**_ - Initialize project structure with the games servers view "AppListVy" and some mock up data | Component Searchbar and Tour on AppListVy include
 ### BKV-Två:
-- [ ]  _**AppVy**_ - 
+- [ ] _**AppVy**_ - View about one application
 ### BKV-Tre:
-- [ ] _**OverviewVy**_ -
+- [ ] _**KontoVy**_ - View about account setting
 ### BKV-Fyra:
-- [ ] _**Rooter**_ - Initialize a router that allow the navigation with different uri
+- [ ] _**Hemma**_ - Home Page
 ### BKV-Fem:
-- [ ] _**ConfigProvider**_ - Modify and complete the config provider
+- [ ] _**OverviewVy**_ - Overview of servers data
 ### BKV-Sex:
-- [ ]  Allow the data to be sent in Bokiaegis
+- [ ]  _**Rooter**_ - Initialize a router that allow the navigation with different uri
 ### BKV-Sju:
-- [ ] _**SearchAppVy**_ - Search bar and Tour
+- [ ] _**ConfigProvider**_ - Modify and complete the config provider
 ### BKV-Åtta:
-- [ ] _**Header**_ Button functionalities
+- [ ] _**Bokaegis**_ - Allow the data to be sent in Bokaegis
 ### BKV-Nio:
-- [ ] 
+- [ ] _**Header**_ Button functionalities
 ### BKV-Tio:
-- [ ] 
+- [ ] _**V.1**_ Release V1 of Bokivy with all minor adjustment forget above

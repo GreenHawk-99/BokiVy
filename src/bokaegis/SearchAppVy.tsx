@@ -1,54 +1,49 @@
-import {Button, Input, Select, Space, Tour, TourProps} from "antd";
-import {AppstoreOutlined, InfoCircleOutlined} from "@ant-design/icons";
+import {Button, Input, Modal, Select, Space, Tour, TourProps} from "antd";
+import {AppstoreAddOutlined, InfoCircleOutlined} from "@ant-design/icons";
 import React, {useRef, useState} from "react";
-import {TourAppVy} from "./TourAppVy.tsx";
-
 
 interface SearchAppVyProps {
     listSize: number;
-    setListSize:Function;
+    setListSize:React.Dispatch<React.SetStateAction<number>>;
 }
 
 export function SearchAppVy({listSize,setListSize}: SearchAppVyProps) {
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
-
-    const sizePool: number[] = [2, 4, 6, 8, 12, 16, 20];
-
     const ref1 = useRef(null);
     const ref2 = useRef(null);
     const ref3 = useRef(null);
 
-    const sizeHandler = () => {
-        const currentIndex = sizePool.indexOf(listSize);
-        const nextIndex = (currentIndex + 1) % sizePool.length;
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
 
-        const currentSize = sizePool[nextIndex];
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
 
-        setListSize(currentSize);
-        console.log("SP: "+sizePool)
-        console.log("SPL: "+sizePool.length)
-        console.log("NI: "+nextIndex)
-        console.log("CI: "+currentSize)
-    }
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
 
-    const handleChange = (value: string) => {
+    const handleChange = (value: number) => {
         setListSize(value)
     };
 
     const steps: TourProps['steps'] = [
         {
-            title: 'Upload File',
-            description: 'Put your files here.',
+            title: 'Create a server [WIP]',
+            description: 'Still in development but you will be able to create your server on the device via this button.',
             target: () => ref1.current,
         },
         {
-            title: 'Save',
-            description: 'Save your changes.',
+            title: 'Research an server [WIP]',
+            description: 'For now a small number of server wil be hosted so no need to have right now the search bar',
             target: () => ref2.current,
         },
         {
-            title: 'Other Actions',
-            description: 'Click to see other actions.',
+            title: 'Change the card display',
+            description: 'Select the number of card you want in a row',
             target: () => ref3.current,
         },
     ];
@@ -56,22 +51,32 @@ export function SearchAppVy({listSize,setListSize}: SearchAppVyProps) {
     return (
         <>
             <Space.Compact style={{alignItems: "center"}}>
-                <Button type={"primary"} ref={ref1} style={{marginBlock: "1vh"}}
-                        onClick={sizeHandler}><AppstoreOutlined/></Button>
-                <Input.Search ref={ref2} placeholder={"Search an application"}/>
-                <Select ref={ref3} style={{width: "8vw"}} defaultValue={listSize.toString() + " (Default)"}
-                        onChange={handleChange}
-                        options={[
-                            {value: 2},
-                            {value: 4},
-                            {value: 6, label: "6 (Default)"},
-                            {value: 8},
-                            {value: 12},
-                            {value: 16},
-                            {value: 20}
-                        ]}/>
+                <Button disabled={true} type={"primary"} ref={ref1} style={{marginBlock: "1vh"}}
+                onClick={showModal}><AppstoreAddOutlined /></Button>
+                <div ref={ref2}>
+                    <Input.Search disabled={true} placeholder={"Search an application"}/>
+                </div>
+                <div ref={ref3}>
+                    <Select style={{width: "8vw"}} defaultValue={listSize}
+                            onChange={handleChange}
+                            options={[
+                                {value: 2},
+                                {value: 4},
+                                {value: 6, label: "6 (Default)"},
+                                {value: 8},
+                                {value: 12},
+                                {value: 16},
+                                {value: 20}
+                            ]}/>
+                </div>
                 <Button type={"primary"} onClick={() => setOpen(true)}><InfoCircleOutlined /></Button>
             </Space.Compact>
+            <Modal title="Create a server" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                <div>Name</div>
+                <div>Ip</div>
+                <div>port</div>
+                <div>max player</div>
+            </Modal>
             <Tour open={open} onClose={() => setOpen(false)} steps={steps}
                   indicatorsRender={(current, total) => (
                       <span>

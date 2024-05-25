@@ -7,19 +7,16 @@ import {
 } from '@ant-design/icons';
 import {Button, ConfigProvider, Divider, Flex, Layout, MenuProps, Space, theme} from 'antd';
 import {Menu} from 'antd';
-import {Router} from "./router.tsx";
-import {Header} from "antd/es/layout/layout";
+import {Content, Footer, Header} from "antd/es/layout/layout";
 import {TinyColor} from "@ctrl/tinycolor";
+import {AppListVy} from "./bokaegis/AppListVy.tsx";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 export function App() {
     const [current, setCurrent] = useState('applications');
-    const [collapsed, setCollapsed] = useState(false);
     const [isDarkModeOn, setIsDarkModeOn] = useState<boolean>(false);
-    const {token: {colorBgContainer, borderRadiusLG},} = theme.useToken();
-
-    const {Content, Footer, Sider} = Layout;
+    const {token} = theme.useToken();
 
     const onClick: MenuProps['onClick'] = (e) => {
         console.log('click ', e);
@@ -54,32 +51,6 @@ export function App() {
         },
     ];
 
-    /*function getItem(
-        label: React.ReactNode,
-        key: React.Key,
-        icon?: React.ReactNode,
-        children?: MenuItem[],
-    ): MenuItem {
-        return {
-            key,
-            icon,
-            children,
-            label,
-        } as MenuItem;
-    }
-
-    const items: MenuItem[] = [
-        getItem('Option 1', '1', <PieChartOutlined />),
-        getItem('Option 2', '2', <DesktopOutlined />),
-        getItem('User', 'sub1', <UserOutlined />, [
-            getItem('Tom', '3'),
-            getItem('Bill', '4'),
-            getItem('Alex', '5'),
-        ]),
-        getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-        getItem('Files', '9', <FileOutlined />),
-    ];*/
-
     const toggleDarkMode = () => {
         setIsDarkModeOn((prevMode) => !prevMode);
     };
@@ -98,11 +69,7 @@ export function App() {
 
     return (
         <Layout style={{minHeight: '100vh'}}>
-            {/*<Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-                <div className="demo-logo-vertical" />
-                <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
-            </Sider>*/}
-            <Layout>
+            <Layout style={{background:`linear-gradient(135deg, ${colors.join(', ')})`}}>
                 <Header style={{display: 'flex', alignItems: 'center', background: "#ffffff"}}>
                     <div className={"logo logo-header"}>BOKIVY</div>
                     <Menu style={{flex: 1, minWidth: 0}} mode="horizontal" selectedKeys={[current]} items={items}
@@ -113,23 +80,22 @@ export function App() {
                         <Button onClick={toggleDarkMode}>{isDarkModeOn ? <SunOutlined/> : <MoonOutlined/>}</Button>
                     </Space.Compact>
                 </Header>
-                {/*<Header style={{ padding: 0, background: colorBgContainer }} />*/}
                 <Content style={{
                     //  margin: '0 16px'
                     margin: '24px 16px',
                     minHeight: 280,
-                    background: colorBgContainer,
-                    borderRadius: borderRadiusLG,
+                    background: token.colorBgContainer,
+                    borderRadius: token.borderRadiusLG,
                 }}>
                     <div
                         style={{
                             padding: 24,
                             minHeight: 360,
-                            background: colorBgContainer,
-                            borderRadius: borderRadiusLG,
+                            background: token.colorBgContainer,
+                            borderRadius: token.borderRadiusLG,
                         }}
                     >
-                        <Router/>
+                        <AppListVy/>
                     </div>
                 </Content>
                 <Footer style={{textAlign: 'center'}}>
