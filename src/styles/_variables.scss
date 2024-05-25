@@ -1,0 +1,28 @@
+// Colors
+$primary-color: #01e973;
+$secondary-color: #8d42ff;
+$accent-color: #02b158;
+
+// Dark/Neutral colors
+$bg-dark: #1a1a1a;
+$bg-dark-semi: rgba(26, 26, 26, 0.5);
+$bg-dark-heavy: rgba(26, 26, 26, 0.81); // #1a1a1aD0 is ~81% alpha
+
+// Text colors
+$text-light: rgba(255, 255, 255, 0.8);
+$text-dark: #213547;
+
+// Borders & Shadows
+$border-radius-sm: 4px;
+$border-radius-base: 8px;
+$box-shadow-base: $bg-dark-semi 0 0 10px 2px;
+$box-shadow-hover: $bg-dark-semi 0 0 10px 4px;
+$box-shadow-heavy: $bg-dark-heavy 0 0 10px 2px;
+$box-shadow-heavy-hover: $bg-dark-heavy 0 0 10px 4px;
+
+// Transitions
+$transition-base: 0.2s;
+$transition-slow: 0.25s;
+
+// Layout
+$padding-vw: 0.4vw;

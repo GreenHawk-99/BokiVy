@@ -1,36 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {Layout, theme} from 'antd';
+import {Content} from "antd/es/layout/layout";
+import {Outlet} from "react-router-dom";
+import {Sidhuvud} from "./layouts/Sidhuvud.tsx";
+import {useThemeSammanhang} from "./hooks/useContext.ts";
 
-function App() {
-    const [count, setCount] = useState(0)
 
-    return (
-        <>
-            <div>
-                <a href="https://vitejs.dev" target="_blank">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://react.dev" target="_blank">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
-        </>
-    )
+/**
+ * Main application component.
+ * Acts as the entry point for global providers and the RouterProvider.
+ */
+export const App = () => {
+  const {colors} = useThemeSammanhang();
+  const {token} = theme.useToken();
+
+
+  return (
+    <Layout style={{minHeight: '100vh', background: `linear-gradient(135deg, ${colors.join(', ')})`}}>
+      <Sidhuvud/>
+      <Content style={{
+        margin: '24px 16px',
+        minHeight: 280,
+        background: token.colorBgContainer,
+        borderRadius: token.borderRadiusLG,
+      }}>
+        <div
+          style={{
+            padding: 24,
+            minHeight: 360,
+            background: token.colorBgContainer,
+            borderRadius: token.borderRadiusLG,
+          }}
+        >
+          <Outlet/>
+        </div>
+      </Content>
+    </Layout>
+  );
 }
-
-export default App
 
