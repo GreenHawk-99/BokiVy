@@ -1,0 +1,134 @@
+{
+  "common": {
+    "login": "Login",
+    "logout": "Logout",
+    "profile": "Profile",
+    "signIn": "Sign In",
+    "signInWithSteam": "Sign in through Steam",
+    "loggedInWithSteam": "Logged in through Steam",
+    "copyToClipboard": "Copied to clipboard",
+    "running": "Running",
+    "offline": "Offline",
+    "name": "Name",
+    "game": "Game",
+    "status": "Status",
+    "players": "Players",
+    "ipAddress": "IP-Address",
+    "playerCount": "Player Count",
+    "maxPlayers": "Max Players",
+    "send": "Send",
+    "ok": "OK",
+    "cancel": "Cancel",
+    "create": "Create",
+    "copy": "Copy",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "yes": "Yes",
+    "no": "No",
+    "success": "Success",
+    "error": "Error",
+    "required": "Required field",
+    "all": "All"
+  },
+  "form": {
+    "placeholderGame": "Select a game...",
+    "requiredGame": "A game is required.",
+    "placeholderName": "Enter a server name...",
+    "requiredName": "A server name is required.",
+    "requiredMaxPlayers": "A maximum of 255 players is allowed."
+  },
+  "feedback": {
+    "onSuccessCreate": "A server was successfully created.",
+    "onErrorCreate": "An error occurred while creating the server. Please try again later.",
+    "onSuccessDelete": "The server was successfully deleted.",
+    "onErrorDelete": "An error occurred while deleting the server. Please try again later.",
+    "onSuccessUpdate": "The server was successfully updated.",
+    "onErrorUpdate": "An error occurred while updating the server. Please try again later.",
+    "onSuccessRestart": "The server was successfully restarted.",
+    "onErrorRestart": "An error occurred while restarting the server. Please try again later.",
+    "onSuccessStart": "The server was successfully started.",
+    "onErrorStart": "An error occurred while starting the server. Please try again later.",
+    "onSuccessStop": "The server was successfully stopped.",
+    "onErrorStop": "An error occurred while stopping the server. Please try again later."
+  },
+  "menu": {
+    "applications": "Applications",
+    "overview": "Overview"
+  },
+  "multifalt": {
+    "searchPlaceholder": "Search servers...",
+    "createServer": "Create a server",
+    "viewType": {
+      "card": "Card View",
+      "table": "Table View"
+    },
+    "listSize": {
+      "standard": "Standard",
+      "compact": "Compact"
+    },
+    "tour": {
+      "createServer": {
+        "title": "Create a server",
+        "description": "You can create and host your own game server directly from here."
+      },
+      "search": {
+        "title": "Search",
+        "description": "Search for a server by name or IP address"
+      },
+      "viewType": {
+        "title": "View Mode",
+        "description": "Switch between card view and table view"
+      }
+    }
+  },
+  "overview": {
+    "title": "Overview",
+    "totalServers": "Total Servers",
+    "online": "Online",
+    "offline": "Offline",
+    "totalPlayers": "Total Players",
+    "avgUptime": "Avg. Uptime",
+    "backendSystems": "Backend Systems Support",
+    "serverSupervision": "Server Supervision",
+    "resourceUsage": "Resource Usage",
+    "totalCpu": "Total CPU Load",
+    "totalMemory": "Total Memory Usage",
+    "playerActivity": "Recent Activity",
+    "details": "System Details",
+    "status": "Status",
+    "version": "Version",
+    "uptime": "Uptime",
+    "responseTime": "Response Time",
+    "errorRate": "Error Rate",
+    "endpoints": "Active Endpoints",
+    "endpointsCount": "monitored endpoints",
+    "lastBackup": "Last Backup",
+    "onlineTooltip": "Click to see only online servers",
+    "serverName": "Server Name",
+    "game": "Game",
+    "players": "Players",
+    "cpu": "CPU",
+    "memory": "Memory",
+    "statusTypes": {
+      "online": "ONLINE",
+      "degraded": "DEGRADED",
+      "offline": "OFFLINE"
+    }
+  },
+  "errorPage": {
+    "unexpectedError": "Unexpected error",
+    "sorry": "Sorry, an unexpected error has occurred.",
+    "notFound": "The page you tried to reach does not seem to exist or a problem occurred during retrieval.",
+    "details": "Error Details",
+    "status": "Status",
+    "statusText": "Status Text",
+    "responseData": "Response Data",
+    "technicalDetails": "Technical details",
+    "objectDetails": "Object details",
+    "unknownObjectError": "An unknown object error occurred.",
+    "goHome": "Go to home page",
+    "reload": "Reload page",
+    "info": "Information about the error"
+  }
+}

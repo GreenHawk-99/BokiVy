@@ -1,0 +1,115 @@
+import {BackendApp, CreateGameServer, GameServer, PlayerHistory} from "../models/gameServer.ts";
+import {backendApps, gameServers, playerHistory} from "../data/data.ts";
+
+/**
+ * A mocks service that simulates CRUD operations for game servers.
+ * It uses the initial data from data.ts and keeps an in-memory state.
+ */
+class MockServerService {
+  private servers: GameServer[] = [...gameServers];
+
+  /**
+   * Retrieves all game servers.
+   */
+  async getAll(): Promise<GameServer[]> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve([...this.servers]);
+      }, 500); // Simulate network delay
+    });
+  }
+
+  /**
+   * Retrieves a game server by ID.
+   */
+  async getById(id: string): Promise<GameServer | undefined> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(this.servers.find((s: GameServer): boolean => s.id === id));
+      }, 300);
+    });
+  }
+
+  /**
+   * Retrieves player history for graphs.
+   */
+  async getPlayerHistory(): Promise<PlayerHistory[]> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve([...playerHistory]);
+      }, 300);
+    });
+  }
+
+  /**
+   * Retrieves all backend applications.
+   */
+  async getBackendApps(): Promise<BackendApp[]> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve([...backendApps]);
+      }, 300);
+    });
+  }
+
+  /**
+   * Creates a new game server.
+   * Now uses CreateGameServer model to demonstrate separation of concerns.
+   */
+  async create(server: CreateGameServer): Promise<GameServer> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const newServer: GameServer = {
+          ...server,
+          id: crypto.randomUUID(),
+          ipAddress: "127.0.0.1",
+          port: "27015",
+          status: false,
+          currentPlayer: 0,
+          maxPlayers: server.maxPlayers || 0, // Ensure maxPlayer is set from the created server
+        };
+        this.servers.push(newServer);
+        console.log(`[Mock Server Service] Created new server: `, newServer)
+        resolve(newServer);
+      }, 400);
+    });
+  }
+
+  /**
+   * Updates an existing game server.
+   */
+  async update(id: string, serverData: Partial<GameServer>): Promise<GameServer> {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const index = this.servers.findIndex(s => s.id === id);
+        if (index !== -1) {
+          this.servers[index] = {...this.servers[index], ...serverData};
+          console.log(`[Mock Server Service] Updated server:`, this.servers[index], "with data:", serverData)
+          resolve(this.servers[index]);
+        } else {
+          reject(new Error(`Server with id ${id} not found`));
+        }
+      }, 400);
+    });
+  }
+
+  /**
+   * Deletes a game server.
+   */
+  async delete(id: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const index = this.servers.findIndex(s => s.id === id);
+        if (index !== -1) {
+          this.servers.splice(index, 1);
+          console.log(`[Mock Server Service] Deleted server with id:`, id)
+          resolve();
+        } else {
+          reject(new Error(`Server with id ${id} not found`));
+        }
+      }, 300);
+    });
+  }
+}
+
+export const mockServerService = new MockServerService();

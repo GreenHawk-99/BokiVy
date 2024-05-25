@@ -1,0 +1,87 @@
+@use "variables" as vars;
+@use "mixin" as mix;
+@use "base";
+
+.logo {
+  font-size: xx-large;
+  font-weight: 900;
+  transform: skew(-16deg, 0deg);
+  //@include mix.logo-gradient;
+  padding-inline: vars.$padding-vw;
+  cursor: default;
+}
+
+@keyframes outline-fade {
+  0%, 100% {
+    text-shadow: 0 0 5px vars.$primary-color, 0 0 10px vars.$primary-color;
+  }
+  50% {
+    text-shadow: 0 0 15px vars.$secondary-color, 0 0 25px vars.$secondary-color;
+  }
+}
+
+.logo-header {
+  font-family: 'KROIGS Regular', sans-serif;
+  color: white;
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  -webkit-text-stroke: 1px black;
+  text-shadow:
+          0 0 4px rgba(0, 0, 0, 0.8),
+          0 0 10px rgba(0, 0, 0, 0.5);
+  animation: outline-fade 3s infinite ease-in-out;
+}
+
+.server-card {
+  @include mix.card-shadow;
+
+  img {
+    cursor: pointer;
+  }
+
+  .player-count-tag {
+    color: vars.$accent-color;
+    background: #cfffe6;
+    border-color: vars.$primary-color;
+  }
+
+  .copy-icon {
+    :hover {
+      color: vars.$primary-color;
+      transition: color vars.$transition-base;
+    }
+  }
+}
+
+.image-card {
+  cursor: pointer;
+  border-radius: vars.$border-radius-base;
+  @include mix.card-shadow(vars.$box-shadow-heavy, vars.$box-shadow-heavy-hover);
+
+  .container {
+    display: flex;
+    position: relative;
+  }
+
+  .info {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-size: 18px;
+  }
+
+  img {
+    border-radius: vars.$border-radius-base;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.application-wrapper {
+  display: flex;
+}
+
+.application {
+  // Main app container styles
+}

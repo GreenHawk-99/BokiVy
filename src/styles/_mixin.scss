@@ -1,0 +1,25 @@
+@use "variables" as vars;
+
+@mixin flex-center($direction: row) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+@mixin card-shadow($shadow: vars.$box-shadow-base, $hover-shadow: vars.$box-shadow-hover) {
+  box-shadow: $shadow;
+  transition: box-shadow vars.$transition-base;
+
+  &:hover {
+    box-shadow: $hover-shadow;
+  }
+}
+
+@mixin logo-gradient($deg: 135deg) {
+  background-image: linear-gradient($deg, vars.$primary-color 20%, vars.$secondary-color 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
