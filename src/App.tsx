@@ -1,21 +1,24 @@
 import './App.scss'
 import {useState} from 'react';
 import {
-    AppstoreOutlined, FontSizeOutlined, GithubOutlined, MoonOutlined,
+    AppstoreOutlined, CopyOutlined, FontSizeOutlined, GithubOutlined, MinusCircleOutlined, MoonOutlined,
     RadarChartOutlined,
-    SettingOutlined, SunOutlined, UserOutlined,
+    SettingOutlined, SunOutlined, SyncOutlined, UserOutlined,
 } from '@ant-design/icons';
-import {Button, ConfigProvider, Divider, Flex, Layout, MenuProps, Space, theme} from 'antd';
+import {Button, Card, ConfigProvider, Divider, Flex, Layout, MenuProps, Space, Tag, theme, Typography} from 'antd';
 import {Menu} from 'antd';
 import {Content, Footer, Header} from "antd/es/layout/layout";
 import {TinyColor} from "@ctrl/tinycolor";
-import {AppListVy} from "./bokaegis/AppListVy.tsx";
+import {imageRender} from "./utils/Checker.tsx";
+import {gameServers} from "./data/data.ts";
+import {AppVy} from "./bokaegis/AppVy.tsx";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 export function App() {
     const [current, setCurrent] = useState('applications');
     const [isDarkModeOn, setIsDarkModeOn] = useState<boolean>(false);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const {token} = theme.useToken();
 
     const onClick: MenuProps['onClick'] = (e) => {
@@ -95,7 +98,42 @@ export function App() {
                             borderRadius: token.borderRadiusLG,
                         }}
                     >
-                        <AppListVy/>
+                        <Card className={"server-card"}
+                              style={{width:"20vw"}}
+                              bordered={true}
+                              cover={<div onClick={() => setIsModalOpen(true)}>
+                                  {imageRender(gameServers[2].name)}
+                              </div>}>
+                            <div>
+                                <Typography.Title level={3} style={{marginTop: "0"}}>{gameServers[2].name}</Typography.Title>
+                                <Flex vertical={true} gap={"1vh"}>
+                                    <Flex justify={"space-between"}>
+                                        <Space>
+                                            <Typography.Text strong={true}>
+                                                Status:
+                                            </Typography.Text>
+                                            <Tag icon={gameServers[2].status ? <SyncOutlined spin /> : <MinusCircleOutlined />}
+                                                 color={gameServers[2].status ? "green" : "red"}>{gameServers[2].status ? "Running" : "Closed"}</Tag>
+                                        </Space>
+                                        <Space>
+                                            <Typography.Text strong={true}>Player Count:</Typography.Text>
+                                            <Tag
+                                                className={"player-count-tag"}>{gameServers[2].currentPlayer + "/" + gameServers[2].maxPlayer}</Tag>
+                                        </Space>
+                                    </Flex>
+                                    <Space>
+                                        <Typography.Text strong={true}>
+                                            Ip Address:
+                                        </Typography.Text>
+                                        <Typography.Text italic={true}>
+                                            {gameServers[2].ipAddress+gameServers[2].port}
+                                        </Typography.Text>
+                                        <CopyOutlined className={"copy-icon"}/>
+                                    </Space>
+                                </Flex>
+                            </div>
+                        </Card>
+                        <AppVy application={gameServers[2]} open={isModalOpen} setOpen={setIsModalOpen}/>
                     </div>
                 </Content>
                 <Footer style={{textAlign: 'center'}}>

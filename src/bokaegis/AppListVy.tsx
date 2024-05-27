@@ -44,12 +44,14 @@ export function AppListVy() {
                                                     Status:
                                                 </Typography.Text>
                                                 <Tag icon={server.status ? <SyncOutlined spin /> : <MinusCircleOutlined />}
-                                                    color={server.status ? "green" : "red"}>{server.status ? "Running" : "Closed"}</Tag>
+                                                    color={server.status ? "green" : "red"}>{server.status ? "Running" : "Closed"}
+                                                </Tag>
                                             </Space>
                                             <Space>
                                                 <Typography.Text strong={true}>Player Count:</Typography.Text>
                                                 <Tag
-                                                    className={"player-count-tag"}>{server.currentPlayer + "/" + server.maxPlayer}</Tag>
+                                                    className={"player-count-tag"}>{server.currentPlayer + "/" + server.maxPlayer}
+                                                </Tag>
                                             </Space>
                                         </Flex>
                                         <Space>
