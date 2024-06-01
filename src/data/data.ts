@@ -114,3 +114,42 @@ export const gameServers: Array<GameServer> = [
         maxPlayer:16
     },
 ]
+
+interface HemmaCard {
+    name: string,
+    description: string,
+    image: string,
+}
+
+export const hemmaCards: Array<HemmaCard> =[
+    {
+        name:"Applications",
+        description:"See the servers tab",
+        image:"https://placehold.co/600x400"
+    },
+    {
+        name:"Overview",
+        description:"Go to test",
+        image:"https://placehold.co/600x400"
+    },
+    {
+        name:"Test",
+        description:"Go to test",
+        image:"https://placehold.co/600x400"
+    },
+    {
+        name:"Test",
+        description:"Go to test",
+        image:"https://placehold.co/600x400"
+    },
+    {
+        name:"Test",
+        description:"Go to test",
+        image:"https://placehold.co/600x400"
+    },
+    {
+        name:"Test",
+        description:"Go to test",
+        image:"https://placehold.co/600x400"
+    }
+]

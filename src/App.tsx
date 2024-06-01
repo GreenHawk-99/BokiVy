@@ -9,7 +9,7 @@ import {Button, ConfigProvider, Divider, Flex, Layout, MenuProps, Space, theme} 
 import {Menu} from 'antd';
 import {Content, Footer, Header} from "antd/es/layout/layout";
 import {TinyColor} from "@ctrl/tinycolor";
-import {AppListVy} from "./bokaegis/AppListVy.tsx";
+import {HemmaVy} from "./misc/HemmaVy.tsx";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -71,7 +71,7 @@ export function App() {
         <Layout style={{minHeight: '100vh'}}>
             <Layout style={{background:`linear-gradient(135deg, ${colors.join(', ')})`}}>
                 <Header style={{display: 'flex', alignItems: 'center', background: "#ffffff"}}>
-                    <div className={"logo logo-header"}>BOKIVY</div>
+                    <div className={"logo"}>BOKIVY</div>
                     <Menu style={{flex: 1, minWidth: 0}} mode="horizontal" selectedKeys={[current]} items={items}
                           onClick={onClick}/>
                     <Space.Compact>
@@ -95,7 +95,7 @@ export function App() {
                             borderRadius: token.borderRadiusLG,
                         }}
                     >
-                        <AppListVy/>
+                            <HemmaVy/>
                     </div>
                 </Content>
                 <Footer style={{textAlign: 'center'}}>
