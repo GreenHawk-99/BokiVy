@@ -1,6 +1,6 @@
 import {Card, Col, Row, Statistic, Typography} from "antd";
 import {CheckCircleOutlined, CloseCircleOutlined, DesktopOutlined, TeamOutlined} from "@ant-design/icons";
-import {useDataVy} from "../contexts/DataContext.tsx";
+import {useDataVy} from "../hooks/useDataVy";
 
 export function OverviewVy() {
   const { stats } = useDataVy();

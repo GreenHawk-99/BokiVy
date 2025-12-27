@@ -19,16 +19,16 @@ Bokivy is a React-based web application designed to display and manage game serv
 - `src/utils/`: Helper functions and utilities (e.g., `Checker.tsx`).
 - `src/App.tsx`: Entry point component that sets up global providers and the router.
 - `src/routes/`: Router configuration (e.g., `index.tsx`).
-- `src/contexts/`: Centralized state management (e.g., `DataContext`, `MessageContext`, `UserContext`, `ThemeContext`).
+- `src/contexts/`: Centralized state management (e.g., `DataProvider`, `MessageProvider`, `UserProvider`, `ThemeProvider`).
 - `public/`: Static assets.
 
 ## Key Features
 - **Server List**: Real-time display of game servers with search and filtering.
 - **Overview Dashboard**: Aggregate statistics (Total Servers, Online/Offline, Player Capacity).
-- **Centralized Messaging**: Application-wide message API via `MessageContext`.
-- **Data Management**: Global access to server data and statistics via `DataContext`.
-- **User Management**: Global access to user profile and login state via `UserContext`.
-- **Theme Management**: Centralized dark mode and Ant Design theme configuration via `ThemeContext`.
+- **Centralized Messaging**: Application-wide message API via `MessageProvider`.
+- **Data Management**: Global access to server data and statistics via `DataProvider`.
+- **User Management**: Global access to user profile and login state via `UserProvider`.
+- **Theme Management**: Centralized dark mode and Ant Design theme configuration via `ThemeProvider`.
 - **Search & Filter**: Instant filtering of servers by name or IP address.
 - **Interactive Tour**: Onboarding tool for new users (WIP).
 

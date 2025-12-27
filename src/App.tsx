@@ -12,8 +12,8 @@ import { Button, ConfigProvider, Divider, Flex, Layout, Menu, MenuProps, Space, 
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import { TinyColor } from "@ctrl/tinycolor";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import {useUserVy} from "./contexts/UserContext.tsx";
-import {useThemeVy} from "./contexts/ThemeContext.tsx";
+import {useUserVy} from "./hooks/useUserVy";
+import {useThemeVy} from "./hooks/useThemeVy";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -22,7 +22,7 @@ type MenuItem = Required<MenuProps>['items'][number];
  * Acts as the entry point for global providers and the RouterProvider.
  */
 export function App() {
-  const { username, login } = useUserVy();
+  const { username, login, logout, isLoading } = useUserVy();
   const { isDarkMode, toggleDarkMode, colors } = useThemeVy();
   const { token } = theme.useToken();
   const navigate = useNavigate();
@@ -90,7 +90,11 @@ export function App() {
             onClick={onClick}
           />
           <Space.Compact>
-            <Button icon={<UserOutlined />} onClick={login}>{username || 'Guest'}</Button>
+            {username ? (
+              <Button icon={<UserOutlined />} onClick={logout}>{username}</Button>
+            ) : (
+              <Button icon={<UserOutlined />} onClick={login} loading={isLoading}>Login with Steam</Button>
+            )}
             <Button icon={<FontSizeOutlined />} />
             <Button onClick={toggleDarkMode}>{isDarkMode ? <SunOutlined /> : <MoonOutlined />}</Button>
           </Space.Compact>

@@ -5,8 +5,8 @@ import {useEffect, useState} from "react";
 import {imageRender} from "../utils/Checker.tsx";
 import {GameServer} from "../models/gameServer.ts";
 import {SearchAppVy} from "./SearchAppVy.tsx";
-import {useMessageVy} from "../contexts/MessageContext.tsx";
-import {useDataVy} from "../contexts/DataContext.tsx";
+import {useMessageVy} from "../hooks/useMessageVy";
+import {useDataVy} from "../hooks/useDataVy";
 
 /**
  * Component to display a list of game servers.
