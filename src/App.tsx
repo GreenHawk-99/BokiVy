@@ -1,5 +1,3 @@
-import './App.scss'
-import {useState} from 'react';
 import {
   AppstoreOutlined,
   FontSizeOutlined,
@@ -10,72 +8,64 @@ import {
   SunOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import {Button, ConfigProvider, Divider, Flex, Layout, Menu, MenuProps, Space, theme} from 'antd';
-import {Content, Footer, Header} from "antd/es/layout/layout";
-import {TinyColor} from "@ctrl/tinycolor";
-import {AppListVy} from "./components/AppListVy.tsx";
-import {OverviewVy} from "./pages/OverviewVy.tsx";
+import { Button, ConfigProvider, Divider, Flex, Layout, Menu, MenuProps, Space, theme } from 'antd';
+import { Content, Footer, Header } from "antd/es/layout/layout";
+import { TinyColor } from "@ctrl/tinycolor";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import {useUserVy} from "./contexts/UserContext.tsx";
+import {useThemeVy} from "./contexts/ThemeContext.tsx";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
-const colors = ['#01e973', '#8d42ff'];
-
 /**
  * Main application component.
+ * Acts as the entry point for global providers and the RouterProvider.
  */
 export function App() {
-  const [current, setCurrent] = useState('applications');
-  const [isDarkModeOn, setIsDarkModeOn] = useState<boolean>(false);
-  const {token} = theme.useToken();
+  const { username, login } = useUserVy();
+  const { isDarkMode, toggleDarkMode, colors } = useThemeVy();
+  const { token } = theme.useToken();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Determine current key based on path
+  const current = location.pathname === '/overview' ? 'overview' : 'applications';
 
   const onClick: MenuProps['onClick'] = (e) => {
-    console.log('click ', e);
-    setCurrent(e.key);
-  };
-
-  const renderContent = () => {
-    switch (current) {
-      case 'applications':
-        return <AppListVy/>;
-      case 'overview':
-        return <OverviewVy/>;
-      default:
-        return <AppListVy/>;
+    if (e.key === 'applications') {
+      navigate('/');
+    } else if (e.key === 'overview') {
+      navigate('/overview');
     }
-  }
+  };
 
   const items: MenuItem[] = [
     {
       label: 'Applications',
       key: 'applications',
-      icon: <AppstoreOutlined/>,
+      icon: <AppstoreOutlined />,
     },
     {
       label: 'Overview',
       key: 'overview',
-      icon: <RadarChartOutlined/>,
+      icon: <RadarChartOutlined />,
     },
     {
       label: 'Navigation Three - Submenu',
       key: 'submenu',
-      icon: <SettingOutlined/>,
+      icon: <SettingOutlined />,
       children: [
         {
           type: 'group',
           label: 'Servers',
           children: [
-            {label: 'Option 1', key: 'setting:1'},
-            {label: 'Option 2', key: 'setting:2'},
+            { label: 'Option 1', key: 'setting:1' },
+            { label: 'Option 2', key: 'setting:2' },
           ],
         },
       ],
     },
   ];
-
-  const toggleDarkMode = () => {
-    setIsDarkModeOn((prevMode) => !prevMode);
-  };
-
 
   const getHoverColors = (colors: string[]) =>
     colors.map((color) => new TinyColor(color).lighten(5).toString());
@@ -88,25 +78,24 @@ export function App() {
   }
 
   return (
-    <ConfigProvider
-      theme={{
-        algorithm: isDarkModeOn ? theme.darkAlgorithm : theme.defaultAlgorithm,
-      }}
-    >
-      <Layout style={{minHeight: '100vh'}}>
-        <Layout style={{background: `linear-gradient(135deg, ${colors.join(', ')})`}}>
-        <Header style={{display: 'flex', alignItems: 'center', background: isDarkModeOn ? '#001529' : "#ffffff"}}>
+    <Layout style={{ minHeight: '100vh' }}>
+      <Layout style={{ background: `linear-gradient(135deg, ${colors.join(', ')})` }}>
+        <Header style={{ display: 'flex', alignItems: 'center', background: isDarkMode ? '#001529' : "#ffffff" }}>
           <div className={"logo logo-header"}>BOKIVY</div>
-          <Menu style={{flex: 1, minWidth: 0}} mode="horizontal" selectedKeys={[current]} items={items}
-                onClick={onClick}/>
+          <Menu
+            style={{ flex: 1, minWidth: 0 }}
+            mode="horizontal"
+            selectedKeys={[current]}
+            items={items}
+            onClick={onClick}
+          />
           <Space.Compact>
-            <Button><UserOutlined/></Button>
-            <Button><FontSizeOutlined/></Button>
-            <Button onClick={toggleDarkMode}>{isDarkModeOn ? <SunOutlined/> : <MoonOutlined/>}</Button>
+            <Button icon={<UserOutlined />} onClick={login}>{username || 'Guest'}</Button>
+            <Button icon={<FontSizeOutlined />} />
+            <Button onClick={toggleDarkMode}>{isDarkMode ? <SunOutlined /> : <MoonOutlined />}</Button>
           </Space.Compact>
         </Header>
         <Content style={{
-          //  margin: '0 16px'
           margin: '24px 16px',
           minHeight: 280,
           background: token.colorBgContainer,
@@ -120,12 +109,12 @@ export function App() {
               borderRadius: token.borderRadiusLG,
             }}
           >
-            {renderContent()}
+            <Outlet />
           </div>
         </Content>
-        <Footer style={{textAlign: 'center'}}>
+        <Footer style={{ textAlign: 'center' }}>
           <Flex justify={"center"} align={"center"}>
-            <Space split={<Divider type="vertical"/>}>
+            <Space split={<Divider type="vertical" />}>
               <div className={"logo"}>BOKIVY</div>
               <ConfigProvider
                 theme={{
@@ -138,7 +127,7 @@ export function App() {
                     },
                   },
                 }}
-              > Created by <Button type={"primary"} icon={<GithubOutlined/>}
+              > Created by <Button type={"primary"} icon={<GithubOutlined />}
                                    onClick={openLink}>GreenHawk</Button>
               </ConfigProvider>
             </Space>
@@ -146,6 +135,6 @@ export function App() {
         </Footer>
       </Layout>
     </Layout>
-    </ConfigProvider>
   );
 }
+

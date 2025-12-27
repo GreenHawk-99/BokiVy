@@ -1,9 +1,9 @@
 import {Card, Col, Row, Statistic, Typography} from "antd";
-import {ServerService} from "../services/ServerService.ts";
 import {CheckCircleOutlined, CloseCircleOutlined, DesktopOutlined, TeamOutlined} from "@ant-design/icons";
+import {useDataVy} from "../contexts/DataContext.tsx";
 
 export function OverviewVy() {
-  const stats = ServerService.getServerStats();
+  const { stats } = useDataVy();
 
   return (
     <>

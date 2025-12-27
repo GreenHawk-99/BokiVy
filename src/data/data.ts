@@ -1,4 +1,4 @@
-import {GameServer} from "../model/gameServer.ts";
+import {GameServer} from "../models/gameServer.ts";
 
 export const gameServers: Array<GameServer> = [
   {

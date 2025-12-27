@@ -1,11 +1,11 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import {Button, Tour, TourProps} from "antd";
 import {InfoCircleOutlined} from "@ant-design/icons";
 
 interface TourAppVyProps {
-  ref1: Function,
-  ref2: Function,
-  ref3: Function,
+  ref1: React.RefObject<any>,
+  ref2: React.RefObject<any>,
+  ref3: React.RefObject<any>,
 }
 
 export function TourAppVy({ref1, ref2, ref3}: TourAppVyProps) {

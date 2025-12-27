@@ -1,32 +1,31 @@
 import '../App.scss'
-import {Card, Flex, List, message, Space, Tag, Tooltip, Typography} from "antd";
+import {Card, Flex, List, Space, Tag, Tooltip, Typography} from "antd";
 import {CopyOutlined, MinusCircleOutlined, SyncOutlined} from "@ant-design/icons";
 import {useEffect, useState} from "react";
 import {imageRender} from "../utils/Checker.tsx";
-import {GameServer} from "../model/gameServer.ts";
+import {GameServer} from "../models/gameServer.ts";
 import {SearchAppVy} from "./SearchAppVy.tsx";
-import {ServerService} from "../services/ServerService.ts";
+import {useMessageVy} from "../contexts/MessageContext.tsx";
+import {useDataVy} from "../contexts/DataContext.tsx";
 
 /**
  * Component to display a list of game servers.
  */
 export function AppListVy() {
   const [listSize, setListSize] = useState<number>(8);
-  const [allServers, setAllServers] = useState<GameServer[]>([]);
+  const { servers } = useDataVy();
   const [filteredServers, setFilteredServers] = useState<GameServer[]>([]);
-  const [messageApi, contextHolder] = message.useMessage();
+  const messageApi = useMessageVy();
 
   useEffect(() => {
-    const data = ServerService.getServers();
-    setAllServers(data);
-    setFilteredServers(data);
-  }, []);
+    setFilteredServers(servers);
+  }, [servers]);
 
   /**
    * Filters the server list based on the search term.
    */
   const handleSearch = (value: string) => {
-    const filtered = allServers.filter(server =>
+    const filtered = servers.filter(server =>
       server.name.toLowerCase().includes(value.toLowerCase()) ||
       server.ipAddress.includes(value)
     );
@@ -41,7 +40,7 @@ export function AppListVy() {
    * Copies the server IP and port to the clipboard.
    */
   const copyhandler = (ip: string) => {
-    navigator.clipboard.writeText(ip);
+    void navigator.clipboard.writeText(ip);
     messageApi.info("Copied to clipboard");
   }
 
@@ -84,7 +83,6 @@ export function AppListVy() {
                       <Typography.Text italic={true}>
                         {ipAddressAndPort(server)}
                       </Typography.Text>
-                      {contextHolder}
                       <CopyOutlined className={"copy-icon"} onClick={() => {
                         copyhandler(ipAddressAndPort(server))
                       }}/>
