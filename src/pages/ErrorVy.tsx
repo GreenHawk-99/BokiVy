@@ -19,7 +19,7 @@ export default function ErrorVy() {
   }
 
   return (
-    <div id="error-page">
+    <div id={"error-page"}>
       <h1>{status}</h1>
       <p>Sorry, an unexpected error has occurred.</p>
       <p>

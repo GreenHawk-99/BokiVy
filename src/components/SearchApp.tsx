@@ -8,7 +8,7 @@ interface SearchAppVyProps {
   onSearch: (value: string) => void;
 }
 
-export function SearchAppVy({listSize, setListSize, onSearch}: SearchAppVyProps) {
+export function SearchApp({listSize, setListSize, onSearch}: SearchAppVyProps) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const ref1 = useRef(null);

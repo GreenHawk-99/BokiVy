@@ -3,7 +3,7 @@
 --------------
 
 ### BKV-En:
-- [ ] _**AppListVy**_ - Initialize project structure with the games servers view "AppListVy" and some mock up data | Component Searchbar and Tour on AppListVy include
+- [ ] _**AppList**_ - Initialize project structure with the games servers view "AppList" and some mock up data | Component Searchbar and Tour on AppList include
 ### BKV-Två:
 - [ ] _**AppVy**_ - View about one application
 ### BKV-Tre:

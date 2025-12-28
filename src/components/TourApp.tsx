@@ -8,7 +8,7 @@ interface TourAppVyProps {
   ref3: React.RefObject<any>,
 }
 
-export function TourAppVy({ref1, ref2, ref3}: TourAppVyProps) {
+export function TourApp({ref1, ref2, ref3}: TourAppVyProps) {
   const [open, setOpen] = useState<boolean>(false);
 
 

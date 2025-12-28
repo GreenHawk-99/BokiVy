@@ -4,14 +4,14 @@ import {CopyOutlined, MinusCircleOutlined, SyncOutlined} from "@ant-design/icons
 import {useEffect, useState} from "react";
 import {imageRender} from "../utils/Checker.tsx";
 import {GameServer} from "../models/gameServer.ts";
-import {SearchAppVy} from "./SearchAppVy.tsx";
+import {SearchApp} from "./SearchApp.tsx";
 import {useMessageVy} from "../hooks/useMessageVy";
 import {useDataVy} from "../hooks/useDataVy";
 
 /**
  * Component to display a list of game servers.
  */
-export function AppListVy() {
+export function AppList() {
   const [listSize, setListSize] = useState<number>(8);
   const { servers } = useDataVy();
   const [filteredServers, setFilteredServers] = useState<GameServer[]>([]);
@@ -48,7 +48,7 @@ export function AppListVy() {
     <>
       <Flex justify={"space-between"} align={"center"}>
         <Typography.Title level={2} style={{marginBlock: "1vh"}}>Server List</Typography.Title>
-        <SearchAppVy listSize={listSize} setListSize={setListSize} onSearch={handleSearch}/>
+        <SearchApp listSize={listSize} setListSize={setListSize} onSearch={handleSearch}/>
       </Flex>
       <List grid={{gutter: 16, column: listSize}}
             dataSource={filteredServers} renderItem={(server) => (

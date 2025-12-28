@@ -1,20 +1,20 @@
-import React, {ReactNode, useEffect, useState} from 'react';
+import React, {ReactNode, useState} from 'react';
 import {UserService} from '../services/UserService';
 import {UserContext} from "./UserContext.ts";
 
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({children}) => {
   const [username, setUsername] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  useEffect(() => {
-    const checkProfile = async () => {
+  const fetchUserProfile = async () => {
+    try {
       const name = await UserService.fetchProfile();
       setUsername(name);
-      setIsLoading(false);
-    };
-    checkProfile();
-  }, []);
+    } catch (err) {
+      console.error("Login failed", err);
+    }
+  };
 
   const login = async () => {
     setIsLoading(true);
@@ -22,6 +22,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({children}) => {
       await UserService.login();
     } catch (err) {
       console.error("Login failed", err);
+    } finally {
       setIsLoading(false);
     }
   };

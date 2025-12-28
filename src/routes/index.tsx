@@ -1,6 +1,6 @@
 import {createBrowserRouter} from 'react-router-dom';
 import {OverviewVy} from '../pages/OverviewVy';
-import {AppListVy} from '../components/AppListVy';
+import {AppList} from '../components/AppList.tsx';
 import ErrorVy from '../pages/ErrorVy.tsx';
 import {App} from "../App.tsx";
 
@@ -12,7 +12,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <AppListVy/>,
+        element: <AppList/>,
       },
       {
         path: "overview",
