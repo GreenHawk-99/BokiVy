@@ -29,3 +29,28 @@ export class ServerService {
     };
   }
 }
+
+/*
+suggestions
+
+import { UserService } from './UserService';
+
+// ... existing code ...
+
+export const ServerService = {
+  getServers: async () => {
+    const steamId = UserService.getStoredSteamId();
+
+    const response = await fetch('http://localhost:5000/api/servers', {
+      headers: {
+        'Authorization': `Bearer ${steamId}`, // Header version
+        'Content-Type': 'application/json'
+      }
+    });
+
+    return await response.json();
+  },
+
+  // ... existing code ...
+};
+ */

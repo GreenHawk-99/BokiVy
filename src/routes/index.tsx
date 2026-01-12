@@ -1,18 +1,18 @@
 import {createBrowserRouter} from 'react-router-dom';
 import {OverviewVy} from '../pages/OverviewVy';
-import {AppList} from '../components/AppList.tsx';
+import {ServerDisplay} from '../pages/ServerDisplay.tsx';
 import ErrorVy from '../pages/ErrorVy.tsx';
-import {App} from "../App.tsx";
+import {RootProvider} from "../contexts/RootProvider.tsx";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element: <RootProvider/>,
     errorElement: <ErrorVy/>,
     children: [
       {
         index: true,
-        element: <AppList/>,
+        element: <ServerDisplay/>,
       },
       {
         path: "overview",

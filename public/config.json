@@ -1,0 +1,6 @@
+{
+  "YggdrasilApi": {
+    "auth": "http://localhost:5000/api/auth/steam",
+    "profile": "http://localhost:5000/api/auth/profile"
+  }
+}

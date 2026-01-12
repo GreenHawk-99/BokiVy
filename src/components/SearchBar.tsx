@@ -8,7 +8,7 @@ interface SearchAppVyProps {
   onSearch: (value: string) => void;
 }
 
-export function SearchApp({listSize, setListSize, onSearch}: SearchAppVyProps) {
+export function SearchBar({listSize, setListSize, onSearch}: SearchAppVyProps) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const ref1 = useRef(null);
@@ -33,18 +33,18 @@ export function SearchApp({listSize, setListSize, onSearch}: SearchAppVyProps) {
 
   const steps: TourProps['steps'] = [
     {
-      title: 'Create a server [WIP]',
-      description: 'Still in development but you will be able to create your server on the device via this button.',
+      title: 'Create a server',
+      description: 'You can create and host your own game server directly from here.',
       target: () => ref1.current,
     },
     {
-      title: 'Research an server [WIP]',
-      description: 'For now a small number of server wil be hosted so no need to have right now the search bar',
+      title: 'Search for a server',
+      description: 'Quickly find a specific server by name or IP address.',
       target: () => ref2.current,
     },
     {
-      title: 'Change the card display',
-      description: 'Select the number of card you want in a row',
+      title: 'Card Layout',
+      description: 'Adjust the number of server cards displayed per row.',
       target: () => ref3.current,
     },
   ];
@@ -52,10 +52,10 @@ export function SearchApp({listSize, setListSize, onSearch}: SearchAppVyProps) {
   return (
     <>
       <Space.Compact style={{alignItems: "center"}}>
-        <Button disabled={true} type={"primary"} ref={ref1} style={{marginBlock: "1vh"}}
+        <Button type={"primary"} ref={ref1} style={{marginBlock: "1vh"}}
                 onClick={showModal}><AppstoreAddOutlined/></Button>
         <div ref={ref2}>
-          <Input.Search allowClear placeholder={"Search an application"} onSearch={onSearch} onChange={(e) => onSearch(e.target.value)}/>
+          <Input.Search allowClear placeholder={"Search servers..."} onSearch={onSearch} onChange={(e) => onSearch(e.target.value)}/>
         </div>
         <div ref={ref3}>
           <Select style={{width: "8vw"}} defaultValue={listSize}

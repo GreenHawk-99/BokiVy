@@ -1,23 +1,26 @@
-import React, {ReactNode} from 'react';
 import {ThemeProvider} from "./ThemeProvider.tsx";
 import {UserProvider} from "./UserProvider.tsx";
 import {MessageProvider} from "./MessageProvider.tsx";
 import {DataProvider} from "./DataContext.tsx";
+import {App} from "../App.tsx";
+import {ConfigProvider} from "./ConfigProvider.tsx";
 
 
 /**
  * Root provider that aggregates all application-level contexts.
  */
-export const RootProvider: React.FC<{ children: ReactNode }> = ({children}) => {
+export const RootProvider = () => {
   return (
-    <ThemeProvider>
-      <UserProvider>
-        <MessageProvider>
-          <DataProvider>
-            {children}
-          </DataProvider>
-        </MessageProvider>
-      </UserProvider>
-    </ThemeProvider>
+    <ConfigProvider>
+      <ThemeProvider>
+        <UserProvider>
+          <MessageProvider>
+            <DataProvider>
+              <App/>
+            </DataProvider>
+          </MessageProvider>
+        </UserProvider>
+      </ThemeProvider>
+    </ConfigProvider>
   );
 };

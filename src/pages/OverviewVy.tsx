@@ -10,7 +10,7 @@ export function OverviewVy() {
       <Typography.Title level={2} style={{marginBlock: "1vh"}}>Overview</Typography.Title>
       <Row gutter={[16, 16]}>
         <Col span={6}>
-          <Card bordered={false}>
+          <Card variant={"borderless"}>
             <Statistic
               title="Total Servers"
               value={stats.total}
@@ -19,7 +19,7 @@ export function OverviewVy() {
           </Card>
         </Col>
         <Col span={6}>
-          <Card bordered={false}>
+          <Card variant={"borderless"}>
             <Statistic
               title="Online"
               value={stats.online}
@@ -29,7 +29,7 @@ export function OverviewVy() {
           </Card>
         </Col>
         <Col span={6}>
-          <Card bordered={false}>
+          <Card variant={"borderless"}>
             <Statistic
               title="Offline"
               value={stats.offline}
@@ -39,7 +39,7 @@ export function OverviewVy() {
           </Card>
         </Col>
         <Col span={6}>
-          <Card bordered={false}>
+          <Card variant={"borderless"}>
             <Statistic
               title="Total Players"
               value={stats.totalPlayers}

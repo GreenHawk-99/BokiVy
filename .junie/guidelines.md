@@ -11,7 +11,7 @@ Bokivy is a React-based web application designed to display and manage game serv
 - **Icons**: Ant Design Icons
 
 ## Project Structure
-- `src/components/`: Reusable UI components (e.g., `AppList`, `SearchApp`, `MainLayoutVy`).
+- `src/components/`: Reusable UI components (e.g., `ServerDisplay`, `SearchBar`, `MainLayoutVy`).
 - `src/pages/`: Main view components (e.g., `OverviewVy`).
 - `src/services/`: Business logic and data management (e.g., `ServerService`, `UserService`).
 - `src/data/`: Static data and mock datasets (e.g., `data.ts`).
@@ -33,6 +33,7 @@ Bokivy is a React-based web application designed to display and manage game serv
 - **Interactive Tour**: Onboarding tool for new users (WIP).
 
 ## Coding Standards
+- **Key Language**: The project uses some specific swedish word instead of english words (e.g., Sidhuvud: Header, ...).
 - **Component Design**: Use functional components with hooks. Prefer Ant Design components for UI consistency.
 - **Services**: Centralize data fetching and business logic in service classes to keep components lean.
 - **State Management**: Use centralized contexts for global state (server data, user, theme, messages). Use `useDataVy`, `useUserVy`, `useThemeVy`, and `useMessageVy` hooks.

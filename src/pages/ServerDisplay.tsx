@@ -4,14 +4,14 @@ import {CopyOutlined, MinusCircleOutlined, SyncOutlined} from "@ant-design/icons
 import {useEffect, useState} from "react";
 import {imageRender} from "../utils/Checker.tsx";
 import {GameServer} from "../models/gameServer.ts";
-import {SearchApp} from "./SearchApp.tsx";
-import {useMessageVy} from "../hooks/useMessageVy";
-import {useDataVy} from "../hooks/useDataVy";
+import {SearchBar} from "../components/SearchBar.tsx";
+import {useMessageVy} from "../hooks/useMessageVy.ts";
+import {useDataVy} from "../hooks/useDataVy.ts";
 
 /**
  * Component to display a list of game servers.
  */
-export function AppList() {
+export function ServerDisplay() {
   const [listSize, setListSize] = useState<number>(8);
   const { servers } = useDataVy();
   const [filteredServers, setFilteredServers] = useState<GameServer[]>([]);
@@ -46,9 +46,8 @@ export function AppList() {
 
   return (
     <>
-      <Flex justify={"space-between"} align={"center"}>
-        <Typography.Title level={2} style={{marginBlock: "1vh"}}>Server List</Typography.Title>
-        <SearchApp listSize={listSize} setListSize={setListSize} onSearch={handleSearch}/>
+      <Flex justify={"space-between"} align={"flex-end"}>
+        <SearchBar listSize={listSize} setListSize={setListSize} onSearch={handleSearch}/>
       </Flex>
       <List grid={{gutter: 16, column: listSize}}
             dataSource={filteredServers} renderItem={(server) => (
@@ -56,7 +55,7 @@ export function AppList() {
           {
             listSize < 12 ?
               <Card className={"server-card"}
-                    bordered={true}
+                    variant={'outlined'}
                     cover={imageRender(server.name)
                     }>
                 <div>
