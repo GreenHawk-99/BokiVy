@@ -13,6 +13,7 @@
     "@ant-design/icons": "^5.5.0",
     "@ctrl/tinycolor": "^4.1.0",
     "antd": "^5.29.3",
+    "axios": "^1.13.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.0"

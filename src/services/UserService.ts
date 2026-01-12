@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 /**
  * Service to handle user-related data operations, such as Steam profile integration.
  */
@@ -12,23 +14,19 @@ export class UserService {
    */
   static async fetchProfile(): Promise<{ username: string, avatar: string } | null> {
     try {
-      const response = await fetch('http://localhost:5000/api/auth/profile', {
-        credentials: 'include',
+      const response = await axios.get('http://localhost:5000/api/auth/profile', {
+        withCredentials: true,
       });
-      if (!response.ok) {
-        if (response.status === 401) {
-          return null; // Not logged in
-        }
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json();
+      const data = response.data;
       return {
         username: data.username,
         avatar: data.avatar || "https://api.dicebear.com/7.x/avataaars/svg?seed=" + data.username
       };
-    } catch (error) {
-      console.error("UserService: Error fetching profile", error);
-      return null;
+    } catch (error: any) {
+      if (axios.isAxiosError(error) && error.response?.status === 401) {
+        return null; // Not logged in
+      }
+      throw new Error('Network response was not ok');
     }
   }
 }
