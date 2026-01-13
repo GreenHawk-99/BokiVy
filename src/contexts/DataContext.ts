@@ -10,7 +10,7 @@ interface DataContextType {
     totalPlayers: number;
     maxPlayers: number;
   };
-  refreshData: () => void;
+  refreshData: () => Promise<void>;
 }
 
 export const DataContext = createContext<DataContextType | undefined>(undefined);

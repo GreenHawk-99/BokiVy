@@ -1,6 +1,9 @@
 {
-  "YggdrasilApi": {
-    "auth": "http://localhost:5000/api/auth/steam",
-    "profile": "http://localhost:5000/api/auth/profile"
+  "apis": {
+    "yggdrasil": {
+      "baseUrl": "http://localhost:5000/api/v1",
+      "timeout": 10000,
+      "retryAttempts": 3
+    }
   }
 }

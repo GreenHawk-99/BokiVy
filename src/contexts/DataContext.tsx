@@ -10,9 +10,15 @@ import {DataContext} from "./DataContext.ts";
 export const DataProvider: React.FC<{ children: ReactNode }> = ({children}) => {
   const [servers, setServers] = useState<GameServer[]>([]);
 
-  const refreshData = () => {
-    const data = ServerService.getServers();
-    setServers([...data]);
+  const refreshData = async () => {
+    try {
+      const data = await ServerService.getServers();
+      setServers([...data]);
+    } catch (error) {
+      console.error("Failed to fetch servers, falling back to mock data", error);
+      const data = ServerService.getMockServers();
+      setServers([...data]);
+    }
   };
 
   useEffect(() => {

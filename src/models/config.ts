@@ -1,6 +1,12 @@
+export interface ApiConfig {
+  baseUrl: string;
+  timeout?: number;
+  retryAttempts?: number;
+  headers?: Record<string, string>;
+}
+
 export interface Config {
-  YggdrasilApi: {
-    auth: string;
-    profile: string;
+  apis: {
+    yggdrasil: ApiConfig;
   };
 }

@@ -1,3 +1,4 @@
+import api from './api';
 import axios from 'axios';
 
 /**
@@ -5,7 +6,10 @@ import axios from 'axios';
  */
 export class UserService {
   static async login(): Promise<void> {
-    window.location.href = 'http://localhost:5000/api/auth/steam';
+    // Note: This relies on the backend being at the same base URL or redirected.
+    // Since we don't have the auth URL in the new config structure yet, 
+    // we use a relative path if possible or keep it hardcoded for now if it's different.
+    window.location.href = (api.defaults.baseURL || 'http://localhost:5000/api/v1') + '/auth/steam';
   }
 
   /**
@@ -14,9 +18,7 @@ export class UserService {
    */
   static async fetchProfile(): Promise<{ username: string, avatar: string } | null> {
     try {
-      const response = await axios.get('http://localhost:5000/api/auth/profile', {
-        withCredentials: true,
-      });
+      const response = await api.get('/auth/profile');
       const data = response.data;
       return {
         username: data.username,

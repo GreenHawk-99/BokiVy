@@ -1,12 +1,35 @@
-import React, {ReactNode, useState} from 'react';
+import React, {ReactNode, useEffect, useState} from 'react';
 import {UserService} from '../services/UserService';
 import {UserContext} from "./UserContext.ts";
+import {useConfigVy} from "../hooks/useConfigVy.ts";
 
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({children}) => {
   const [username, setUsername] = useState<string | null>(null);
   const [avatar, setAvatar] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const {config} = useConfigVy();
+
+  const refreshProfile = async () => {
+    setIsLoading(true);
+    try {
+      const profile = await UserService.fetchProfile();
+      if (profile) {
+        setUsername(profile.username);
+        setAvatar(profile.avatar);
+      }
+    } catch (err) {
+      console.error("Failed to fetch profile", err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (config) {
+      refreshProfile();
+    }
+  }, [config]);
 
   const login = async () => {
     setIsLoading(true);

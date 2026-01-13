@@ -1,3 +1,4 @@
+import api from './api';
 import {gameServers} from "../data/data.ts";
 import {GameServer} from "../models/gameServer.ts";
 
@@ -6,10 +7,43 @@ import {GameServer} from "../models/gameServer.ts";
  */
 export class ServerService {
   /**
-   * Retrieves all game servers.
+   * Retrieves all game servers from the mock data.
    */
-  static getServers(): GameServer[] {
+  static getMockServers(): GameServer[] {
     return gameServers;
+  }
+
+  /**
+   * Retrieves all game servers from the backend API.
+   */
+  static async getServers(): Promise<GameServer[]> {
+    const response = await api.get('/servers');
+    return response.data;
+  }
+
+  /**
+   * Creates a new game server.
+   */
+  static async createServer(server: GameServer): Promise<GameServer> {
+    const response = await api.post('/servers', server);
+    return response.data;
+  }
+
+  /**
+   * Updates an existing game server.
+   * Note: Assumes the server object has an 'id' or one is provided.
+   * Since GameServer interface doesn't have an ID, we use IP as a placeholder or expect it in the URL.
+   */
+  static async updateServer(id: string, server: Partial<GameServer>): Promise<GameServer> {
+    const response = await api.put(`/servers/${id}`, server);
+    return response.data;
+  }
+
+  /**
+   * Deletes a game server.
+   */
+  static async deleteServer(id: string): Promise<void> {
+    await api.delete(`/servers/${id}`);
   }
 
   /**
