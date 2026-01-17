@@ -1,7 +1,7 @@
 import React, {ReactNode, useEffect, useMemo, useState} from 'react';
 import {GameServer} from '../models/gameServer';
 import {ServerService} from '../services/ServerService';
-import {DataContext} from "./DataContext.ts";
+import {DataContext} from "./AppContext.ts";
 
 
 /**

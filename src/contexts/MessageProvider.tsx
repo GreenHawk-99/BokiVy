@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import {message} from 'antd';
-import {MessageContext} from "./MessageContext.ts";
+import {MessageContext} from "./AppContext.ts";
 
 
 /**

@@ -1,9 +1,8 @@
 import React, {ReactNode, useEffect, useState} from 'react';
 import axios from 'axios';
 import {Config} from '../models/config';
-import {ConfigContext} from './ConfigContext';
-import {setBaseUrl} from "../services/api.ts";
-import {ApiClientFactory} from "../services/ApiClientFactory";
+import {apiRegistry} from "../services/api.ts";
+import {ConfigContext} from "./AppContext.ts";
 
 /**
  * Provider component for managing application configuration.
@@ -24,13 +23,11 @@ export const ConfigProvider: React.FC<{ children: ReactNode }> = ({children}) =>
       });
       setConfig(response.data);
 
-      // Update the base URL for the global API client
-      if (response.data.apis?.yggdrasil) {
-        setBaseUrl(response.data.apis.yggdrasil.baseUrl);
-        
-        // Example of using the factory to create a specific client if needed
-        // const yggdrasilClient = ApiClientFactory.createApiClient(response.data.apis.yggdrasil);
-        // ... store or use the client
+      // Register all APIs defined in the configuration
+      if (response.data.apis) {
+        Object.entries(response.data.apis).forEach(([name, apiConfig]) => {
+          apiRegistry.register(name, apiConfig);
+        });
       }
     } catch (error) {
       console.error('Error while parsing configuration JSON:', error);

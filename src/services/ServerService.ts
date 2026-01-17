@@ -1,4 +1,4 @@
-import api from './api';
+import { apiRegistry } from './api';
 import {gameServers} from "../data/data.ts";
 import {GameServer} from "../models/gameServer.ts";
 
@@ -6,6 +6,10 @@ import {GameServer} from "../models/gameServer.ts";
  * Service to handle game server data operations.
  */
 export class ServerService {
+  private static get api() {
+    return apiRegistry.get('yggdrasil');
+  }
+
   /**
    * Retrieves all game servers from the mock data.
    */
@@ -17,7 +21,7 @@ export class ServerService {
    * Retrieves all game servers from the backend API.
    */
   static async getServers(): Promise<GameServer[]> {
-    const response = await api.get('/servers');
+    const response = await this.api.get('/servers');
     return response.data;
   }
 
@@ -25,7 +29,7 @@ export class ServerService {
    * Creates a new game server.
    */
   static async createServer(server: GameServer): Promise<GameServer> {
-    const response = await api.post('/servers', server);
+    const response = await this.api.post('/servers', server);
     return response.data;
   }
 
@@ -35,7 +39,7 @@ export class ServerService {
    * Since GameServer interface doesn't have an ID, we use IP as a placeholder or expect it in the URL.
    */
   static async updateServer(id: string, server: Partial<GameServer>): Promise<GameServer> {
-    const response = await api.put(`/servers/${id}`, server);
+    const response = await this.api.put(`/servers/${id}`, server);
     return response.data;
   }
 
@@ -43,7 +47,7 @@ export class ServerService {
    * Deletes a game server.
    */
   static async deleteServer(id: string): Promise<void> {
-    await api.delete(`/servers/${id}`);
+    await this.api.delete(`/servers/${id}`);
   }
 
   /**

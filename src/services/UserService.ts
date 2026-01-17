@@ -1,15 +1,17 @@
-import api from './api';
+import { apiRegistry } from './api';
 import axios from 'axios';
 
 /**
  * Service to handle user-related data operations, such as Steam profile integration.
  */
 export class UserService {
+  private static get api() {
+    return apiRegistry.get('yggdrasil');
+  }
+
   static async login(): Promise<void> {
     // Note: This relies on the backend being at the same base URL or redirected.
-    // Since we don't have the auth URL in the new config structure yet, 
-    // we use a relative path if possible or keep it hardcoded for now if it's different.
-    window.location.href = (api.defaults.baseURL || 'http://localhost:5000/api/v1') + '/auth/steam';
+    window.location.href = (this.api.defaults.baseURL || 'http://localhost:5000/api/v1') + '/auth/steam';
   }
 
   /**
@@ -18,13 +20,13 @@ export class UserService {
    */
   static async fetchProfile(): Promise<{ username: string, avatar: string } | null> {
     try {
-      const response = await api.get('/auth/profile');
+      const response = await this.api.get('/auth/profile');
       const data = response.data;
       return {
         username: data.username,
         avatar: data.avatar || "https://api.dicebear.com/7.x/avataaars/svg?seed=" + data.username
       };
-    } catch (error: any) {
+    } catch (error) {
       if (axios.isAxiosError(error) && error.response?.status === 401) {
         return null; // Not logged in
       }

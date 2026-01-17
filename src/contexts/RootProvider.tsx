@@ -13,13 +13,13 @@ export const RootProvider = () => {
   return (
     <ConfigProvider>
       <ThemeProvider>
-        <UserProvider>
-          <MessageProvider>
+        <MessageProvider>
+          <UserProvider>
             <DataProvider>
               <App/>
             </DataProvider>
-          </MessageProvider>
-        </UserProvider>
+          </UserProvider>
+        </MessageProvider>
       </ThemeProvider>
     </ConfigProvider>
   );

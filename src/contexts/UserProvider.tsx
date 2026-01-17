@@ -1,7 +1,7 @@
 import React, {ReactNode, useEffect, useState} from 'react';
 import {UserService} from '../services/UserService';
-import {UserContext} from "./UserContext.ts";
-import {useConfigVy} from "../hooks/useConfigVy.ts";
+import {useConfigVy} from "../hooks/useContext.ts";
+import {UserContext} from "./AppContext.ts";
 
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({children}) => {

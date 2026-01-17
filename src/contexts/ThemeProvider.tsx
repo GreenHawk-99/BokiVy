@@ -1,6 +1,6 @@
 import React, {ReactNode, useState} from 'react';
 import {ConfigProvider, theme} from 'antd';
-import {ThemeContext} from "./ThemeContext.ts";
+import {ThemeContext} from "./AppContext.ts";
 
 
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({children}) => {
