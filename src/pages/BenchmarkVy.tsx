@@ -17,6 +17,7 @@ interface BenchmarkForm {
  */
 export const BenchmarkVy: React.FC = () => {
   const [form] = Form.useForm<BenchmarkForm>();
+  const [isAutoTransform, setIsAutoTransform] = React.useState(true);
   const messageApi = useMessageKrok();
 
   const onFinish = (values: any) => {
@@ -60,16 +61,43 @@ export const BenchmarkVy: React.FC = () => {
               <Input placeholder="Enter some text"/>
             </Form.Item>
 
-            <Form.Item
-              label="Input 2 (Codex Transformation)"
-              name="codex"
-              rules={[{required: true, message: 'Please input another thing!'}]}
-              getValueFromEvent={(e: React.ChangeEvent<HTMLInputElement>) => {
-                const rawValue = e.target.value.replace(/\$/g, '');
-                return rawValue.split('').map(char => `$${char}`).join('');
-              }}
-            >
-              <Input placeholder="Enter more text"/>
+            <Form.Item label="Codex Configuration">
+              <Space.Compact style={{ width: '100%' }}>
+                <Form.Item
+                  name="codex"
+                  noStyle // This is CRUCIAL: it removes the CSS margin/padding but keeps the logic
+                  rules={[
+                    { required: true, message: 'Value is required' },
+                    {
+                      pattern: /^(\$[a-zA-Z])+$/,
+                      message: 'Format must be $char$char (e.g. $a$B$c)'
+                    }
+                  ]}
+                  getValueFromEvent={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    const val = e.target.value;
+                    if (!isAutoTransform) return val;
+
+                    // We still transform, but we don't "strip" anymore.
+                    // We let the 'pattern' rule handle the feedback.
+                    const raw = val.replace(/\$/g, '');
+                    return raw.split('').map(c => `$${c}`).join('');
+                  }}
+                >
+                  <Input
+                    allowClear
+                    style={{ width: 'calc(100% - 100px)' }}
+                    suffix={isAutoTransform ? <ExperimentOutlined style={{ color: '#1677ff' }} /> : null}
+                    placeholder={isAutoTransform ? "Auto-encoding..." : "Manual input..."}
+                  />
+                </Form.Item>
+                <Button
+                  type={isAutoTransform ? 'primary' : 'default'}
+                  onClick={() => setIsAutoTransform(!isAutoTransform)}
+                  style={{ width: '100px' }}
+                >
+                  {isAutoTransform ? 'Auto' : 'Manual'}
+                </Button>
+              </Space.Compact>
             </Form.Item>
 
             {/* Optional: Visual Feedback Preview */}
