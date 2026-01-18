@@ -9,7 +9,7 @@ export interface ConfigContextType {
   loading: boolean;
 }
 
-export const ConfigContext = createContext<ConfigContextType | undefined>(undefined);
+export const ConfigSammanhang = createContext<ConfigContextType | undefined>(undefined);
 
 // Theme Context
 interface ThemeContextType {
@@ -18,14 +18,14 @@ interface ThemeContextType {
   colors: string[];
 }
 
-export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+export const ThemeSammanhang = createContext<ThemeContextType | undefined>(undefined);
 
 // Message Context
 interface MessageContextType {
   messageApi: MessageInstance;
 }
 
-export const MessageContext = createContext<MessageContextType | undefined>(undefined);
+export const MessageSammanhang = createContext<MessageContextType | undefined>(undefined);
 
 // User Context
 interface UserContextType {
@@ -36,7 +36,7 @@ interface UserContextType {
   logout: () => void;
 }
 
-export const UserContext = createContext<UserContextType | undefined>(undefined);
+export const UserSammanhang = createContext<UserContextType | undefined>(undefined);
 
 // Data Context
 interface DataContextType {
@@ -51,4 +51,4 @@ interface DataContextType {
   refreshData: () => Promise<void>;
 }
 
-export const DataContext = createContext<DataContextType | undefined>(undefined);
+export const DataSammanhang = createContext<DataContextType | undefined>(undefined);

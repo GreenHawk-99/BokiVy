@@ -1,4 +1,4 @@
-import { apiRegistry } from './api';
+import {apiRegistry} from './api';
 import {gameServers} from "../data/data.ts";
 import {GameServer} from "../models/gameServer.ts";
 

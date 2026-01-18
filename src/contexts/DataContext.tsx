@@ -1,7 +1,7 @@
 import React, {ReactNode, useEffect, useMemo, useState} from 'react';
 import {GameServer} from '../models/gameServer';
 import {ServerService} from '../services/ServerService';
-import {DataContext} from "./AppContext.ts";
+import {DataSammanhang} from "./AppContext.ts";
 
 
 /**
@@ -22,7 +22,7 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({children}) => {
   };
 
   useEffect(() => {
-    refreshData();
+    void refreshData();
   }, []);
 
   const stats = useMemo(() => {
@@ -30,8 +30,8 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({children}) => {
   }, [servers]);
 
   return (
-    <DataContext.Provider value={{servers, stats, refreshData}}>
+    <DataSammanhang.Provider value={{servers, stats, refreshData}}>
       {children}
-    </DataContext.Provider>
+    </DataSammanhang.Provider>
   );
 };

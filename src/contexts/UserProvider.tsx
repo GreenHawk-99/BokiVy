@@ -1,14 +1,14 @@
 import React, {ReactNode, useEffect, useState} from 'react';
 import {UserService} from '../services/UserService';
-import {useConfigVy} from "../hooks/useContext.ts";
-import {UserContext} from "./AppContext.ts";
+import {useConfigKrok} from "../hooks/useContext.ts";
+import {UserSammanhang} from "./AppContext.ts";
 
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({children}) => {
   const [username, setUsername] = useState<string | null>(null);
   const [avatar, setAvatar] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const {config} = useConfigVy();
+  const {config} = useConfigKrok();
 
   const refreshProfile = async () => {
     setIsLoading(true);
@@ -48,9 +48,9 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({children}) => {
   };
 
   return (
-    <UserContext.Provider value={{username, avatar, isLoading, login, logout}}>
+    <UserSammanhang.Provider value={{username, avatar, isLoading, login, logout}}>
       {children}
-    </UserContext.Provider>
+    </UserSammanhang.Provider>
   );
 };
 

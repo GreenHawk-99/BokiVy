@@ -1,23 +1,23 @@
 import {useContext} from "react";
-import {ConfigContext, DataContext, MessageContext, ThemeContext, UserContext} from "../contexts/AppContext.ts";
+import {ConfigSammanhang, DataSammanhang, MessageSammanhang, ThemeSammanhang, UserSammanhang} from "../contexts/AppContext.ts";
 
 
 /**
  * Custom hook to access the application configuration.
  * @returns The configuration object and loading state.
  */
-export const useConfigVy = () => {
-  const context = useContext(ConfigContext);
+export const useConfigKrok = () => {
+  const context = useContext(ConfigSammanhang);
   if (context === undefined) {
-    throw new Error('useConfigVy must be used within a ConfigProvider');
+    throw new Error('useConfigSammanhang must be used within a ConfigProvider');
   }
   return context;
 };
 
-export const useThemeVy = () => {
-  const context = useContext(ThemeContext);
+export const useThemeKrok = () => {
+  const context = useContext(ThemeSammanhang);
   if (context === undefined) {
-    throw new Error('useThemeVy must be used within a ThemeProvider');
+    throw new Error('useThemeSammanhang must be used within a ThemeProvider');
   }
   return context;
 };
@@ -25,18 +25,18 @@ export const useThemeVy = () => {
 /**
  * Hook to use the global message API.
  */
-export const useMessageVy = () => {
-  const context = useContext(MessageContext);
+export const useMessageKrok = () => {
+  const context = useContext(MessageSammanhang);
   if (!context) {
-    throw new Error('useMessageVy must be used within a MessageProvider');
+    throw new Error('useMessageSammanhang must be used within a MessageProvider');
   }
   return context.messageApi;
 };
 
-export const useUserVy = () => {
-  const context = useContext(UserContext);
+export const useUserKrok = () => {
+  const context = useContext(UserSammanhang);
   if (context === undefined) {
-    throw new Error('useUserVy must be used within a UserProvider');
+    throw new Error('useUserSammanhang must be used within a UserProvider');
   }
   return context;
 };
@@ -44,10 +44,10 @@ export const useUserVy = () => {
 /**
  * Hook to access game server data and statistics.
  */
-export const useDataVy = () => {
-  const context = useContext(DataContext);
+export const useDataKrok = () => {
+  const context = useContext(DataSammanhang);
   if (!context) {
-    throw new Error('useDataVy must be used within a DataProvider');
+    throw new Error('useDataSammanhang must be used within a DataProvider');
   }
   return context;
 };

@@ -10,9 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@ant-design/icons": "^5.5.0",
+    "@ant-design/icons": "^6.1.0",
     "@ctrl/tinycolor": "^4.1.0",
-    "antd": "^5.29.3",
+    "antd": "^6.2.0",
     "axios": "^1.13.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

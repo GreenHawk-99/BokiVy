@@ -2,7 +2,7 @@ import React, {ReactNode, useEffect, useState} from 'react';
 import axios from 'axios';
 import {Config} from '../models/config';
 import {apiRegistry} from "../services/api.ts";
-import {ConfigContext} from "./AppContext.ts";
+import {ConfigSammanhang} from "./AppContext.ts";
 
 /**
  * Provider component for managing application configuration.
@@ -46,8 +46,8 @@ export const ConfigProvider: React.FC<{ children: ReactNode }> = ({children}) =>
   }
 
   return (
-    <ConfigContext.Provider value={{config, loading}}>
+    <ConfigSammanhang.Provider value={{config, loading}}>
       {children}
-    </ConfigContext.Provider>
+    </ConfigSammanhang.Provider>
   );
 };

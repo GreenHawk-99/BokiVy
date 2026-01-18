@@ -1,6 +1,6 @@
 import React, {ReactNode, useState} from 'react';
 import {ConfigProvider, theme} from 'antd';
-import {ThemeContext} from "./AppContext.ts";
+import {ThemeSammanhang} from "./AppContext.ts";
 
 
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({children}) => {
@@ -13,7 +13,7 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({children}) => 
   const colors = ['#01e973', '#8d42ff'];
 
   return (
-    <ThemeContext.Provider value={{isDarkMode, toggleDarkMode, colors}}>
+    <ThemeSammanhang.Provider value={{isDarkMode, toggleDarkMode, colors}}>
       <ConfigProvider
         theme={{
           token: {
@@ -25,7 +25,7 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({children}) => 
       >
         {children}
       </ConfigProvider>
-    </ThemeContext.Provider>
+    </ThemeSammanhang.Provider>
   );
 };
 

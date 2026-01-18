@@ -1,4 +1,4 @@
-import { apiRegistry } from './api';
+import {apiRegistry} from './api';
 import axios from 'axios';
 
 /**

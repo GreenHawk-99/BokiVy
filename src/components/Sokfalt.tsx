@@ -8,7 +8,13 @@ interface SearchAppVyProps {
   onSearch: (value: string) => void;
 }
 
-export function SearchBar({listSize, setListSize, onSearch}: SearchAppVyProps) {
+/**
+ * Search bar component for the server display page
+ * @param listSize
+ * @param setListSize
+ * @param onSearch
+ */
+export function Sokfalt({listSize, setListSize, onSearch}: SearchAppVyProps) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const ref1 = useRef(null);
@@ -55,7 +61,8 @@ export function SearchBar({listSize, setListSize, onSearch}: SearchAppVyProps) {
         <Button type={"primary"} ref={ref1} style={{marginBlock: "1vh"}}
                 onClick={showModal}><AppstoreAddOutlined/></Button>
         <div ref={ref2}>
-          <Input.Search allowClear placeholder={"Search servers..."} onSearch={onSearch} onChange={(e) => onSearch(e.target.value)}/>
+          <Input.Search allowClear placeholder={"Search servers..."} onSearch={onSearch}
+                        onChange={(e) => onSearch(e.target.value)}/>
         </div>
         <div ref={ref3}>
           <Select style={{width: "8vw"}} defaultValue={listSize}

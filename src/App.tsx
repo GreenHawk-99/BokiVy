@@ -1,9 +1,9 @@
 import {Layout, theme} from 'antd';
 import {Content} from "antd/es/layout/layout";
 import {Outlet} from "react-router-dom";
-import {useThemeVy} from "./hooks/useThemeVy";
 import {Sidhuvud} from "./layout/Sidhuvud.tsx";
 import {Sidfot} from "./layout/Sidfot.tsx";
+import {useThemeKrok} from "./hooks/useContext.ts";
 
 
 /**
@@ -11,7 +11,7 @@ import {Sidfot} from "./layout/Sidfot.tsx";
  * Acts as the entry point for global providers and the RouterProvider.
  */
 export function App() {
-  const {colors} = useThemeVy();
+  const {colors} = useThemeKrok();
   const {token} = theme.useToken();
 
 

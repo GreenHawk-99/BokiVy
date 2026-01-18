@@ -2,11 +2,10 @@ import {GithubOutlined} from "@ant-design/icons";
 import {Footer} from "antd/es/layout/layout";
 import {Button, ConfigProvider, Divider, Flex, Space} from "antd";
 import {TinyColor} from "@ctrl/tinycolor";
-import {useThemeVy} from "../hooks/useThemeVy.ts";
+import {useThemeKrok} from "../hooks/useContext.ts";
 
 export function Sidfot() {
-  const {colors} = useThemeVy();
-
+  const {colors} = useThemeKrok();
 
   const getHoverColors = (colors: string[]) =>
     colors.map((color) => new TinyColor(color).lighten(5).toString());

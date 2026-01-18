@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import {message} from 'antd';
-import {MessageContext} from "./AppContext.ts";
+import {MessageSammanhang} from "./AppContext.ts";
 
 
 /**
@@ -10,10 +10,10 @@ export const MessageProvider: React.FC<{ children: ReactNode }> = ({children}) =
   const [messageApi, contextHolder] = message.useMessage();
 
   return (
-    <MessageContext.Provider value={{messageApi}}>
+    <MessageSammanhang.Provider value={{messageApi}}>
       {contextHolder}
       {children}
-    </MessageContext.Provider>
+    </MessageSammanhang.Provider>
   );
 };
 

@@ -4,18 +4,17 @@ import {CopyOutlined, MinusCircleOutlined, SyncOutlined} from "@ant-design/icons
 import {useEffect, useState} from "react";
 import {imageRender} from "../utils/Checker.tsx";
 import {GameServer} from "../models/gameServer.ts";
-import {SearchBar} from "../components/SearchBar.tsx";
-import {useMessageVy} from "../hooks/useMessageVy.ts";
-import {useDataVy} from "../hooks/useDataVy.ts";
+import {Sokfalt} from "../components/Sokfalt.tsx";
+import {useDataKrok, useMessageKrok} from "../hooks/useContext.ts";
 
 /**
  * Component to display a list of game servers.
  */
 export function ServerDisplay() {
   const [listSize, setListSize] = useState<number>(8);
-  const { servers } = useDataVy();
+  const {servers} = useDataKrok();
   const [filteredServers, setFilteredServers] = useState<GameServer[]>([]);
-  const messageApi = useMessageVy();
+  const messageApi = useMessageKrok();
 
   useEffect(() => {
     setFilteredServers(servers);
@@ -41,13 +40,13 @@ export function ServerDisplay() {
    */
   const copyhandler = (ip: string) => {
     void navigator.clipboard.writeText(ip);
-    messageApi.info("Copied to clipboard");
+    void messageApi.info("Copied to clipboard");
   }
 
   return (
     <>
       <Flex justify={"space-between"} align={"flex-end"}>
-        <SearchBar listSize={listSize} setListSize={setListSize} onSearch={handleSearch}/>
+        <Sokfalt listSize={listSize} setListSize={setListSize} onSearch={handleSearch}/>
       </Flex>
       <List grid={{gutter: 16, column: listSize}}
             dataSource={filteredServers} renderItem={(server) => (

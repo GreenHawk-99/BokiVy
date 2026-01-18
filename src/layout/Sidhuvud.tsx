@@ -2,36 +2,44 @@ import {Header} from "antd/es/layout/layout";
 import {Avatar, Button, Menu, MenuProps, Modal, Space, Typography} from "antd";
 import {
   AppstoreOutlined,
+  ExperimentOutlined,
   FontSizeOutlined,
   LogoutOutlined,
   MoonOutlined,
-  RadarChartOutlined, SettingOutlined,
+  RadarChartOutlined,
+  SettingOutlined,
   SunOutlined,
   UserOutlined
 } from "@ant-design/icons";
-import {useUserVy} from "../hooks/useUserVy.ts";
-import {useThemeVy} from "../hooks/useThemeVy.ts";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import sits_01 from "../assets/sits_01.png";
+import {useThemeKrok, useUserKrok} from "../hooks/useContext.ts";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 export function Sidhuvud() {
-  const {username, avatar, login, logout, isLoading} = useUserVy();
-  const {isDarkMode, toggleDarkMode} = useThemeVy();
+  const {username, avatar, login, logout, isLoading} = useUserKrok();
+  const {isDarkMode, toggleDarkMode} = useThemeKrok();
   const navigate = useNavigate();
   const location = useLocation();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Determine the current key based on a path
-  const current = location.pathname === '/overview' ? 'overview' : 'applications';
+  let current = 'applications';
+  if (location.pathname === '/overview') {
+    current = 'overview';
+  } else if (location.pathname === '/benchmark') {
+    current = 'benchmark';
+  }
 
   const onClick: MenuProps['onClick'] = (e) => {
     if (e.key === 'applications') {
       navigate('/');
     } else if (e.key === 'overview') {
       navigate('/overview');
+    } else if (e.key === 'benchmark') {
+      navigate('/benchmark');
     }
   };
 
@@ -58,6 +66,11 @@ export function Sidhuvud() {
       label: 'Overview',
       key: 'overview',
       icon: <RadarChartOutlined/>,
+    },
+    {
+      label: 'Benchmark',
+      key: 'benchmark',
+      icon: <ExperimentOutlined/>,
     },
     {
       label: 'Navigation Three - Submenu',
