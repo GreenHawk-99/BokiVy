@@ -1,14 +1,15 @@
 import React from 'react';
-import {Button, Card, Form, Input, Select, Space, Typography} from 'antd';
-import {ExperimentOutlined} from '@ant-design/icons';
+import {Button, Card, Form, Input, Space, Typography, Upload, UploadFile, UploadProps} from 'antd';
+import {ExperimentOutlined, InboxOutlined} from '@ant-design/icons';
 import {useMessageKrok} from "../hooks/useContext.ts";
+import {RcFile} from "antd/es/upload";
 
 const {Title, Paragraph} = Typography;
+const {Dragger} = Upload;
 
 interface BenchmarkForm {
   name: string;
-  codex: string;
-  select?: string;
+  file: RcFile | File;
 }
 
 /**
@@ -17,17 +18,62 @@ interface BenchmarkForm {
  */
 export const BenchmarkVy: React.FC = () => {
   const [form] = Form.useForm<BenchmarkForm>();
-  const [isAutoTransform, setIsAutoTransform] = React.useState(true);
   const messageApi = useMessageKrok();
+  const [submittable, setSubmittable] = React.useState<boolean>(false);
+
+  // Watch all values to trigger re-render on any change
+  const values = Form.useWatch([], form);
+
+  React.useEffect(() => {
+    form
+      .validateFields({validateOnly: true})
+      .then(() => setSubmittable(true))
+      .catch(() => setSubmittable(false));
+  }, [form, values]);
 
   const onFinish = (values: any) => {
-    console.log('Success:', values);
+    console.log('Submitted values:', values);
+    // Step 1: Extract the binary data from the Ant Design wrapper
+    const rawFile = values.file.originFileObj as File;
+    // Step 2: Prepare the data for the backend
+    const formData = new FormData();
+    formData.append('name', values.name);
+    formData.append('file', rawFile);
+
+    console.log('Final data for Service:', { name: values.name, file: rawFile });
+    // Example: void ServerService.uploadCover(formData);
+    console.log('formData', formData.get('name'))
+    console.log('formData', formData.get('file'))
     void messageApi.success('Form submitted successfully!');
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
     void messageApi.error('Please check the form for errors.');
+  };
+
+  const uploadProps: UploadProps = {
+    name: 'file',
+    multiple: false,
+    maxCount: 1,
+    beforeUpload: () => false,
+    showUploadList: true,
+    listType: "picture",
+  }
+
+  const normFile = (e: any) => {
+    if (Array.isArray(e)) {
+      return e[0];
+    }
+    return e?.fileList?.[0]; // Extract the first file only
+  };
+
+  const normFileT = (e: any) => {
+    if (Array.isArray(e)) {
+      return e[0]?.originFileObj || e[0];
+    }
+    // Extract the raw file object immediately so the Form state matches your interface
+    return e?.fileList?.[0]?.originFileObj || e?.fileList?.[0];
   };
 
   return (
@@ -39,7 +85,7 @@ export const BenchmarkVy: React.FC = () => {
           </Title>
           <Paragraph>
             This page is dedicated to testing UI components and benchmarking Ant Design features.
-            Currently showcasing <b>Ant Design v6.2.0</b> features like Form variants.
+            Currently showcasing <b>Ant Design v6.2.0</b> features like Form variants and Dragger upload.
           </Paragraph>
         </Card>
 
@@ -48,79 +94,48 @@ export const BenchmarkVy: React.FC = () => {
             form={form}
             name="benchmark_form"
             layout="vertical"
+            requiredMark={false}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
             variant="filled"
           >
             <Form.Item
-              label="Input 1 (Filled Variant via Form)"
+              label="Cover Name (TextArea)"
               name="name"
-              rules={[{required: true, message: 'Please input something!'}]}
+              rules={[{required: true, message: 'Please enter a cover name!'}]}
             >
-              <Input placeholder="Enter some text"/>
-            </Form.Item>
-
-            <Form.Item label="Codex Configuration">
-              <Space.Compact style={{ width: '100%' }}>
-                <Form.Item
-                  name="codex"
-                  noStyle // This is CRUCIAL: it removes the CSS margin/padding but keeps the logic
-                  rules={[
-                    { required: true, message: 'Value is required' },
-                    {
-                      pattern: /^(\$[a-zA-Z])+$/,
-                      message: 'Format must be $char$char (e.g. $a$B$c)'
-                    }
-                  ]}
-                  getValueFromEvent={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    const val = e.target.value;
-                    if (!isAutoTransform) return val;
-
-                    // We still transform, but we don't "strip" anymore.
-                    // We let the 'pattern' rule handle the feedback.
-                    const raw = val.replace(/\$/g, '');
-                    return raw.split('').map(c => `$${c}`).join('');
-                  }}
-                >
-                  <Input
-                    allowClear
-                    style={{ width: 'calc(100% - 100px)' }}
-                    suffix={isAutoTransform ? <ExperimentOutlined style={{ color: '#1677ff' }} /> : null}
-                    placeholder={isAutoTransform ? "Auto-encoding..." : "Manual input..."}
-                  />
-                </Form.Item>
-                <Button
-                  type={isAutoTransform ? 'primary' : 'default'}
-                  onClick={() => setIsAutoTransform(!isAutoTransform)}
-                  style={{ width: '100px' }}
-                >
-                  {isAutoTransform ? 'Auto' : 'Manual'}
-                </Button>
-              </Space.Compact>
-            </Form.Item>
-
-            {/* Optional: Visual Feedback Preview */}
-            <Form.Item noStyle shouldUpdate={(prev, curr) => prev.codex !== curr.codex}>
-              {({ getFieldValue }) => (
-                <div style={{ marginBottom: 24, marginTop: -20, fontSize: '12px', color: '#666' }}>
-                  Encoded Value: <code style={{ color: '#1677ff' }}>{getFieldValue('codex') || 'None'}</code>
-                </div>
-              )}
-            </Form.Item>
-
-            <Form.Item label="Select (Inherited Variant)" name="select">
-              <Select
-                placeholder="Select an option"
-                options={[
-                  {value: 'v6', label: 'Ant Design v6'},
-                  {value: 'v5', label: 'Ant Design v5'},
-                ]}
+              <Input
+                placeholder="Enter a cover name here..."
+                maxLength={20}
               />
             </Form.Item>
 
+            <Form.Item
+              label="File Upload (Dragger)"
+              name="file"
+              // Important: We must tell the form how to pass the value BACK to the Dragger
+              // Since Dragger expects an array, but our form now stores a single object
+              getValueProps={(value) => ({ fileList: value ? [value] : [] })}
+              getValueFromEvent={normFile}
+              rules={[{required: true, message: 'Please upload one file!'}]}
+            >
+              <Dragger {...uploadProps} style={{padding: '20px'}}>
+                <p className="ant-upload-drag-icon">
+                  <InboxOutlined/>
+                </p>
+                <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                <p className="ant-upload-hint">
+                  Support for a single or bulk upload. Strictly prohibited from uploading company data or other
+                  banned files.
+                </p>
+              </Dragger>
+            </Form.Item>
+
+
+
             <Form.Item>
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" disabled={!submittable}>
                 Send
               </Button>
             </Form.Item>
