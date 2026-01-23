@@ -4,16 +4,17 @@ import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {imageRender} from "../utils/cover.tsx";
 import {GameServer} from "../models/gameServer.ts";
-import {Multifalt, ViewType} from "../components/Multifalt.tsx";
+import {Multifalt} from "../components/Multifalt.tsx";
 import {useDataKrok, useMessageKrok} from "../hooks/useContext.ts";
 import {ColumnsType} from "antd/es/table";
+import {ViewType} from "../type/component.ts";
 
 /**
  * Component to display a list of game servers.
  */
 export function ServerVy() {
   const [listSize, setListSize] = useState<number>(8);
-  const [viewType, setViewType] = useState<ViewType>('kort');
+  const [viewType, setViewType] = useState<ViewType>('cart');
   const {servers} = useDataKrok();
   const [filteredServers, setFilteredServers] = useState<GameServer[]>([]);
   const messageApi = useMessageKrok();
@@ -74,7 +75,10 @@ export function ServerVy() {
       key: 'ipAddress',
       render: (_, record) => (
         <Space>
-          <Typography.Text copyable={{ text: ipAddressAndPort(record), onCopy: () => void messageApi.info(t('common.copyToClipboard')) }}>
+          <Typography.Text copyable={{
+            text: ipAddressAndPort(record),
+            onCopy: () => void messageApi.info(t('common.copyToClipboard'))
+          }}>
             {ipAddressAndPort(record)}
           </Typography.Text>
         </Space>
@@ -85,15 +89,16 @@ export function ServerVy() {
   return (
     <>
       <Flex justify={"space-between"} align={"flex-end"}>
-        <Multifalt listSize={listSize} setListSize={setListSize} onSearch={handleSearch} viewType={viewType} setViewType={setViewType}/>
+        <Multifalt listSize={listSize} setListSize={setListSize} onSearch={handleSearch} viewType={viewType}
+                   setViewType={setViewType}/>
       </Flex>
-      {viewType === 'tabell' ? (
+      {viewType === 'table' ? (
         <Table
+          rowKey={'id'}
           dataSource={filteredServers}
           columns={columns}
-          rowKey="id"
-          pagination={{ pageSize: 10 }}
-          style={{ marginTop: '2vh' }}
+          pagination={{pageSize: 10}}
+          bordered={true}
         />
       ) : (
         <List grid={{gutter: 16, column: listSize}}

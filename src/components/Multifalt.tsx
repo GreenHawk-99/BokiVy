@@ -1,9 +1,9 @@
-import {Button, Input, Modal, Select, Space, Tour, TourProps, Segmented} from "antd";
-import {AppstoreAddOutlined, InfoCircleOutlined, TableOutlined, AppstoreOutlined} from "@ant-design/icons";
+import {Button, Flex, Input, Modal, Segmented, Select, Space, Tour, TourProps} from "antd";
+import {AppstoreAddOutlined, AppstoreOutlined, InfoCircleOutlined, TableOutlined} from "@ant-design/icons";
 import React, {useRef, useState} from "react";
 import {useTranslation} from "react-i18next";
+import {ViewType} from "../type/component.ts";
 
-export type ViewType = 'kort' | 'tabell';
 
 interface MultifaltProps {
   listSize: number;
@@ -71,38 +71,41 @@ export function Multifalt({listSize, setListSize, onSearch, viewType, setViewTyp
 
   return (
     <>
-      <Space.Compact style={{alignItems: "center"}}>
-        <Button type={"primary"} ref={ref1} style={{marginBlock: "1vh"}}
-                onClick={showModal}><AppstoreAddOutlined/></Button>
-        <div ref={ref2}>
-          <Input.Search allowClear placeholder={t('multifalt.searchPlaceholder')} onSearch={onSearch}
-                        onChange={(e) => onSearch(e.target.value)}/>
-        </div>
-        <div ref={ref3}>
-          <Select style={{width: "120px"}} defaultValue={listSize}
-                  onChange={handleChange}
-                  options={[
-                    {value: 2},
-                    {value: 4},
-                    {value: 6},
-                    {value: 8, label: `8 (${t('multifalt.listSize.standard')})`},
-                    {value: 12},
-                    {value: 16},
-                    {value: 20}
-                  ]}/>
-        </div>
+      <Flex justify={"space-between"} align={"center"} style={{width: '100%', marginBottom: "4vh"}}>
+
+        <Space.Compact style={{alignItems: "center"}}>
+          <Button type={"primary"} ref={ref1} style={{marginBlock: "1vh"}}
+                  onClick={showModal}><AppstoreAddOutlined/></Button>
+          <div ref={ref2}>
+            <Input.Search allowClear placeholder={t('multifalt.searchPlaceholder')} onSearch={onSearch}
+                          onChange={(e) => onSearch(e.target.value)}/>
+          </div>
+          <div ref={ref3}>
+            <Select style={{width: "120px"}} defaultValue={listSize}
+                    onChange={handleChange}
+                    options={[
+                      {value: 2},
+                      {value: 4},
+                      {value: 6},
+                      {value: 8, label: `8 (${t('multifalt.listSize.standard')})`},
+                      {value: 12},
+                      {value: 16},
+                      {value: 20}
+                    ]}/>
+          </div>
+          <Button type={"primary"} onClick={() => setOpen(true)}><InfoCircleOutlined/></Button>
+        </Space.Compact>
         <div ref={ref4}>
           <Segmented
             value={viewType}
             onChange={(value) => setViewType(value as ViewType)}
             options={[
-              { value: 'kort', icon: <AppstoreOutlined />, label: t('multifalt.viewType.card') },
-              { value: 'tabell', icon: <TableOutlined />, label: t('multifalt.viewType.table') },
+              {value: 'cart', icon: <AppstoreOutlined/>, label: t('multifalt.viewType.card')},
+              {value: 'table', icon: <TableOutlined/>, label: t('multifalt.viewType.table')},
             ]}
           />
         </div>
-        <Button type={"primary"} onClick={() => setOpen(true)}><InfoCircleOutlined/></Button>
-      </Space.Compact>
+      </Flex>
       <Modal title={t('multifalt.createServer')} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
         <div>{t('common.name')}</div>
         <div>Ip</div>
