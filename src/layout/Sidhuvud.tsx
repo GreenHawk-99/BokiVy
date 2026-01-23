@@ -7,12 +7,12 @@ import {
   LogoutOutlined,
   MoonOutlined,
   RadarChartOutlined,
-  SettingOutlined,
   SunOutlined,
   UserOutlined
 } from "@ant-design/icons";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useState} from "react";
+import {useTranslation} from "react-i18next";
 import sits_01 from "../assets/sits_01.png";
 import {useThemeKrok, useUserKrok} from "../hooks/useContext.ts";
 
@@ -21,9 +21,15 @@ type MenuItem = Required<MenuProps>['items'][number];
 export function Sidhuvud() {
   const {username, avatar, login, logout, isLoading} = useUserKrok();
   const {isDarkMode, toggleDarkMode} = useThemeKrok();
+  const {t, i18n} = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === 'sv' ? 'en' : 'sv';
+    void i18n.changeLanguage(newLang);
+  };
 
   // Determine the current key based on a path
   let current = 'applications';
@@ -58,34 +64,19 @@ export function Sidhuvud() {
 
   const items: MenuItem[] = [
     {
-      label: 'Applications',
+      label: t('menu.applications'),
       key: 'applications',
       icon: <AppstoreOutlined/>,
     },
     {
-      label: 'Overview',
+      label: t('menu.overview'),
       key: 'overview',
       icon: <RadarChartOutlined/>,
     },
     {
-      label: 'Benchmark',
+      label: t('menu.benchmark'),
       key: 'benchmark',
       icon: <ExperimentOutlined/>,
-    },
-    {
-      label: 'Navigation Three - Submenu',
-      key: 'submenu',
-      icon: <SettingOutlined/>,
-      children: [
-        {
-          type: 'group',
-          label: 'Servers',
-          children: [
-            {label: 'Option 1', key: 'setting:1'},
-            {label: 'Option 2', key: 'setting:2'},
-          ],
-        },
-      ],
     },
   ];
 
@@ -101,14 +92,16 @@ export function Sidhuvud() {
       />
       <Space.Compact>
         <Button icon={<UserOutlined/>} onClick={showModal} loading={isLoading}>
-          {username || 'Login'}
+          {username || t('common.login')}
         </Button>
-        <Button icon={<FontSizeOutlined/>}/>
+        <Button icon={<FontSizeOutlined/>} onClick={toggleLanguage}>
+          {i18n.language === 'sv' ? 'SV' : 'EN'}
+        </Button>
         <Button onClick={toggleDarkMode}>{isDarkMode ? <SunOutlined/> : <MoonOutlined/>}</Button>
       </Space.Compact>
 
       <Modal
-        title={username ? "Profile" : "Sign In"}
+        title={username ? t('common.profile') : t('common.signIn')}
         open={isModalOpen}
         onCancel={handleCancel}
         footer={null}
@@ -119,7 +112,7 @@ export function Sidhuvud() {
             <Avatar size={100} src={avatar} icon={<UserOutlined/>} style={{marginBottom: 16}}/>
             <Typography.Title level={3}>{username}</Typography.Title>
             <Typography.Text type="secondary" style={{marginBottom: 24}}>
-              Logged in through Steam
+              {t('common.loggedInSteam')}
             </Typography.Text>
             <Button
               danger
@@ -128,7 +121,7 @@ export function Sidhuvud() {
               onClick={handleLogout}
               block
             >
-              Logout
+              {t('common.logout')}
             </Button>
           </div>
         ) : (

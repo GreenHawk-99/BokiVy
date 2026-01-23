@@ -3,6 +3,7 @@ import {Button, Card, Form, Input, Space, Typography, Upload, UploadProps} from 
 import {ExperimentOutlined, InboxOutlined} from '@ant-design/icons';
 import {useMessageKrok} from "../hooks/useContext.ts";
 import {RcFile} from "antd/es/upload";
+import {useTranslation} from "react-i18next";
 
 const {Title, Paragraph} = Typography;
 const {Dragger} = Upload;
@@ -19,6 +20,7 @@ interface BenchmarkForm {
 export const BenchmarkVy: React.FC = () => {
   const [form] = Form.useForm<BenchmarkForm>();
   const messageApi = useMessageKrok();
+  const {t} = useTranslation();
   const [submittable, setSubmittable] = React.useState<boolean>(false);
 
   // Watch all values to trigger re-render on any change
@@ -44,12 +46,12 @@ export const BenchmarkVy: React.FC = () => {
     // Example: void ServerService.uploadCover(formData);
     console.log('formData', formData.get('name'))
     console.log('formData', formData.get('file'))
-    void messageApi.success('Form submitted successfully!');
+    void messageApi.success(t('benchmark.formSuccess'));
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
-    void messageApi.error('Please check the form for errors.');
+    void messageApi.error(t('benchmark.formError'));
   };
 
   const uploadProps: UploadProps = {
@@ -73,15 +75,15 @@ export const BenchmarkVy: React.FC = () => {
       <Space orientation="vertical" size="large" style={{width: '100%'}}>
         <Card variant="outlined">
           <Title level={2}>
-            <ExperimentOutlined/> UI Benchmark Playground (v6.2.0)
+            <ExperimentOutlined/> {t('benchmark.title')} (v6.2.0)
           </Title>
           <Paragraph>
-            This page is dedicated to testing UI components and benchmarking Ant Design features.
+            {t('benchmark.description')}
             Currently showcasing <b>Ant Design v6.2.0</b> features like Form variants and Dragger upload.
           </Paragraph>
         </Card>
 
-        <Card title="Ant Design Form Benchmark (Vertical Layout)" variant="outlined">
+        <Card title={t('benchmark.formTitle')} variant="outlined">
           <Form
             form={form}
             name="benchmark_form"
@@ -93,33 +95,32 @@ export const BenchmarkVy: React.FC = () => {
             variant="filled"
           >
             <Form.Item
-              label="Cover Name (TextArea)"
+              label={t('benchmark.coverName')}
               name="name"
-              rules={[{required: true, message: 'Please enter a cover name!'}]}
+              rules={[{required: true, message: t('benchmark.coverNameRequired')}]}
             >
               <Input
-                placeholder="Enter a cover name here..."
+                placeholder={t('benchmark.coverNamePlaceholder')}
                 maxLength={20}
               />
             </Form.Item>
 
             <Form.Item
-              label="File Upload (Dragger)"
+              label={t('benchmark.fileUpload')}
               name="file"
               // Important: We must tell the form how to pass the value BACK to the Dragger
               // Since Dragger expects an array, but our form now stores a single object
               getValueProps={(value) => ({fileList: value ? [value] : []})}
               getValueFromEvent={normFile}
-              rules={[{required: true, message: 'Please upload one file!'}]}
+              rules={[{required: true, message: t('benchmark.fileUploadRequired')}]}
             >
               <Dragger {...uploadProps} style={{padding: '20px'}}>
                 <p className="ant-upload-drag-icon">
                   <InboxOutlined/>
                 </p>
-                <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                <p className="ant-upload-text">{t('benchmark.fileUploadText')}</p>
                 <p className="ant-upload-hint">
-                  Support for a single or bulk upload. Strictly prohibited from uploading company data or other
-                  banned files.
+                  {t('benchmark.fileUploadHint')}
                 </p>
               </Dragger>
             </Form.Item>
@@ -127,7 +128,7 @@ export const BenchmarkVy: React.FC = () => {
 
             <Form.Item>
               <Button type="primary" htmlType="submit" disabled={!submittable}>
-                Send
+                {t('common.send')}
               </Button>
             </Form.Item>
           </Form>

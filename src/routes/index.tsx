@@ -1,6 +1,6 @@
 import {createBrowserRouter} from 'react-router-dom';
 import {OverviewVy} from '../pages/OverviewVy';
-import {ServerDisplay} from '../pages/ServerDisplay.tsx';
+import {ServerVy} from '../pages/ServerVy.tsx';
 import {BenchmarkVy} from '../pages/BenchmarkVy.tsx';
 import ErrorVy from '../pages/ErrorVy.tsx';
 import {RootProvider} from "../contexts/RootProvider.tsx";
@@ -13,7 +13,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <ServerDisplay/>,
+        element: <ServerVy/>,
       },
       {
         path: "overview",

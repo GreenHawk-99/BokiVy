@@ -1,0 +1,76 @@
+{
+  "common": {
+    "login": "Logga in",
+    "logout": "Logga ut",
+    "profile": "Profil",
+    "signIn": "Logga in",
+    "loggedInSteam": "Inloggad via Steam",
+    "copyToClipboard": "Kopierad till urklipp",
+    "running": "Körs",
+    "offline": "offline",
+    "name": "Namn",
+    "status": "Status",
+    "players": "Spelare",
+    "ipAddress": "IP-Adress",
+    "playerCount": "Antal spelare",
+    "send": "Skicka",
+    "success": "Framgång",
+    "error": "Fel"
+  },
+  "menu": {
+    "applications": "Applikationer",
+    "overview": "Översikt",
+    "benchmark": "Benchmark"
+  },
+  "multifalt": {
+    "searchPlaceholder": "Sök servrar...",
+    "createServer": "Skapa en server",
+    "viewType": {
+      "card": "Kortvy",
+      "table": "Tabellvy"
+    },
+    "listSize": {
+      "standard": "Standard",
+      "compact": "Kompakt"
+    },
+    "tour": {
+      "createServer": {
+        "title": "Skapa en server",
+        "description": "Du kan skapa och vara värd för din egen spelserver direkt härifrån."
+      },
+      "search": {
+        "title": "Sök",
+        "description": "Sök efter en server med namn eller IP-adress"
+      },
+      "cardLayout": {
+        "title" : "Kortlayout",
+        "description" : "Justera antalet serverkort som visas per rad."
+      },
+      "viewType": {
+        "title": "Visningsläge",
+        "description": "Växla mellan kortvy och tabellvy"
+      }
+    }
+  },
+  "overview": {
+    "title": "Översikt",
+    "totalServers": "Totala servrar",
+    "online": "Online",
+    "offline": "Offline",
+    "totalPlayers": "Totala spelare"
+  },
+  "benchmark": {
+    "title": "UI Benchmark Playground",
+    "description": "Denna sida är dedikerad till att testa UI-komponenter och benchmarka Ant Design-funktioner.",
+    "formTitle": "Ant Design Form Benchmark (Vertikal layout)",
+    "coverName": "Omslagsnamn (TextArea)",
+    "coverNamePlaceholder": "Ange ett omslagsnamn här...",
+    "coverNameRequired": "Vänligen ange ett omslagsnamn!",
+    "fileUpload": "Filuppladdning (Dragger)",
+    "fileUploadRequired": "Vänligen ladda upp en fil!",
+    "fileUploadText": "Klicka eller dra filen till detta område för att ladda upp",
+    "fileUploadHint": "Stöd för enstaka eller massuppladdning. Strängt förbjudet att ladda upp företagsdata eller andra förbjudna filer.",
+    "formSuccess": "Formuläret har skickats!",
+    "formError": "Kontrollera formuläret för fel."
+  }
+}

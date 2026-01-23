@@ -1,18 +1,20 @@
 import {Card, Col, Row, Statistic, Typography} from "antd";
 import {CheckCircleOutlined, CloseCircleOutlined, DesktopOutlined, TeamOutlined} from "@ant-design/icons";
 import {useDataKrok} from "../hooks/useContext.ts";
+import {useTranslation} from "react-i18next";
 
 export function OverviewVy() {
   const {stats} = useDataKrok();
+  const {t} = useTranslation();
 
   return (
     <>
-      <Typography.Title level={2} style={{marginBlock: "1vh"}}>Overview</Typography.Title>
+      <Typography.Title level={2} style={{marginBlock: "1vh"}}>{t('overview.title')}</Typography.Title>
       <Row gutter={[16, 16]}>
         <Col span={6}>
           <Card variant={"borderless"}>
             <Statistic
-              title="Total Servers"
+              title={t('overview.totalServers')}
               value={stats.total}
               prefix={<DesktopOutlined/>}
             />
@@ -21,7 +23,7 @@ export function OverviewVy() {
         <Col span={6}>
           <Card variant={"borderless"}>
             <Statistic
-              title="Online"
+              title={t('overview.online')}
               value={stats.online}
               valueStyle={{color: '#3f8600'}}
               prefix={<CheckCircleOutlined/>}
@@ -31,7 +33,7 @@ export function OverviewVy() {
         <Col span={6}>
           <Card variant={"borderless"}>
             <Statistic
-              title="Offline"
+              title={t('overview.offline')}
               value={stats.offline}
               valueStyle={{color: '#cf1322'}}
               prefix={<CloseCircleOutlined/>}
@@ -41,7 +43,7 @@ export function OverviewVy() {
         <Col span={6}>
           <Card variant={"borderless"}>
             <Statistic
-              title="Total Players"
+              title={t('overview.totalPlayers')}
               value={stats.totalPlayers}
               suffix={`/ ${stats.maxPlayers}`}
               prefix={<TeamOutlined/>}

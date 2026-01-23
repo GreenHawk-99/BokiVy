@@ -3,7 +3,7 @@
 --------------
 
 ### BKV-En:
-- [ ] _**ServerDisplay**_ - Initialize project structure with the games servers view "ServerDisplay" and some mock up data | Component Searchbar and Tour on ServerDisplay include
+- [ ] _**ServerVy**_ - Initialize project structure with the games servers view "ServerVy" and some mock up data | Component Searchbar and Tour on ServerVy include
 ### BKV-Två:
 - [ ] _**AppVy**_ - View about one application
 ### BKV-Tre:

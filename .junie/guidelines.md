@@ -11,7 +11,7 @@ Bokivy is a React-based web application designed to display and manage game serv
 - **Icons**: Ant Design Icons
 
 ## Project Structure
-- `src/components/`: Reusable UI components (e.g., `ServerDisplay`, `SearchBar`, `MainLayoutVy`).
+- `src/components/`: Reusable UI components (e.g., `ServerVy`, `SearchBar`, `MainLayoutVy`).
 - `src/pages/`: Main view components (e.g., `OverviewVy`).
 - `src/services/`: Business logic and data management (e.g., `ServerService`, `UserService`).
 - `src/data/`: Static data and mock datasets (e.g., `data.ts`).

@@ -18,7 +18,8 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({children}) => 
         theme={{
           token: {
             colorPrimary: "#01e973",
-            colorPrimaryBorder: "#8d42ff"
+            colorPrimaryBorder: "#8d42ff",
+            fontFamily: "'AlibabaSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'"
           },
           algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
         }}

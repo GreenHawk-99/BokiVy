@@ -1,0 +1,76 @@
+{
+  "common": {
+    "login": "Login",
+    "logout": "Logout",
+    "profile": "Profile",
+    "signIn": "Sign In",
+    "loggedInSteam": "Logged in through Steam",
+    "copyToClipboard": "Copied to clipboard",
+    "running": "Running",
+    "offline": "Offline",
+    "name": "Name",
+    "status": "Status",
+    "players": "Players",
+    "ipAddress": "IP-Address",
+    "playerCount": "Player Count",
+    "send": "Send",
+    "success": "Success",
+    "error": "Error"
+  },
+  "menu": {
+    "applications": "Applications",
+    "overview": "Overview",
+    "benchmark": "Benchmark"
+  },
+  "multifalt": {
+    "searchPlaceholder": "Search servers...",
+    "createServer": "Create a server",
+    "viewType": {
+      "card": "Card View",
+      "table": "Table View"
+    },
+    "listSize": {
+      "standard": "Standard",
+      "compact": "Compact"
+    },
+    "tour": {
+      "createServer": {
+        "title": "Create a server",
+        "description": "You can create and host your own game server directly from here."
+      },
+      "search": {
+        "title": "Search",
+        "description": "Search for a server by name or IP address"
+      },
+      "cardLayout": {
+        "title" : "Card Layout",
+        "description" : "Adjust the number of server cards displayed per row."
+      },
+      "viewType": {
+        "title": "View Mode",
+        "description": "Switch between card view and table view"
+      }
+    }
+  },
+  "overview": {
+    "title": "Overview",
+    "totalServers": "Total Servers",
+    "online": "Online",
+    "offline": "Offline",
+    "totalPlayers": "Total Players"
+  },
+  "benchmark": {
+    "title": "UI Benchmark Playground",
+    "description": "This page is dedicated to testing UI components and benchmarking Ant Design features.",
+    "formTitle": "Ant Design Form Benchmark (Vertical Layout)",
+    "coverName": "Cover Name (TextArea)",
+    "coverNamePlaceholder": "Enter a cover name here...",
+    "coverNameRequired": "Please enter a cover name!",
+    "fileUpload": "File Upload (Dragger)",
+    "fileUploadRequired": "Please upload one file!",
+    "fileUploadText": "Click or drag file to this area to upload",
+    "fileUploadHint": "Support for a single or bulk upload. Strictly prohibited from uploading company data or other banned files.",
+    "formSuccess": "Form submitted successfully!",
+    "formError": "Please check the form for errors."
+  }
+}
