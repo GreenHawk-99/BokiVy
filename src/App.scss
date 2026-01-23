@@ -78,3 +78,15 @@
 .application {
 
 }
+
+/* Remove default browser ring when focus is not "keyboard-intent" */
+:where(button, [role="button"], a, input, select, textarea):focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Provide your own ring for keyboard navigation */
+:where(button, [role="button"], a, input, select, textarea):focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(1, 233, 115, 0.35);
+  border-radius: 8px; /* optional, match your UI */
+}
