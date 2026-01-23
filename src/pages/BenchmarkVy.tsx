@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Card, Form, Input, Space, Typography, Upload, UploadFile, UploadProps} from 'antd';
+import {Button, Card, Form, Input, Space, Typography, Upload, UploadProps} from 'antd';
 import {ExperimentOutlined, InboxOutlined} from '@ant-design/icons';
 import {useMessageKrok} from "../hooks/useContext.ts";
 import {RcFile} from "antd/es/upload";
@@ -40,7 +40,7 @@ export const BenchmarkVy: React.FC = () => {
     formData.append('name', values.name);
     formData.append('file', rawFile);
 
-    console.log('Final data for Service:', { name: values.name, file: rawFile });
+    console.log('Final data for Service:', {name: values.name, file: rawFile});
     // Example: void ServerService.uploadCover(formData);
     console.log('formData', formData.get('name'))
     console.log('formData', formData.get('file'))
@@ -66,14 +66,6 @@ export const BenchmarkVy: React.FC = () => {
       return e[0];
     }
     return e?.fileList?.[0]; // Extract the first file only
-  };
-
-  const normFileT = (e: any) => {
-    if (Array.isArray(e)) {
-      return e[0]?.originFileObj || e[0];
-    }
-    // Extract the raw file object immediately so the Form state matches your interface
-    return e?.fileList?.[0]?.originFileObj || e?.fileList?.[0];
   };
 
   return (
@@ -116,7 +108,7 @@ export const BenchmarkVy: React.FC = () => {
               name="file"
               // Important: We must tell the form how to pass the value BACK to the Dragger
               // Since Dragger expects an array, but our form now stores a single object
-              getValueProps={(value) => ({ fileList: value ? [value] : [] })}
+              getValueProps={(value) => ({fileList: value ? [value] : []})}
               getValueFromEvent={normFile}
               rules={[{required: true, message: 'Please upload one file!'}]}
             >
@@ -131,7 +123,6 @@ export const BenchmarkVy: React.FC = () => {
                 </p>
               </Dragger>
             </Form.Item>
-
 
 
             <Form.Item>

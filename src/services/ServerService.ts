@@ -1,11 +1,14 @@
 import {apiRegistry} from './api';
 import {gameServers} from "../data/data.ts";
 import {GameServer} from "../models/gameServer.ts";
+import {mockServerService} from "./MockServerService.ts";
 
 /**
  * Service to handle game server data operations.
  */
 export class ServerService {
+  private static USE_MOCK: boolean = true; // Toggle this to switch between mock and real API
+
   private static get api() {
     return apiRegistry.get('yggdrasil');
   }
@@ -18,9 +21,12 @@ export class ServerService {
   }
 
   /**
-   * Retrieves all game servers from the backend API.
+   * Retrieves all game servers.
    */
   static async getServers(): Promise<GameServer[]> {
+    if (this.USE_MOCK) {
+      return mockServerService.getAll();
+    }
     const response = await this.api.get('/servers');
     return response.data;
   }
@@ -29,16 +35,20 @@ export class ServerService {
    * Creates a new game server.
    */
   static async createServer(server: GameServer): Promise<GameServer> {
+    if (this.USE_MOCK) {
+      return mockServerService.create(server);
+    }
     const response = await this.api.post('/servers', server);
     return response.data;
   }
 
   /**
    * Updates an existing game server.
-   * Note: Assumes the server object has an 'id' or one is provided.
-   * Since GameServer interface doesn't have an ID, we use IP as a placeholder or expect it in the URL.
    */
   static async updateServer(id: string, server: Partial<GameServer>): Promise<GameServer> {
+    if (this.USE_MOCK) {
+      return mockServerService.update(id, server);
+    }
     const response = await this.api.put(`/servers/${id}`, server);
     return response.data;
   }
@@ -47,6 +57,9 @@ export class ServerService {
    * Deletes a game server.
    */
   static async deleteServer(id: string): Promise<void> {
+    if (this.USE_MOCK) {
+      return mockServerService.delete(id);
+    }
     await this.api.delete(`/servers/${id}`);
   }
 
@@ -67,28 +80,3 @@ export class ServerService {
     };
   }
 }
-
-/*
-suggestions
-
-import { UserService } from './UserService';
-
-// ... existing code ...
-
-export const ServerService = {
-  getServers: async () => {
-    const steamId = UserService.getStoredSteamId();
-
-    const response = await fetch('http://localhost:5000/api/servers', {
-      headers: {
-        'Authorization': `Bearer ${steamId}`, // Header version
-        'Content-Type': 'application/json'
-      }
-    });
-
-    return await response.json();
-  },
-
-  // ... existing code ...
-};
- */

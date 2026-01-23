@@ -2,6 +2,7 @@ import {GameServer} from "../models/gameServer.ts";
 
 export const gameServers: Array<GameServer> = [
   {
+    id: "1",
     name: "V Rising",
     ipAddress: "192.22.169.12",
     port: "4040",
@@ -10,6 +11,7 @@ export const gameServers: Array<GameServer> = [
     maxPlayer: 10
   },
   {
+    id: "2",
     name: "Abiotic Factor",
     ipAddress: "192.22.169.13",
     port: "4040",
@@ -18,6 +20,7 @@ export const gameServers: Array<GameServer> = [
     maxPlayer: 12
   },
   {
+    id: "3",
     name: "Minecraft",
     ipAddress: "192.22.169.14",
     port: "4040",
@@ -26,6 +29,7 @@ export const gameServers: Array<GameServer> = [
     maxPlayer: 24
   },
   {
+    id: "4",
     name: "Astroneer",
     ipAddress: "192.22.169.15",
     port: "4040",
@@ -34,6 +38,7 @@ export const gameServers: Array<GameServer> = [
     maxPlayer: 4
   },
   {
+    id: "5",
     name: "Core Kepper",
     ipAddress: "192.22.169.16",
     port: "4040",
@@ -42,6 +47,7 @@ export const gameServers: Array<GameServer> = [
     maxPlayer: 8
   },
   {
+    id: "6",
     name: "Project Zomboid",
     ipAddress: "192.22.169.17",
     port: "4040",
@@ -50,6 +56,7 @@ export const gameServers: Array<GameServer> = [
     maxPlayer: 40
   },
   {
+    id: "7",
     name: "Factorio",
     ipAddress: "192.22.169.18",
     port: "4040",
@@ -58,6 +65,7 @@ export const gameServers: Array<GameServer> = [
     maxPlayer: 12
   },
   {
+    id: "8",
     name: "Valheim",
     ipAddress: "192.22.169.19",
     port: "4040",
@@ -66,6 +74,7 @@ export const gameServers: Array<GameServer> = [
     maxPlayer: 10
   },
   {
+    id: "9",
     name: "Starbound",
     ipAddress: "192.22.169.20",
     port: "4040",
@@ -74,6 +83,7 @@ export const gameServers: Array<GameServer> = [
     maxPlayer: 10
   },
   {
+    id: "10",
     name: "Conan Exile",
     ipAddress: "192.22.169.21",
     port: "4040",
@@ -82,6 +92,7 @@ export const gameServers: Array<GameServer> = [
     maxPlayer: 100
   },
   {
+    id: "11",
     name: "Palworld",
     ipAddress: "192.22.169.22",
     port: "4040",
@@ -90,6 +101,7 @@ export const gameServers: Array<GameServer> = [
     maxPlayer: 8
   },
   {
+    id: "12",
     name: "Counter Strike 2",
     ipAddress: "192.22.169.23",
     port: "4040",
@@ -98,6 +110,7 @@ export const gameServers: Array<GameServer> = [
     maxPlayer: 18
   },
   {
+    id: "13",
     name: "Garry's Mod",
     ipAddress: "192.22.169.24",
     port: "4040",
@@ -106,6 +119,7 @@ export const gameServers: Array<GameServer> = [
     maxPlayer: 20
   },
   {
+    id: "14",
     name: "Enshrouded",
     ipAddress: "192.22.169.25",
     port: "4040",
