@@ -2,7 +2,6 @@ import {Layout, theme} from 'antd';
 import {Content} from "antd/es/layout/layout";
 import {Outlet} from "react-router-dom";
 import {Sidhuvud} from "./layout/Sidhuvud.tsx";
-import {Sidfot} from "./layout/Sidfot.tsx";
 import {useThemeKrok} from "./hooks/useContext.ts";
 
 
@@ -36,7 +35,6 @@ export function App() {
             <Outlet/>
           </div>
         </Content>
-        <Sidfot/>
       </Layout>
     </Layout>
   );
