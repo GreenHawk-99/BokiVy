@@ -1,4 +1,3 @@
-import '../App.scss'
 import {Card, Flex, List, Space, Table, Tag, Tooltip, Typography} from "antd";
 import {CopyOutlined, MinusCircleOutlined, SyncOutlined} from "@ant-design/icons";
 import {useEffect, useState} from "react";
