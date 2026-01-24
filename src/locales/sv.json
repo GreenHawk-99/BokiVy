@@ -72,5 +72,20 @@
     "fileUploadHint": "Stöd för enstaka eller massuppladdning. Strängt förbjudet att ladda upp företagsdata eller andra förbjudna filer.",
     "formSuccess": "Formuläret har skickats!",
     "formError": "Kontrollera formuläret för fel."
+  },
+  "errorPage": {
+    "unexpectedError": "Oväntat fel",
+    "sorry": "Tyvärr uppstod ett oväntat fel.",
+    "notFound": "Sidan du försökte nå verkar inte finnas eller så uppstod ett problem vid hämtning.",
+    "details": "Feldetaljer",
+    "status": "Status",
+    "statusText": "Statustext",
+    "responseData": "Svarsdata",
+    "technicalDetails": "Tekniska detaljer",
+    "objectDetails": "Objekt-detaljer",
+    "unknownObjectError": "Ett okänt objekt-fel inträffade.",
+    "goHome": "Gå till startsidan",
+    "reload": "Ladda om sidan",
+    "info": "Information om felet"
   }
 }

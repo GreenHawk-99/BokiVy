@@ -1,4 +1,4 @@
-import {imageData} from "../data/gamePreview.ts";
+import {imageData} from "../data/gameCover.ts";
 
 const imageChecker = (name: string): string => {
   if (imageData[name] != null) {

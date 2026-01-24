@@ -72,5 +72,20 @@
     "fileUploadHint": "Support for a single or bulk upload. Strictly prohibited from uploading company data or other banned files.",
     "formSuccess": "Form submitted successfully!",
     "formError": "Please check the form for errors."
+  },
+  "errorPage": {
+    "unexpectedError": "Unexpected error",
+    "sorry": "Sorry, an unexpected error has occurred.",
+    "notFound": "The page you tried to reach does not seem to exist or a problem occurred during retrieval.",
+    "details": "Error Details",
+    "status": "Status",
+    "statusText": "Status Text",
+    "responseData": "Response Data",
+    "technicalDetails": "Technical details",
+    "objectDetails": "Object details",
+    "unknownObjectError": "An unknown object error occurred.",
+    "goHome": "Go to home page",
+    "reload": "Reload page",
+    "info": "Information about the error"
   }
 }

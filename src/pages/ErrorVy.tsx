@@ -1,9 +1,10 @@
 import {isRouteErrorResponse, useNavigate, useRouteError} from "react-router-dom";
-import {Button, Collapse, Layout, Result, theme, Typography} from 'antd';
+import {Button, Collapse, Layout, Result, Space, theme, Typography} from 'antd';
 import {ThemeProvider} from "../contexts/ThemeProvider.tsx";
 import {useThemeKrok} from "../hooks/useContext.ts";
-import {HomeOutlined, ReloadOutlined} from '@ant-design/icons';
+import {FontSizeOutlined, HomeOutlined, ReloadOutlined} from '@ant-design/icons';
 import {ReactNode} from "react";
+import {useTranslation} from "react-i18next";
 
 const {Text, Paragraph} = Typography;
 const {Panel} = Collapse;
@@ -19,30 +20,36 @@ function ErrorContent() {
   const navigate = useNavigate();
   const {colors} = useThemeKrok();
   const {token} = theme.useToken();
+  const {t, i18n} = useTranslation();
 
   console.error('ErrorVy caught an error:', error);
 
+  const toggleLanguage = () => {
+    const newLang = i18n.language === 'sv' ? 'en' : 'sv';
+    void i18n.changeLanguage(newLang);
+  };
+
   let status: number | string = "Error";
-  let title: string = "Unexpected error";
-  let subTitle: string = "Sorry, an unexpected error has occurred.";
+  let title: string = t('errorPage.unexpectedError');
+  let subTitle: string = t('errorPage.sorry');
   let extraInfo: ReactNode = null;
 
   // isRouteErrorResponse checks if the error is a Response object thrown by React Router (e.g., 404).
   if (isRouteErrorResponse(error)) {
     status = error.status;
     title = `${error.status} ${error.statusText}`;
-    subTitle = error.data?.message || "The page you tried to reach does not seem to exist or a problem occurred during retrieval.";
+    subTitle = error.data?.message || t('errorPage.notFound');
 
     // Detailed info for 404 or other router responses
     extraInfo = (
       <div style={{textAlign: 'left', marginTop: 16}}>
-        <Text strong>Error Details:</Text>
+        <Text strong>{t('errorPage.details')}:</Text>
         <Paragraph>
-          <Text type="secondary">Status: {error.status}</Text><br/>
-          <Text type="secondary">Status Text: {error.statusText}</Text><br/>
+          <Text type="secondary">{t('errorPage.status')}: {error.status}</Text><br/>
+          <Text type="secondary">{t('errorPage.statusText')}: {error.statusText}</Text><br/>
           {error.data && (
             <Collapse ghost size="small">
-              <Panel header="Response Data" key="data">
+              <Panel header={t('errorPage.responseData')} key="data">
                 <pre style={{fontSize: '12px'}}>{JSON.stringify(error.data, null, 2)}</pre>
               </Panel>
             </Collapse>
@@ -54,7 +61,7 @@ function ErrorContent() {
     subTitle = error.message;
     extraInfo = (
       <Collapse ghost style={{marginTop: 24}}>
-        <Panel header="Technical details" key="1">
+        <Panel header={t('errorPage.technicalDetails')} key="1">
           <Paragraph>
             <Text type="secondary" style={{whiteSpace: 'pre-wrap', fontFamily: 'monospace'}}>
               {error.stack}
@@ -65,10 +72,10 @@ function ErrorContent() {
     );
   } else if (error && typeof error === 'object') {
     // Handle generic object errors (like failed fetch or axios errors)
-    subTitle = (error as any).message || "An unknown object error occurred.";
+    subTitle = (error as any).message || t('errorPage.unknownObjectError');
     extraInfo = (
       <div style={{textAlign: 'left', marginTop: 16}}>
-        <Text strong>Object details:</Text>
+        <Text strong>{t('errorPage.objectDetails')}:</Text>
         <pre style={{
           padding: 16,
           background: token.colorFillAlter,
@@ -93,25 +100,34 @@ function ErrorContent() {
           background: token.colorBgContainer,
           padding: 48,
           borderRadius: token.borderRadiusLG,
-          boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
+          boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+          position: 'relative'
         }}>
+          <div style={{position: 'absolute', top: 24, right: 24}}>
+            <Button icon={<FontSizeOutlined/>} onClick={toggleLanguage} size="small">
+              {i18n.language === 'sv' ? 'SV' : 'EN'}
+            </Button>
+          </div>
+
           <Result
             status={typeof status === 'number' ? (status === 404 ? '404' : status === 403 ? '403' : '500') : 'error'}
             title={title}
             subTitle={subTitle}
             extra={[
-              <Button type="primary" key="home" icon={<HomeOutlined/>} onClick={() => navigate('/')}>
-                Go to home page
-              </Button>,
-              <Button key="reload" icon={<ReloadOutlined/>} onClick={() => window.location.reload()}>
-                Reload page
-              </Button>,
+              <Space key="actions">
+                <Button type="primary" icon={<HomeOutlined/>} onClick={() => navigate('/')}>
+                  {t('errorPage.goHome')}
+                </Button>
+                <Button icon={<ReloadOutlined/>} onClick={() => window.location.reload()}>
+                  {t('errorPage.reload')}
+                </Button>
+              </Space>
             ]}
           >
             {extraInfo}
             {!isRouteErrorResponse(error) && !(error instanceof Error) && typeof error !== 'object' && (
               <div style={{marginTop: 24}}>
-                <Text type="secondary">Information about the error:</Text>
+                <Text type="secondary">{t('errorPage.info')}:</Text>
                 <pre style={{
                   padding: 16,
                   background: token.colorFillAlter,
