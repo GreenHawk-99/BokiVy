@@ -2,8 +2,8 @@ import {Card, Flex, Tag, Typography} from "antd";
 import {MinusCircleOutlined, SyncOutlined} from "@ant-design/icons";
 import {useTranslation} from "react-i18next";
 import {GameServer} from "../models/gameServer.ts";
-import {imageRender} from "../utils/cover.tsx";
 import {useMessageSammanhang} from "../hooks/useContext.ts";
+import {SmartCover} from "./SmartCover.tsx";
 
 interface ServerCardVyProps {
   server: GameServer;
@@ -22,7 +22,7 @@ export function ServerCardVy({server}: ServerCardVyProps) {
     <Card
       className="server-card"
       hoverable
-      cover={imageRender(server.name)}
+      cover={<SmartCover gameName={server.name}/>}
       styles={{body: {padding: '16px'}}}
     >
       <Typography.Title level={4} style={{marginTop: 0, marginBottom: '12px'}} ellipsis={{tooltip: server.name}}>

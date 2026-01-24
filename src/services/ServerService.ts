@@ -1,6 +1,6 @@
 import {apiRegistry} from './api';
 import {gameServers} from "../data/data.ts";
-import {GameServer} from "../models/gameServer.ts";
+import {CreateGameServer, GameServer} from "../models/gameServer.ts";
 import {mockServerService} from "./MockServerService.ts";
 
 /**
@@ -34,7 +34,7 @@ export class ServerService {
   /**
    * Creates a new game server.
    */
-  static async createServer(server: GameServer): Promise<GameServer> {
+  static async createServer(server: CreateGameServer): Promise<GameServer> {
     if (this.USE_MOCK) {
       return mockServerService.create(server);
     }

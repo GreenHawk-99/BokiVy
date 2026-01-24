@@ -1,4 +1,4 @@
-import {GameServer} from "../models/gameServer.ts";
+import {CreateGameServer, GameServer} from "../models/gameServer.ts";
 import {gameServers} from "../data/data.ts";
 
 /**
@@ -32,14 +32,18 @@ class MockServerService {
 
   /**
    * Creates a new game server.
+   * Now uses CreateGameServer model to demonstrate separation of concerns.
    */
-  async create(server: GameServer): Promise<GameServer> {
+  async create(server: CreateGameServer): Promise<GameServer> {
     return new Promise((resolve) => {
       setTimeout(() => {
-        const newServer: GameServer = {...server};
-        if (!newServer.id) {
-          newServer.id = Math.random().toString(36).substr(2, 9);
-        }
+        const newServer: GameServer = {
+          ...server,
+          id: Math.random().toString(36).substr(2, 9),
+          status: false,
+          currentPlayer: 0,
+          maxPlayer: 0, // In a real app, this might be fetched from the server itself
+        };
         this.servers.push(newServer);
         resolve(newServer);
       }, 400);

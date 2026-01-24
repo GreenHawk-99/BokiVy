@@ -1,6 +1,6 @@
-import {Button, Flex, Input, Modal, Segmented, Select, Space, Tour, TourProps} from "antd";
+import {Button, Flex, Input, Modal, Segmented, Space, Tour, TourProps} from "antd";
 import {AppstoreAddOutlined, AppstoreOutlined, InfoCircleOutlined, TableOutlined} from "@ant-design/icons";
-import React, {useRef, useState} from "react";
+import {useRef, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {ViewType} from "../type/component.ts";
 

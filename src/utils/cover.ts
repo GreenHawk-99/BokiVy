@@ -1,6 +1,6 @@
 import {imageData} from "../data/gameCover.ts";
 
-const imageChecker = (name: string): string => {
+export const imageChecker = (name: string): string => {
   if (imageData[name] != null) {
     return imageData[name].valueOf();
   } else {
@@ -8,9 +8,3 @@ const imageChecker = (name: string): string => {
   }
 };
 
-export const imageRender = (name: string) => {
-  return (
-    <img alt={name + " Thumbnail"}
-         src={imageChecker(name)}/>
-  )
-}

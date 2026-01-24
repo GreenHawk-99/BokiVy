@@ -16,7 +16,7 @@ Bokivy is a React-based web application designed to display and manage game serv
 - `src/services/`: Business logic and data management (e.g., `ServerService`, `UserService`).
 - `src/data/`: Static data and mock datasets (e.g., `data.ts`).
 - `src/models/`: TypeScript interfaces and type definitions (e.g., `gameServer.ts`).
-- `src/utils/`: Helper functions and utilities (e.g., `cover.tsx`).
+- `src/utils/`: Helper functions and utilities (e.g., `cover.ts`).
 - `src/App.tsx`: Entry point component that sets up global providers and the router.
 - `src/routes/`: Router configuration (e.g., `router.tsx`).
 - `src/contexts/`: Centralized state management (e.g., `DataProvider`, `MessageProvider`, `UserProvider`, `ThemeProvider`).

@@ -1,10 +1,9 @@
 import {Header} from "antd/es/layout/layout";
-import {Avatar, Button, Menu, MenuProps, Modal, Space, Typography} from "antd";
+import {Button, Menu, MenuProps, Space, theme} from "antd";
 import {
   AppstoreOutlined,
   ExperimentOutlined,
   FontSizeOutlined,
-  LogoutOutlined,
   MoonOutlined,
   RadarChartOutlined,
   SunOutlined,
@@ -13,18 +12,19 @@ import {
 import {useLocation, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
-import sits_01 from "../assets/sits_01.png";
 import {useThemeSammanhang, useUserSammanhang} from "../hooks/useContext.ts";
+import {ProfileModalVy} from "../components/ProfileModalVy.tsx";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 export function Sidhuvud() {
-  const {username, avatar, login, logout, isLoading} = useUserSammanhang();
+  const {username, isLoading} = useUserSammanhang();
   const {isDarkMode, toggleDarkMode} = useThemeSammanhang();
-  const {t, i18n} = useTranslation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const {token} = theme.useToken()
+  const {t, i18n} = useTranslation();
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'sv' ? 'en' : 'sv';
@@ -57,11 +57,6 @@ export function Sidhuvud() {
     setIsModalOpen(false);
   };
 
-  const handleLogout = () => {
-    logout();
-    setIsModalOpen(false);
-  };
-
   const items: MenuItem[] = [
     {
       label: t('menu.applications'),
@@ -81,7 +76,7 @@ export function Sidhuvud() {
   ];
 
   return (
-    <Header style={{display: 'flex', alignItems: 'center', background: isDarkMode ? '#001529' : "#ffffff"}}>
+    <Header style={{display: 'flex', alignItems: 'center', background: token.colorBgContainer}}>
       <div className={"logo logo-header"}>BOKIVY</div>
       <Menu
         style={{flex: 1, minWidth: 0}}
@@ -100,47 +95,7 @@ export function Sidhuvud() {
         <Button onClick={toggleDarkMode}>{isDarkMode ? <SunOutlined/> : <MoonOutlined/>}</Button>
       </Space.Compact>
 
-      <Modal
-        title={username ? t('common.profile') : t('common.signIn')}
-        open={isModalOpen}
-        onCancel={handleCancel}
-        footer={null}
-        centered
-      >
-        {username ? (
-          <div style={{textAlign: 'center', padding: '20px 0'}}>
-            <Avatar size={100} src={avatar} icon={<UserOutlined/>} style={{marginBottom: 16}}/>
-            <Typography.Title level={3}>{username}</Typography.Title>
-            <Typography.Text type="secondary" style={{marginBottom: 24}}>
-              {t('common.loggedInSteam')}
-            </Typography.Text>
-            <Button
-              danger
-              type="primary"
-              icon={<LogoutOutlined/>}
-              onClick={handleLogout}
-              block
-            >
-              {t('common.logout')}
-            </Button>
-          </div>
-        ) : (
-          <div style={{textAlign: 'center', padding: '20px 0'}}>
-            <div
-              style={{cursor: 'pointer', transition: 'opacity 0.2s'}}
-              onClick={login}
-              onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
-              onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
-            >
-              <img
-                src={sits_01}
-                alt="Sign in through Steam"
-                style={{maxWidth: '100%', height: 'auto'}}
-              />
-            </div>
-          </div>
-        )}
-      </Modal>
+      <ProfileModalVy open={isModalOpen} onCancel={handleCancel}/>
     </Header>
   )
 }
