@@ -1,10 +1,10 @@
 import {Card, Col, Row, Statistic, Typography} from "antd";
 import {CheckCircleOutlined, CloseCircleOutlined, DesktopOutlined, TeamOutlined} from "@ant-design/icons";
-import {useDataKrok} from "../hooks/useContext.ts";
+import {useDataSammanhang} from "../hooks/useContext.ts";
 import {useTranslation} from "react-i18next";
 
 export function OverviewVy() {
-  const {stats} = useDataKrok();
+  const {stats} = useDataSammanhang();
   const {t} = useTranslation();
 
   return (

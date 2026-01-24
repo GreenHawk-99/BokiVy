@@ -6,7 +6,7 @@ import {ConfigSammanhang, DataSammanhang, MessageSammanhang, ThemeSammanhang, Us
  * Custom hook to access the application configuration.
  * @returns The configuration object and loading state.
  */
-export const useConfigKrok = () => {
+export const useConfigSammanhang = () => {
   const context = useContext(ConfigSammanhang);
   if (context === undefined) {
     throw new Error('useConfigSammanhang must be used within a ConfigProvider');
@@ -14,7 +14,7 @@ export const useConfigKrok = () => {
   return context;
 };
 
-export const useThemeKrok = () => {
+export const useThemeSammanhang = () => {
   const context = useContext(ThemeSammanhang);
   if (context === undefined) {
     throw new Error('useThemeSammanhang must be used within a ThemeProvider');
@@ -25,7 +25,7 @@ export const useThemeKrok = () => {
 /**
  * Hook to use the global message API.
  */
-export const useMessageKrok = () => {
+export const useMessageSammanhang = () => {
   const context = useContext(MessageSammanhang);
   if (!context) {
     throw new Error('useMessageSammanhang must be used within a MessageProvider');
@@ -33,7 +33,7 @@ export const useMessageKrok = () => {
   return context.messageApi;
 };
 
-export const useUserKrok = () => {
+export const useUserSammanhang = () => {
   const context = useContext(UserSammanhang);
   if (context === undefined) {
     throw new Error('useUserSammanhang must be used within a UserProvider');
@@ -44,7 +44,7 @@ export const useUserKrok = () => {
 /**
  * Hook to access game server data and statistics.
  */
-export const useDataKrok = () => {
+export const useDataSammanhang = () => {
   const context = useContext(DataSammanhang);
   if (!context) {
     throw new Error('useDataSammanhang must be used within a DataProvider');

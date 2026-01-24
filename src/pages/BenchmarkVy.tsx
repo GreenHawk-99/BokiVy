@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Card, Form, Input, Space, Typography, Upload, UploadProps} from 'antd';
 import {ExperimentOutlined, InboxOutlined} from '@ant-design/icons';
-import {useMessageKrok} from "../hooks/useContext.ts";
+import {useMessageSammanhang} from "../hooks/useContext.ts";
 import {RcFile} from "antd/es/upload";
 import {useTranslation} from "react-i18next";
 
@@ -19,7 +19,7 @@ interface BenchmarkForm {
  */
 export const BenchmarkVy: React.FC = () => {
   const [form] = Form.useForm<BenchmarkForm>();
-  const messageApi = useMessageKrok();
+  const messageApi = useMessageSammanhang();
   const {t} = useTranslation();
   const [submittable, setSubmittable] = React.useState<boolean>(false);
 

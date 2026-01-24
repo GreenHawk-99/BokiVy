@@ -42,10 +42,6 @@
         "title": "Sök",
         "description": "Sök efter en server med namn eller IP-adress"
       },
-      "cardLayout": {
-        "title" : "Kortlayout",
-        "description" : "Justera antalet serverkort som visas per rad."
-      },
       "viewType": {
         "title": "Visningsläge",
         "description": "Växla mellan kortvy och tabellvy"

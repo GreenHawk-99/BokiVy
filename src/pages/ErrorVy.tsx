@@ -1,7 +1,7 @@
 import {isRouteErrorResponse, useNavigate, useRouteError} from "react-router-dom";
 import {Button, Collapse, Layout, Result, Space, theme, Typography} from 'antd';
 import {ThemeProvider} from "../contexts/ThemeProvider.tsx";
-import {useThemeKrok} from "../hooks/useContext.ts";
+import {useThemeSammanhang} from "../hooks/useContext.ts";
 import {FontSizeOutlined, HomeOutlined, ReloadOutlined} from '@ant-design/icons';
 import {ReactNode} from "react";
 import {useTranslation} from "react-i18next";
@@ -18,7 +18,7 @@ function ErrorContent() {
   // useRouteError is a React Router hook that provides the error that was thrown during navigation.
   const error = useRouteError();
   const navigate = useNavigate();
-  const {colors} = useThemeKrok();
+  const {colors} = useThemeSammanhang();
   const {token} = theme.useToken();
   const {t, i18n} = useTranslation();
 

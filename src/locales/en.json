@@ -42,10 +42,6 @@
         "title": "Search",
         "description": "Search for a server by name or IP address"
       },
-      "cardLayout": {
-        "title" : "Card Layout",
-        "description" : "Adjust the number of server cards displayed per row."
-      },
       "viewType": {
         "title": "View Mode",
         "description": "Switch between card view and table view"

@@ -6,8 +6,6 @@ import {ViewType} from "../type/component.ts";
 
 
 interface MultifaltProps {
-  listSize: number;
-  setListSize: React.Dispatch<React.SetStateAction<number>>;
   onSearch: (value: string) => void;
   viewType: ViewType;
   setViewType: (view: ViewType) => void;
@@ -15,19 +13,16 @@ interface MultifaltProps {
 
 /**
  * Multifält komponent för sökning och inställningar på servervisningssidan
- * @param listSize
- * @param setListSize
  * @param onSearch
  * @param viewType
  * @param setViewType
  */
-export function Multifalt({listSize, setListSize, onSearch, viewType, setViewType}: MultifaltProps) {
+export function Multifalt({onSearch, viewType, setViewType}: MultifaltProps) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const {t} = useTranslation();
   const ref1 = useRef(null);
   const ref2 = useRef(null);
-  const ref3 = useRef(null);
   const ref4 = useRef(null);
 
   const showModal = () => {
@@ -42,10 +37,6 @@ export function Multifalt({listSize, setListSize, onSearch, viewType, setViewTyp
     setIsModalOpen(false);
   };
 
-  const handleChange = (value: number) => {
-    setListSize(value)
-  };
-
   const steps: TourProps['steps'] = [
     {
       title: t('multifalt.tour.createServer.title'),
@@ -56,11 +47,6 @@ export function Multifalt({listSize, setListSize, onSearch, viewType, setViewTyp
       title: t('multifalt.tour.search.title'),
       description: t('multifalt.tour.search.description'),
       target: () => ref2.current,
-    },
-    {
-      title: t('multifalt.tour.cardLayout.title'),
-      description: t('multifalt.tour.cardLayout.description'),
-      target: () => ref3.current,
     },
     {
       title: t('multifalt.tour.viewType.title'),
@@ -79,19 +65,6 @@ export function Multifalt({listSize, setListSize, onSearch, viewType, setViewTyp
           <div ref={ref2}>
             <Input.Search allowClear placeholder={t('multifalt.searchPlaceholder')} onSearch={onSearch}
                           onChange={(e) => onSearch(e.target.value)}/>
-          </div>
-          <div ref={ref3}>
-            <Select style={{width: "120px"}} defaultValue={listSize}
-                    onChange={handleChange}
-                    options={[
-                      {value: 2},
-                      {value: 4},
-                      {value: 6},
-                      {value: 8, label: `8 (${t('multifalt.listSize.standard')})`},
-                      {value: 12},
-                      {value: 16},
-                      {value: 20}
-                    ]}/>
           </div>
           <Button type={"primary"} onClick={() => setOpen(true)}><InfoCircleOutlined/></Button>
         </Space.Compact>

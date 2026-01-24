@@ -1,23 +1,22 @@
-import {Card, Flex, List, Space, Table, Tag, Tooltip, Typography} from "antd";
-import {CopyOutlined, MinusCircleOutlined, SyncOutlined} from "@ant-design/icons";
+import {Flex, List, Space, Table, Tag, Typography} from "antd";
+import {MinusCircleOutlined, SyncOutlined} from "@ant-design/icons";
 import {useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
-import {imageRender} from "../utils/cover.tsx";
 import {GameServer} from "../models/gameServer.ts";
 import {Multifalt} from "../components/Multifalt.tsx";
-import {useDataKrok, useMessageKrok} from "../hooks/useContext.ts";
+import {useDataSammanhang, useMessageSammanhang} from "../hooks/useContext.ts";
 import {ColumnsType} from "antd/es/table";
 import {ViewType} from "../type/component.ts";
+import {ServerCardVy} from "../components/ServerCardVy.tsx";
 
 /**
  * Component to display a list of game servers.
  */
 export function ServerVy() {
-  const [listSize, setListSize] = useState<number>(8);
+  const {servers} = useDataSammanhang();
   const [viewType, setViewType] = useState<ViewType>('cart');
-  const {servers} = useDataKrok();
   const [filteredServers, setFilteredServers] = useState<GameServer[]>([]);
-  const messageApi = useMessageKrok();
+  const messageApi = useMessageSammanhang();
   const {t} = useTranslation();
 
   useEffect(() => {
@@ -38,14 +37,6 @@ export function ServerVy() {
   const ipAddressAndPort = (server: GameServer) => (
     server.ipAddress + ":" + server.port
   )
-
-  /**
-   * Copies the server IP and port to the clipboard.
-   */
-  const copyhandler = (ip: string) => {
-    void navigator.clipboard.writeText(ip);
-    void messageApi.info(t('common.copyToClipboard'));
-  }
 
   const columns: ColumnsType<GameServer> = [
     {
@@ -89,7 +80,7 @@ export function ServerVy() {
   return (
     <>
       <Flex justify={"space-between"} align={"flex-end"}>
-        <Multifalt listSize={listSize} setListSize={setListSize} onSearch={handleSearch} viewType={viewType}
+        <Multifalt onSearch={handleSearch} viewType={viewType}
                    setViewType={setViewType}/>
       </Flex>
       {viewType === 'table' ? (
@@ -101,49 +92,10 @@ export function ServerVy() {
           bordered={true}
         />
       ) : (
-        <List grid={{gutter: 16, column: listSize}}
-              dataSource={filteredServers} renderItem={(server) => (
+        <List grid={{gutter: 16, xs: 4, sm: 4, md: 6, lg: 6, xl: 8, xxl: 8}}
+              dataSource={filteredServers} renderItem={(server:GameServer) => (
           <List.Item>
-            {
-              listSize < 12 ?
-                <Card className={"server-card"}
-                      variant={'outlined'}
-                      cover={imageRender(server.name)
-                      }>
-                  <div>
-                    <Typography.Title level={3} style={{marginTop: "0"}}>{server.name}</Typography.Title>
-                    <Flex vertical={true} gap={"1vh"}>
-                      <Flex justify={"space-between"}>
-                        <Space>
-                          <Typography.Text strong={true}>
-                            {t('common.status')}:
-                          </Typography.Text>
-                          <Tag icon={server.status ? <SyncOutlined spin/> : <MinusCircleOutlined/>}
-                               color={server.status ? "green" : "red"}>{server.status ? t('common.running') : t('common.offline')}</Tag>
-                        </Space>
-                        <Space>
-                          <Typography.Text strong={true}>{t('common.playerCount')}:</Typography.Text>
-                          <Tag
-                            className={"player-count-tag"}>{server.currentPlayer + "/" + server.maxPlayer}</Tag>
-                        </Space>
-                      </Flex>
-                      <Space>
-                        <Typography.Text strong={true}>
-                          {t('common.ipAddress')}:
-                        </Typography.Text>
-                        <Typography.Text italic={true}>
-                          {ipAddressAndPort(server)}
-                        </Typography.Text>
-                        <CopyOutlined className={"copy-icon"} onClick={() => {
-                          copyhandler(ipAddressAndPort(server))
-                        }}/>
-                      </Space>
-                    </Flex>
-                  </div>
-                </Card> : <Flex className={"image-card"}>
-                  <Tooltip title={server.name} color={"#87d068"} placement={"bottom"}>{imageRender(server.name)}</Tooltip>
-                </Flex>
-            }
+            <ServerCardVy server={server}/>
           </List.Item>
         )}/>
       )}

@@ -14,13 +14,13 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import sits_01 from "../assets/sits_01.png";
-import {useThemeKrok, useUserKrok} from "../hooks/useContext.ts";
+import {useThemeSammanhang, useUserSammanhang} from "../hooks/useContext.ts";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 export function Sidhuvud() {
-  const {username, avatar, login, logout, isLoading} = useUserKrok();
-  const {isDarkMode, toggleDarkMode} = useThemeKrok();
+  const {username, avatar, login, logout, isLoading} = useUserSammanhang();
+  const {isDarkMode, toggleDarkMode} = useThemeSammanhang();
   const {t, i18n} = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();

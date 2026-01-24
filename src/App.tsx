@@ -2,7 +2,7 @@ import {Layout, theme} from 'antd';
 import {Content} from "antd/es/layout/layout";
 import {Outlet} from "react-router-dom";
 import {Sidhuvud} from "./layout/Sidhuvud.tsx";
-import {useThemeKrok} from "./hooks/useContext.ts";
+import {useThemeSammanhang} from "./hooks/useContext.ts";
 
 
 /**
@@ -10,7 +10,7 @@ import {useThemeKrok} from "./hooks/useContext.ts";
  * Acts as the entry point for global providers and the RouterProvider.
  */
 export function App() {
-  const {colors} = useThemeKrok();
+  const {colors} = useThemeSammanhang();
   const {token} = theme.useToken();
 
 

@@ -1,6 +1,6 @@
 import React, {ReactNode, useEffect, useState} from 'react';
 import {UserService} from '../services/UserService';
-import {useConfigKrok} from "../hooks/useContext.ts";
+import {useConfigSammanhang} from "../hooks/useContext.ts";
 import {UserSammanhang} from "./AppContext.ts";
 
 
@@ -8,7 +8,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({children}) => {
   const [username, setUsername] = useState<string | null>(null);
   const [avatar, setAvatar] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const {config} = useConfigKrok();
+  const {config} = useConfigSammanhang();
 
   const refreshProfile = async () => {
     setIsLoading(true);
