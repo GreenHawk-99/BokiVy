@@ -3,7 +3,8 @@
  */
 export interface BaseGameServer {
   name: string;
-  maxPlayer: number;
+  game: string;
+  maxPlayers: number;
 }
 
 /**
@@ -27,4 +28,11 @@ export interface GameServer extends BaseGameServer {
   port: string;
   status: boolean;
   currentPlayer: number;
+}
+
+export interface Game {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
 }

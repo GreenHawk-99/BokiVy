@@ -1,9 +1,9 @@
 import {useState} from 'react';
-import {Form, Input, InputNumberProps, Modal, Slider} from 'antd';
+import {Col, Form, Input, InputNumber, InputNumberProps, Modal, Row, Select, Slider} from 'antd';
 import {useTranslation} from 'react-i18next';
 import {CreateGameServer} from '../models/gameServer.ts';
-import {ServerService} from '../services/ServerService.ts';
 import {useDataSammanhang, useMessageSammanhang} from '../hooks/useContext.ts';
+import {supportedGames} from '../data/data.ts';
 
 interface SkapaServerModalProps {
   open: boolean;
@@ -13,26 +13,31 @@ interface SkapaServerModalProps {
 /**
  * Modal component for creating a new game server.
  */
-export const SkapaServerModal = ({open, onCancel}:SkapaServerModalProps) => {
-  const {refreshData} = useDataSammanhang();
+export const SkapaServerModal = ({open, onCancel}: SkapaServerModalProps) => {
+  const {createServer} = useDataSammanhang();
   const [form] = Form.useForm<CreateGameServer>();
   const [loading, setLoading] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<number>(1);
   const messageApi = useMessageSammanhang();
   const {t} = useTranslation();
 
+  const minPlayers = 1;
+  const maxPlayers = 255;
+
   const onChange: InputNumberProps['onChange'] = (newValue) => {
     setInputValue(newValue as number);
+    form.setFieldsValue({maxPlayers: newValue as number});
   };
 
   const handleOk = async () => {
     try {
       const values = await form.validateFields();
+      console.log('Adding new server:', values);
       setLoading(true);
-      await ServerService.createServer(values);
-      await refreshData();
+      await createServer(values);
       messageApi.success(t('common.success')); // Assuming common.success exists
       form.resetFields();
+      setInputValue(1);
       onCancel();
     } catch (error) {
       console.error('Failed to create server:', error);
@@ -44,6 +49,7 @@ export const SkapaServerModal = ({open, onCancel}:SkapaServerModalProps) => {
 
   const handleCancel = () => {
     form.resetFields();
+    setInputValue(1);
     onCancel();
   };
 
@@ -53,6 +59,10 @@ export const SkapaServerModal = ({open, onCancel}:SkapaServerModalProps) => {
       open={open}
       onOk={handleOk}
       onCancel={handleCancel}
+      okText={t('common.create')}
+      cancelText={t('common.cancel')}
+      closable={false}
+      maskClosable={false}
       confirmLoading={loading}
       destroyOnHidden={true}
     >
@@ -63,23 +73,49 @@ export const SkapaServerModal = ({open, onCancel}:SkapaServerModalProps) => {
         name="create_server_form"
       >
         <Form.Item
+          name="game"
+          label={t('common.game')}
+          rules={[{required: true, message: t('form.requiredGame')}]}
+        >
+          <Select
+            placeholder={t('form.selectGame')}
+            options={supportedGames.map(game => ({
+              value: game.name,
+              label: game.name,
+            }))}
+          />
+        </Form.Item>
+        <Form.Item
           name="name"
           label={t('common.name')}
           rules={[{required: true, message: t('form.requiredName')}]}
         >
-          <Input placeholder={t('common.name')} />
+          <Input placeholder={t('common.name')}/>
         </Form.Item>
         <Form.Item
-          name="ipAddress"
+          name="maxPlayers"
           label={t('common.maxPlayers')}
           rules={[{required: true, message: t('form.requiredMaxPlayers')}]}
         >
-          <Slider
-            min={1}
-            max={255}
-            onChange={onChange}
-            value={inputValue}
-          />
+          <Row align="middle" justify="start">
+            <Col span={12}>
+              <Slider
+                min={minPlayers}
+                max={maxPlayers}
+                onChange={onChange}
+                value={inputValue}
+              />
+            </Col>
+            <Col span={12}>
+              <InputNumber
+                min={minPlayers}
+                max={maxPlayers}
+                style={{margin: '0 16px'}}
+                value={inputValue}
+                onChange={onChange}
+              />
+            </Col>
+          </Row>
         </Form.Item>
       </Form>
     </Modal>

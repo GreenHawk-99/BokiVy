@@ -1,5 +1,5 @@
 import {ReactNode, useEffect, useMemo, useState} from 'react';
-import {GameServer} from '../models/gameServer';
+import {CreateGameServer, GameServer} from '../models/gameServer';
 import {ServerService} from '../services/ServerService';
 import {DataSammanhang} from "./AppContext.ts";
 
@@ -9,8 +9,10 @@ import {DataSammanhang} from "./AppContext.ts";
  */
 export const DataProvider = ({children}: { children: ReactNode }) => {
   const [servers, setServers] = useState<GameServer[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const refreshData = async () => {
+    setLoading(true);
     try {
       const data = await ServerService.getServers();
       setServers([...data]);
@@ -18,6 +20,20 @@ export const DataProvider = ({children}: { children: ReactNode }) => {
       console.error("Failed to fetch servers, falling back to mock data", error);
       const data = ServerService.getMockServers();
       setServers([...data]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const createServer = async (server: CreateGameServer) => {
+    setLoading(true);
+    try {
+      await ServerService.createServer(server);
+      await refreshData();
+    } catch (error) {
+      console.error("Failed to add server", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -30,7 +46,7 @@ export const DataProvider = ({children}: { children: ReactNode }) => {
   }, [servers]);
 
   return (
-    <DataSammanhang.Provider value={{servers, stats, refreshData}}>
+    <DataSammanhang.Provider value={{servers, loading, stats, refreshData, createServer}}>
       {children}
     </DataSammanhang.Provider>
   );

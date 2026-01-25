@@ -14,7 +14,7 @@ import {ServerKord} from "../components/ServerKord.tsx";
  * Component to display a list of game servers.
  */
 export const ServerVy = () => {
-  const {servers} = useDataSammanhang();
+  const {servers, loading} = useDataSammanhang();
   const [viewType, setViewType] = useLocalStorage<ViewType>('viewType', 'cart');
   const [filteredServers, setFilteredServers] = useState<GameServer[]>([]);
   const messageApi = useMessageSammanhang();
@@ -41,10 +41,16 @@ export const ServerVy = () => {
 
   const columns: ColumnsType<GameServer> = [
     {
+      title: t('common.game'),
+      dataIndex: 'game',
+      key: 'game',
+      render: (game) => <Typography.Text strong>{game}</Typography.Text>,
+    },
+    {
       title: t('common.name'),
       dataIndex: 'name',
       key: 'name',
-      render: (text) => <Typography.Text strong>{text}</Typography.Text>,
+      render: (name) => <Typography.Text strong>{name}</Typography.Text>,
     },
     {
       title: t('common.status'),
@@ -59,7 +65,7 @@ export const ServerVy = () => {
       title: t('common.players'),
       key: 'players',
       render: (_, record) => (
-        <Tag className={"player-count-tag"}>{record.currentPlayer + "/" + record.maxPlayer}</Tag>
+        <Tag className={"player-count-tag"}>{record.currentPlayer + "/" + record.maxPlayers}</Tag>
       ),
     },
     {
@@ -86,6 +92,7 @@ export const ServerVy = () => {
       </Flex>
       {viewType === 'table' ? (
         <Table
+          loading={loading}
           rowKey={'id'}
           dataSource={filteredServers}
           columns={columns}
@@ -94,6 +101,7 @@ export const ServerVy = () => {
         />
       ) : (
         <List grid={{gutter: 16, xs: 4, sm: 4, md: 6, lg: 6, xl: 8, xxl: 8}}
+              loading={loading}
               dataSource={filteredServers} renderItem={(server:GameServer) => (
           <List.Item>
             <ServerKord server={server}/>

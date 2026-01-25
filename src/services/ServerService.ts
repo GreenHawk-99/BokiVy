@@ -1,7 +1,7 @@
 import {apiRegistry} from './api';
 import {gameServers} from "../data/data.ts";
 import {CreateGameServer, GameServer} from "../models/gameServer.ts";
-import {mockServerService} from "./MockServerService.ts";
+import {mockServerService} from "../mock/MockServerService.ts";
 
 /**
  * Service to handle game server data operations.
@@ -69,7 +69,7 @@ export class ServerService {
   static calculateStats(servers: GameServer[]) {
     const onlineServers = servers.filter(s => s.status).length;
     const totalPlayers = servers.reduce((acc, s) => acc + s.currentPlayer, 0);
-    const maxPlayers = servers.reduce((acc, s) => acc + s.maxPlayer, 0);
+    const maxPlayers = servers.reduce((acc, s) => acc + s.maxPlayers, 0);
 
     return {
       total: servers.length,

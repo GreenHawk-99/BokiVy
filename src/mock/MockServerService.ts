@@ -40,9 +40,11 @@ class MockServerService {
         const newServer: GameServer = {
           ...server,
           id: Math.random().toString(36).substr(2, 9),
+          ipAddress: "127.0.0.1",
+          port: "27015",
           status: false,
           currentPlayer: 0,
-          maxPlayer: 0, // In a real app, this might be fetched from the server itself
+          maxPlayers: server.maxPlayers || 0, // Ensure maxPlayer is set from the created server
         };
         this.servers.push(newServer);
         resolve(newServer);

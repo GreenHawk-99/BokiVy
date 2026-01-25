@@ -22,14 +22,19 @@ export const ServerKord = ({server}: ServerKordProps) => {
     <Card
       className="server-card"
       hoverable
-      cover={<Miniatyrbild gameName={server.name}/>}
+      cover={<Miniatyrbild gameName={server.game}/>}
       styles={{body: {padding: '16px'}}}
     >
-      <Typography.Title level={4} style={{marginTop: 0, marginBottom: '12px'}} ellipsis={{tooltip: server.name}}>
-        {server.name}
+      <Typography.Title level={4} style={{marginTop: 0, marginBottom: '12px'}} ellipsis={{tooltip: server.game}}>
+        {server.game}
       </Typography.Title>
 
       <Flex vertical gap="small">
+        <Flex justify="space-between" align="center">
+          <Typography.Text type="secondary">{t('common.name')}:</Typography.Text>
+          <Typography.Text>{server.name}</Typography.Text>
+        </Flex>
+
         <Flex justify="space-between" align="center">
           <Typography.Text type="secondary">{t('common.status')}:</Typography.Text>
           <Tag
@@ -44,7 +49,7 @@ export const ServerKord = ({server}: ServerKordProps) => {
         <Flex justify="space-between" align="center">
           <Typography.Text type="secondary">{t('common.players')}:</Typography.Text>
           <Tag className="player-count-tag" style={{marginRight: 0}}>
-            {server.currentPlayer} / {server.maxPlayer}
+            {server.currentPlayer} / {server.maxPlayers}
           </Tag>
         </Flex>
 

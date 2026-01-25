@@ -1,6 +1,5 @@
-import {ReactNode, useEffect, useState} from 'react';
+import {ReactNode, useState} from 'react';
 import {UserService} from '../services/UserService';
-import {useConfigSammanhang} from "../hooks/useContext.ts";
 import {UserSammanhang} from "./AppContext.ts";
 
 
@@ -8,30 +7,6 @@ export const UserProvider = ({children}: { children: ReactNode }) => {
   const [username, setUsername] = useState<string | null>(null);
   const [avatar, setAvatar] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const {config} = useConfigSammanhang();
-
-  const refreshProfile = async () => {
-    setIsLoading(true);
-    try {
-      const profile = await UserService.fetchProfile();
-      if (profile) {
-        setUsername(profile.username);
-        setAvatar(profile.avatar);
-      }
-    } catch (err) {
-      console.error("Failed to fetch profile", err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  /*
-  useEffect(() => {
-    if (config) {
-      refreshProfile();
-    }
-  }, [config]);
-  */
 
   const login = async () => {
     setIsLoading(true);
