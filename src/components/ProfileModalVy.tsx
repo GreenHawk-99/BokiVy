@@ -1,4 +1,3 @@
-import React from 'react';
 import {Avatar, Button, Modal, Typography} from "antd";
 import {LogoutOutlined, UserOutlined} from "@ant-design/icons";
 import {useTranslation} from "react-i18next";
@@ -10,7 +9,7 @@ interface ProfileModalVyProps {
   onCancel: () => void;
 }
 
-export const ProfileModalVy: React.FC<ProfileModalVyProps> = ({open, onCancel}) => {
+export const ProfileModalVy = ({open, onCancel}: ProfileModalVyProps) => {
   const {username, avatar, login, logout} = useUserSammanhang();
   const {t} = useTranslation();
 

@@ -1,10 +1,10 @@
-import React, {ReactNode, useMemo, useState} from 'react';
+import {ReactNode, useMemo, useState} from 'react';
 import {ConfigProvider, ThemeConfig} from 'antd';
 import {ThemeSammanhang} from "./AppContext.ts";
 import {darkTheme, lightTheme} from "../config/theme.ts";
 
 
-export const ThemeProvider: React.FC<{ children: ReactNode }> = ({children}) => {
+export const ThemeProvider = ({children}: { children: ReactNode }) => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   const toggleDarkMode = () => {

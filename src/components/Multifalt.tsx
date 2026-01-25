@@ -18,7 +18,7 @@ interface MultifaltProps {
  * @param viewType
  * @param setViewType
  */
-export function Multifalt({onSearch, viewType, setViewType}: MultifaltProps) {
+export const Multifalt = ({onSearch, viewType, setViewType}: MultifaltProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const {t} = useTranslation();

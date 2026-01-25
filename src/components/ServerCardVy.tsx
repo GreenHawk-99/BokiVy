@@ -12,7 +12,7 @@ interface ServerCardVyProps {
 /**
  * A reusable card component to display game server information.
  */
-export function ServerCardVy({server}: ServerCardVyProps) {
+export const ServerCardVy = ({server}: ServerCardVyProps) => {
   const {t} = useTranslation();
   const messageApi = useMessageSammanhang();
 

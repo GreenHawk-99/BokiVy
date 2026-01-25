@@ -1,4 +1,4 @@
-import React, {ReactNode, useEffect, useState} from 'react';
+import {ReactNode, useEffect, useState} from 'react';
 import axios from 'axios';
 import {Config} from '../models/config';
 import {apiRegistry} from "../services/api.ts";
@@ -8,7 +8,7 @@ import {ConfigSammanhang} from "./AppContext.ts";
  * Provider component for managing application configuration.
  * Fetches the configuration from public/config.json dynamically.
  */
-export const ConfigProvider: React.FC<{ children: ReactNode }> = ({children}) => {
+export const ConfigProvider = ({children}: { children: ReactNode }) => {
   const [config, setConfig] = useState<Config | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 

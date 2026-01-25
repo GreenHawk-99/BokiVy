@@ -1,4 +1,4 @@
-import React, {ReactNode, useEffect, useMemo, useState} from 'react';
+import {ReactNode, useEffect, useMemo, useState} from 'react';
 import {GameServer} from '../models/gameServer';
 import {ServerService} from '../services/ServerService';
 import {DataSammanhang} from "./AppContext.ts";
@@ -7,7 +7,7 @@ import {DataSammanhang} from "./AppContext.ts";
 /**
  * Provider component for managing game server data.
  */
-export const DataProvider: React.FC<{ children: ReactNode }> = ({children}) => {
+export const DataProvider = ({children}: { children: ReactNode }) => {
   const [servers, setServers] = useState<GameServer[]>([]);
 
   const refreshData = async () => {

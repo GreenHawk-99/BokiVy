@@ -3,7 +3,7 @@ import {CheckCircleOutlined, CloseCircleOutlined, DesktopOutlined, TeamOutlined}
 import {useDataSammanhang} from "../hooks/useContext.ts";
 import {useTranslation} from "react-i18next";
 
-export function OverviewVy() {
+export const OverviewVy = () => {
   const {stats} = useDataSammanhang();
   const {t} = useTranslation();
 

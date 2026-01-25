@@ -1,4 +1,4 @@
-import React from 'react';
+import {useEffect, useState} from 'react';
 import {Button, Card, Form, Input, Space, Typography, Upload, UploadProps} from 'antd';
 import {ExperimentOutlined, InboxOutlined} from '@ant-design/icons';
 import {useMessageSammanhang} from "../hooks/useContext.ts";
@@ -17,16 +17,16 @@ interface BenchmarkForm {
  * BenchmarkVy Page
  * A playground for testing UI elements and Ant Design features.
  */
-export const BenchmarkVy: React.FC = () => {
+export const BenchmarkVy = () => {
   const [form] = Form.useForm<BenchmarkForm>();
   const messageApi = useMessageSammanhang();
   const {t} = useTranslation();
-  const [submittable, setSubmittable] = React.useState<boolean>(false);
+  const [submittable, setSubmittable] = useState<boolean>(false);
 
   // Watch all values to trigger re-render on any change
   const values = Form.useWatch([], form);
 
-  React.useEffect(() => {
+  useEffect(() => {
     form
       .validateFields({validateOnly: true})
       .then(() => setSubmittable(true))

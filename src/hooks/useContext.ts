@@ -1,5 +1,11 @@
 import {useContext} from "react";
-import {ConfigSammanhang, DataSammanhang, MessageSammanhang, ThemeSammanhang, UserSammanhang} from "../contexts/AppContext.ts";
+import {
+  ConfigSammanhang,
+  DataSammanhang,
+  MessageSammanhang,
+  ThemeSammanhang,
+  UserSammanhang
+} from "../contexts/AppContext.ts";
 
 
 /**

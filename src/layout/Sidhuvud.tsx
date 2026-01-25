@@ -17,7 +17,7 @@ import {ProfileModalVy} from "../components/ProfileModalVy.tsx";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
-export function Sidhuvud() {
+export const Sidhuvud = () => {
   const {username, isLoading} = useUserSammanhang();
   const {isDarkMode, toggleDarkMode} = useThemeSammanhang();
   const [isModalOpen, setIsModalOpen] = useState(false);

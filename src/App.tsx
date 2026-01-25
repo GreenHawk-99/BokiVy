@@ -9,7 +9,7 @@ import {useThemeSammanhang} from "./hooks/useContext.ts";
  * Main application component.
  * Acts as the entry point for global providers and the RouterProvider.
  */
-export function App() {
+export const App = () => {
   const {colors} = useThemeSammanhang();
   const {token} = theme.useToken();
 

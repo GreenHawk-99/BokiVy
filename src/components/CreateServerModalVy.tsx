@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Form, Input, InputNumberProps, Modal, Slider} from 'antd';
 import {useTranslation} from 'react-i18next';
 import {CreateGameServer} from '../models/gameServer.ts';
@@ -13,7 +13,7 @@ interface CreateServerModalVyProps {
 /**
  * Modal component for creating a new game server.
  */
-export const CreateServerModalVy: React.FC<CreateServerModalVyProps> = ({open, onCancel}:CreateServerModalVyProps) => {
+export const CreateServerModalVy = ({open, onCancel}:CreateServerModalVyProps) => {
   const {refreshData} = useDataSammanhang();
   const [form] = Form.useForm<CreateGameServer>();
   const [loading, setLoading] = useState<boolean>(false);

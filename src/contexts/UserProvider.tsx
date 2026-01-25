@@ -1,10 +1,10 @@
-import React, {ReactNode, useEffect, useState} from 'react';
+import {ReactNode, useEffect, useState} from 'react';
 import {UserService} from '../services/UserService';
 import {useConfigSammanhang} from "../hooks/useContext.ts";
 import {UserSammanhang} from "./AppContext.ts";
 
 
-export const UserProvider: React.FC<{ children: ReactNode }> = ({children}) => {
+export const UserProvider = ({children}: { children: ReactNode }) => {
   const [username, setUsername] = useState<string | null>(null);
   const [avatar, setAvatar] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -59,12 +59,12 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({children}) => {
 /*
 suggestions
 
-import React, { useState, useEffect, ReactNode } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { UserService } from '../services/UserService';
-import { UserContext } from './UserContext';
-
-export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+// import { useState, useEffect, ReactNode } from 'react';
+// import { useLocation, useNavigate } from 'react-router-dom';
+// import { UserService } from '../services/UserService';
+// import { UserContext } from './UserContext';
+//
+// export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [username, setUsername] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const location = useLocation();

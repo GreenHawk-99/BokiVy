@@ -12,7 +12,7 @@ import {ServerCardVy} from "../components/ServerCardVy.tsx";
 /**
  * Component to display a list of game servers.
  */
-export function ServerVy() {
+export const ServerVy = () => {
   const {servers} = useDataSammanhang();
   const [viewType, setViewType] = useState<ViewType>('cart');
   const [filteredServers, setFilteredServers] = useState<GameServer[]>([]);

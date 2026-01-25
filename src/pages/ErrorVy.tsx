@@ -14,7 +14,7 @@ const {Content} = Layout;
  * ErrorContent component displays the actual error information.
  * It uses Ant Design components to provide a clean and informative error page.
  */
-function ErrorContent() {
+const ErrorContent = () => {
   // useRouteError is a React Router hook that provides the error that was thrown during navigation.
   const error = useRouteError();
   const navigate = useNavigate();
@@ -149,10 +149,12 @@ function ErrorContent() {
  * ErrorVy is the main error boundary component for the router.
  * It wraps ErrorContent with ThemeProvider to ensure consistent styling even when the main app fails to load.
  */
-export default function ErrorVy() {
+const ErrorVy = () => {
   return (
     <ThemeProvider>
       <ErrorContent/>
     </ThemeProvider>
   );
-}
+};
+
+export default ErrorVy;
