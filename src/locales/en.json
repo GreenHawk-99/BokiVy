@@ -13,9 +13,15 @@
     "players": "Players",
     "ipAddress": "IP-Address",
     "playerCount": "Player Count",
+    "maxPlayers": "Max Players",
     "send": "Send",
     "success": "Success",
-    "error": "Error"
+    "error": "Error",
+    "required": "Required field"
+  },
+  "form": {
+    "requiredName": "A server name is required.",
+    "requiredMaxPlayers": "A maximum of 255 players is allowed."
   },
   "menu": {
     "applications": "Applications",

@@ -3,17 +3,19 @@
  */
 export interface BaseGameServer {
   name: string;
-  ipAddress: string;
-  port: string;
+  maxPlayer: number;
 }
 
 /**
  * Model used when creating a new game server.
  * Only includes fields that the user or client provides.
  */
+export type CreateGameServer = BaseGameServer
+/*
 export interface CreateGameServer extends BaseGameServer {
   // Additional fields for creation can be added here (e.g., ownerId)
 }
+*/
 
 /**
  * Full model representing a game server as returned by the API or used for display.
@@ -21,7 +23,8 @@ export interface CreateGameServer extends BaseGameServer {
  */
 export interface GameServer extends BaseGameServer {
   id: string;
+  ipAddress: string;
+  port: string;
   status: boolean;
   currentPlayer: number;
-  maxPlayer: number;
 }

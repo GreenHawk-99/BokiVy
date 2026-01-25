@@ -13,9 +13,15 @@
     "players": "Spelare",
     "ipAddress": "IP-Adress",
     "playerCount": "Antal spelare",
+    "maxPlayers": "Max antal spelare",
     "send": "Skicka",
     "success": "Framgång",
-    "error": "Fel"
+    "error": "Fel",
+    "required": "Obligatoriskt fält"
+  },
+  "form": {
+    "requiredName": "Ett servernamn krävs.",
+    "requiredMaxPlayers": "Maximalt 255 spelare är tillåtna."
   },
   "menu": {
     "applications": "Applikationer",

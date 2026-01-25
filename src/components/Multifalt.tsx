@@ -1,8 +1,9 @@
-import {Button, Flex, Input, Modal, Segmented, Space, Tour, TourProps} from "antd";
+import {Button, Flex, Input, Segmented, Space, Tour, TourProps} from "antd";
 import {AppstoreAddOutlined, AppstoreOutlined, InfoCircleOutlined, TableOutlined} from "@ant-design/icons";
 import {useRef, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {ViewType} from "../type/component.ts";
+import {CreateServerModalVy} from "./CreateServerModalVy.tsx";
 
 
 interface MultifaltProps {
@@ -27,14 +28,6 @@ export function Multifalt({onSearch, viewType, setViewType}: MultifaltProps) {
 
   const showModal = () => {
     setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
   };
 
   const steps: TourProps['steps'] = [
@@ -79,12 +72,7 @@ export function Multifalt({onSearch, viewType, setViewType}: MultifaltProps) {
           />
         </div>
       </Flex>
-      <Modal title={t('multifalt.createServer')} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <div>{t('common.name')}</div>
-        <div>Ip</div>
-        <div>Port</div>
-        <div>{t('common.playerCount')}</div>
-      </Modal>
+      <CreateServerModalVy open={isModalOpen} onCancel={() => setIsModalOpen(false)} />
       <Tour open={open} onClose={() => setOpen(false)} steps={steps}
             indicatorsRender={(current, total) => (
               <span>
