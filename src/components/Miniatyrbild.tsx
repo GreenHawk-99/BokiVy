@@ -1,11 +1,11 @@
 import {useRef} from "react";
 import {imageChecker} from "../utils/cover.ts";
 
-type SmartImageProps = {
+type MiniatyrbildProps = {
   gameName: string
 }
 
-export const SmartCover = ({gameName}: SmartImageProps) => {
+export const Miniatyrbild = ({gameName}: MiniatyrbildProps) => {
   const retriedRef = useRef(false);
 
 

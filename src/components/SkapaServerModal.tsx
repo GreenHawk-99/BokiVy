@@ -5,7 +5,7 @@ import {CreateGameServer} from '../models/gameServer.ts';
 import {ServerService} from '../services/ServerService.ts';
 import {useDataSammanhang, useMessageSammanhang} from '../hooks/useContext.ts';
 
-interface CreateServerModalVyProps {
+interface SkapaServerModalProps {
   open: boolean;
   onCancel: () => void;
 }
@@ -13,7 +13,7 @@ interface CreateServerModalVyProps {
 /**
  * Modal component for creating a new game server.
  */
-export const CreateServerModalVy = ({open, onCancel}:CreateServerModalVyProps) => {
+export const SkapaServerModal = ({open, onCancel}:SkapaServerModalProps) => {
   const {refreshData} = useDataSammanhang();
   const [form] = Form.useForm<CreateGameServer>();
   const [loading, setLoading] = useState<boolean>(false);

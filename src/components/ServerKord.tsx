@@ -3,16 +3,16 @@ import {MinusCircleOutlined, SyncOutlined} from "@ant-design/icons";
 import {useTranslation} from "react-i18next";
 import {GameServer} from "../models/gameServer.ts";
 import {useMessageSammanhang} from "../hooks/useContext.ts";
-import {SmartCover} from "./SmartCover.tsx";
+import {Miniatyrbild} from "./Miniatyrbild.tsx";
 
-interface ServerCardVyProps {
+interface ServerKordProps {
   server: GameServer;
 }
 
 /**
  * A reusable card component to display game server information.
  */
-export const ServerCardVy = ({server}: ServerCardVyProps) => {
+export const ServerKord = ({server}: ServerKordProps) => {
   const {t} = useTranslation();
   const messageApi = useMessageSammanhang();
 
@@ -22,7 +22,7 @@ export const ServerCardVy = ({server}: ServerCardVyProps) => {
     <Card
       className="server-card"
       hoverable
-      cover={<SmartCover gameName={server.name}/>}
+      cover={<Miniatyrbild gameName={server.name}/>}
       styles={{body: {padding: '16px'}}}
     >
       <Typography.Title level={4} style={{marginTop: 0, marginBottom: '12px'}} ellipsis={{tooltip: server.name}}>

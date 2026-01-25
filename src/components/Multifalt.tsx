@@ -3,7 +3,7 @@ import {AppstoreAddOutlined, AppstoreOutlined, InfoCircleOutlined, TableOutlined
 import {useRef, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {ViewType} from "../type/component.ts";
-import {CreateServerModalVy} from "./CreateServerModalVy.tsx";
+import {SkapaServerModal} from "./SkapaServerModal.tsx";
 
 
 interface MultifaltProps {
@@ -72,7 +72,7 @@ export const Multifalt = ({onSearch, viewType, setViewType}: MultifaltProps) => 
           />
         </div>
       </Flex>
-      <CreateServerModalVy open={isModalOpen} onCancel={() => setIsModalOpen(false)} />
+      <SkapaServerModal open={isModalOpen} onCancel={() => setIsModalOpen(false)} />
       <Tour open={open} onClose={() => setOpen(false)} steps={steps}
             indicatorsRender={(current, total) => (
               <span>

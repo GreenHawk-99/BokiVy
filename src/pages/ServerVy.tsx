@@ -7,7 +7,7 @@ import {Multifalt} from "../components/Multifalt.tsx";
 import {useDataSammanhang, useMessageSammanhang} from "../hooks/useContext.ts";
 import {ColumnsType} from "antd/es/table";
 import {ViewType} from "../type/component.ts";
-import {ServerCardVy} from "../components/ServerCardVy.tsx";
+import {ServerKord} from "../components/ServerKord.tsx";
 
 /**
  * Component to display a list of game servers.
@@ -95,7 +95,7 @@ export const ServerVy = () => {
         <List grid={{gutter: 16, xs: 4, sm: 4, md: 6, lg: 6, xl: 8, xxl: 8}}
               dataSource={filteredServers} renderItem={(server:GameServer) => (
           <List.Item>
-            <ServerCardVy server={server}/>
+            <ServerKord server={server}/>
           </List.Item>
         )}/>
       )}

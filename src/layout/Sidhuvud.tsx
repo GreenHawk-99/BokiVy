@@ -13,7 +13,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useThemeSammanhang, useUserSammanhang} from "../hooks/useContext.ts";
-import {ProfileModalVy} from "../components/ProfileModalVy.tsx";
+import {ProfilModal} from "../components/ProfilModal.tsx";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -95,7 +95,7 @@ export const Sidhuvud = () => {
         <Button onClick={toggleDarkMode}>{isDarkMode ? <SunOutlined/> : <MoonOutlined/>}</Button>
       </Space.Compact>
 
-      <ProfileModalVy open={isModalOpen} onCancel={handleCancel}/>
+      <ProfilModal open={isModalOpen} onCancel={handleCancel}/>
     </Header>
   )
 }

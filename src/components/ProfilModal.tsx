@@ -4,12 +4,12 @@ import {useTranslation} from "react-i18next";
 import sits_01 from "../assets/sits_01.png";
 import {useUserSammanhang} from "../hooks/useContext.ts";
 
-interface ProfileModalVyProps {
+interface ProfilModalProps {
   open: boolean;
   onCancel: () => void;
 }
 
-export const ProfileModalVy = ({open, onCancel}: ProfileModalVyProps) => {
+export const ProfilModal = ({open, onCancel}: ProfilModalProps) => {
   const {username, avatar, login, logout} = useUserSammanhang();
   const {t} = useTranslation();
 

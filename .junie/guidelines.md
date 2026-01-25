@@ -11,8 +11,8 @@ Bokivy is a React-based web application designed to display and manage game serv
 - **Icons**: Ant Design Icons
 
 ## Project Structure
-- `src/components/`: Reusable UI components (e.g., `ServerVy`, `SearchBar`, `MainLayoutVy`).
-- `src/pages/`: Main view components (e.g., `OverviewVy`).
+- `src/components/`: Reusable UI components (e.g., `Server`, `SearchBar`, `MainLayout`). No predefined suffix.
+- `src/pages/`: Main view components (e.g., `OverviewVy`). Only pages will have the suffix `Vy`.
 - `src/services/`: Business logic and data management (e.g., `ServerService`, `UserService`).
 - `src/data/`: Static data and mock datasets (e.g., `data.ts`).
 - `src/models/`: TypeScript interfaces and type definitions (e.g., `gameServer.ts`).
@@ -39,7 +39,7 @@ Bokivy is a React-based web application designed to display and manage game serv
 - **State Management**: Use centralized contexts for global state (server data, user, theme, messages). Use `useDataVy`, `useUserVy`, `useThemeVy`, and `useMessageVy` hooks.
 - **Styling**: Maintain the use of `App.scss` for global styles and specific component styles.
 - **Documentation**: Provide JSDoc comments for services and complex components to explain intent and usage.
-- **Consistency**: Follow the existing naming convention (e.g., components ending in `Vy`).
+- **Consistency**: Follow the existing naming convention (e.g., pages ending in `Vy`).
 
 ## Future Roadmap
 - Integration with Steam API for real-time user and server data.
