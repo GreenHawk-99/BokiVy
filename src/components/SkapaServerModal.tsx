@@ -31,17 +31,17 @@ export const SkapaServerModal = ({open, onCancel}: SkapaServerModalProps) => {
 
   const handleOk = async () => {
     try {
-      const values = await form.validateFields();
+      const values: CreateGameServer = await form.validateFields();
       console.log('Adding new server:', values);
       setLoading(true);
       await createServer(values);
-      messageApi.success(t('common.success')); // Assuming common.success exists
+      messageApi.success(t('feedback.onSuccessCreate'));
       form.resetFields();
       setInputValue(1);
       onCancel();
     } catch (error) {
       console.error('Failed to create server:', error);
-      // messageApi.error(t('common.error')); // Error handling if needed
+      messageApi.error(t('feedback.onErrorCreate'));
     } finally {
       setLoading(false);
     }
@@ -56,13 +56,13 @@ export const SkapaServerModal = ({open, onCancel}: SkapaServerModalProps) => {
   return (
     <Modal
       title={t('multifalt.createServer')}
+      mask={{blur: false}}
       open={open}
       onOk={handleOk}
       onCancel={handleCancel}
       okText={t('common.create')}
       cancelText={t('common.cancel')}
       closable={false}
-      maskClosable={false}
       confirmLoading={loading}
       destroyOnHidden={true}
     >
@@ -78,7 +78,7 @@ export const SkapaServerModal = ({open, onCancel}: SkapaServerModalProps) => {
           rules={[{required: true, message: t('form.requiredGame')}]}
         >
           <Select
-            placeholder={t('form.selectGame')}
+            placeholder={t('form.placeholderGame')}
             options={supportedGames.map(game => ({
               value: game.name,
               label: game.name,
@@ -90,7 +90,7 @@ export const SkapaServerModal = ({open, onCancel}: SkapaServerModalProps) => {
           label={t('common.name')}
           rules={[{required: true, message: t('form.requiredName')}]}
         >
-          <Input placeholder={t('common.name')}/>
+          <Input placeholder={t('form.placeholderName')}/>
         </Form.Item>
         <Form.Item
           name="maxPlayers"
@@ -98,7 +98,7 @@ export const SkapaServerModal = ({open, onCancel}: SkapaServerModalProps) => {
           rules={[{required: true, message: t('form.requiredMaxPlayers')}]}
         >
           <Row align="middle" justify="start">
-            <Col span={12}>
+            <Col span={18}>
               <Slider
                 min={minPlayers}
                 max={maxPlayers}
@@ -106,7 +106,7 @@ export const SkapaServerModal = ({open, onCancel}: SkapaServerModalProps) => {
                 value={inputValue}
               />
             </Col>
-            <Col span={12}>
+            <Col span={6}>
               <InputNumber
                 min={minPlayers}
                 max={maxPlayers}

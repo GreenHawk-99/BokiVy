@@ -4,7 +4,8 @@
     "logout": "Logga ut",
     "profile": "Profil",
     "signIn": "Logga in",
-    "loggedInSteam": "Inloggad via Steam",
+    "signInWithSteam": "Logga in med Steam",
+    "loggedInWithSteam": "Inloggad via Steam",
     "copyToClipboard": "Kopierad till urklipp",
     "running": "Körs",
     "offline": "offline",
@@ -30,9 +31,25 @@
     "required": "Obligatoriskt fält"
   },
   "form": {
-    "selectGame": "Välj ett spel...",
+    "placeholderGame": "Välj ett spel...",
+    "requiredGame": "Ett spel är obligatoriskt.",
+    "placeholderName": "Skriv servernamn...",
     "requiredName": "Ett servernamn krävs.",
     "requiredMaxPlayers": "Maximalt 255 spelare är tillåtna."
+  },
+  "feedback": {
+    "onSuccessCreate": "Servern skapades!",
+    "onErrorCreate": "Ett fel uppstod vid skapandet av servern. Försök igen senare.",
+    "onSuccessDelete": "Servern togs bort!",
+    "onErrorDelete": "Ett fel uppstod vid borttagandet av servern. Försök igen senare.",
+    "onSuccessUpdate": "Servern uppdaterades!",
+    "onErrorUpdate": "Ett fel uppstod vid uppdateringen av servern. Försök igen senare.",
+    "onSuccessRestart": "Servern startades om!",
+    "onErrorRestart": "Ett fel uppstod vid omstarten av servern. Försök igen senare.",
+    "onSuccessStart": "Servern startades!",
+    "onErrorStart": "Ett fel uppstod vid starten av servern. Försök igen senare.",
+    "onSuccessStop": "Servern stoppades!",
+    "onErrorStop": "Ett fel uppstod vid stoppningen av servern. Försök igen senare."
   },
   "menu": {
     "applications": "Applikationer",

@@ -39,7 +39,7 @@ class MockServerService {
       setTimeout(() => {
         const newServer: GameServer = {
           ...server,
-          id: Math.random().toString(36).substr(2, 9),
+          id: crypto.randomUUID(),
           ipAddress: "127.0.0.1",
           port: "27015",
           status: false,
@@ -47,6 +47,7 @@ class MockServerService {
           maxPlayers: server.maxPlayers || 0, // Ensure maxPlayer is set from the created server
         };
         this.servers.push(newServer);
+        console.log(`[Mock Server Service] Created new server: `, newServer)
         resolve(newServer);
       }, 400);
     });
@@ -61,6 +62,7 @@ class MockServerService {
         const index = this.servers.findIndex(s => s.id === id);
         if (index !== -1) {
           this.servers[index] = {...this.servers[index], ...serverData};
+          console.log(`[Mock Server Service] Updated server:`, this.servers[index], "with data:", serverData)
           resolve(this.servers[index]);
         } else {
           reject(new Error(`Server with id ${id} not found`));
@@ -78,6 +80,7 @@ class MockServerService {
         const index = this.servers.findIndex(s => s.id === id);
         if (index !== -1) {
           this.servers.splice(index, 1);
+          console.log(`[Mock Server Service] Deleted server with id:`, id)
           resolve();
         } else {
           reject(new Error(`Server with id ${id} not found`));
