@@ -1,12 +1,33 @@
-import {ReactNode, useState} from 'react';
+import {ReactNode, useEffect, useState} from 'react';
 import {UserService} from '../services/UserService';
 import {UserSammanhang} from "./AppContext.ts";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 
 export const UserProvider = ({children}: { children: ReactNode }) => {
   const [username, setUsername] = useState<string | null>(null);
   const [avatar, setAvatar] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  // const [searchParams] = useState<URLSearchParams>(new URLSearchParams(window.location.search));
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const steamId = searchParams.get('steamid');
+    console.log("steamId", steamId);
+    if (steamId) {
+      // 1. Fetch the user profile from your backend
+      UserService.fetchProfile(steamId)
+        .then(user => {
+          // 2. Store user in LocalStorage or Context
+          setUsername(user!.username || null);
+          localStorage.setItem('steam_user', JSON.stringify(user));
+          // 3. Go to home page
+          navigate('/');
+        })
+        .catch(err => console.error("Login failed", err));
+    }
+  }, [searchParams, navigate]);
 
   const login = async () => {
     setIsLoading(true);

@@ -18,9 +18,13 @@ export class UserService {
    * Fetches the user profile from the backend API.
    * Currently, mocks the response if the backend is not available.
    */
-  static async fetchProfile(): Promise<{ username: string, avatar: string } | null> {
+  static async fetchProfile(steamId: string): Promise<{ username: string, avatar: string } | null> {
     try {
-      const response = await this.api.get('/auth/profile');
+      const response = await this.api.get(`/user/profile?steamid=${steamId}`, {
+        headers: {
+          // 'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      });
       const data = response.data;
       return {
         username: data.username,
