@@ -5,6 +5,7 @@ import {useTranslation} from "react-i18next";
 import {GameServer} from "../models/gameServer.ts";
 import {Multifalt} from "../components/Multifalt.tsx";
 import {useDataSammanhang, useMessageSammanhang} from "../hooks/useContext.ts";
+import {useLocalStorage} from "../hooks/useLocalStorage.ts";
 import {ColumnsType} from "antd/es/table";
 import {ViewType} from "../type/component.ts";
 import {ServerKord} from "../components/ServerKord.tsx";
@@ -14,7 +15,7 @@ import {ServerKord} from "../components/ServerKord.tsx";
  */
 export const ServerVy = () => {
   const {servers} = useDataSammanhang();
-  const [viewType, setViewType] = useState<ViewType>('cart');
+  const [viewType, setViewType] = useLocalStorage<ViewType>('viewType', 'cart');
   const [filteredServers, setFilteredServers] = useState<GameServer[]>([]);
   const messageApi = useMessageSammanhang();
   const {t} = useTranslation();
