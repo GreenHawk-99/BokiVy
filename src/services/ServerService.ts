@@ -1,5 +1,4 @@
 import {apiRegistry} from './api';
-import {gameServers} from "../data/data.ts";
 import {CreateGameServer, GameServer} from "../models/gameServer.ts";
 import {mockServerService} from "../mock/MockServerService.ts";
 
@@ -11,13 +10,6 @@ export class ServerService {
 
   private static get api() {
     return apiRegistry.get('yggdrasil');
-  }
-
-  /**
-   * Retrieves all game servers from the mock data.
-   */
-  static getMockServers(): GameServer[] {
-    return gameServers;
   }
 
   /**

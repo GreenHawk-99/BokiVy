@@ -17,9 +17,7 @@ export const DataProvider = ({children}: { children: ReactNode }) => {
       const data = await ServerService.getServers();
       setServers([...data]);
     } catch (error) {
-      console.error("Failed to fetch servers, falling back to mock data", error);
-      const data = ServerService.getMockServers();
-      setServers([...data]);
+      console.error("Failed to fetch servers", error);
     } finally {
       setLoading(false);
     }

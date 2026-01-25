@@ -102,7 +102,7 @@ export const ServerVy = () => {
       ) : (
         <List grid={{gutter: 16, xs: 4, sm: 4, md: 6, lg: 6, xl: 8, xxl: 8}}
               loading={loading}
-              dataSource={filteredServers} renderItem={(server:GameServer) => (
+              dataSource={filteredServers} renderItem={(server: GameServer) => (
           <List.Item>
             <ServerKord server={server}/>
           </List.Item>
