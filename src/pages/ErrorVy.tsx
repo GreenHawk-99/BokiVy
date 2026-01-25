@@ -7,7 +7,6 @@ import {ReactNode} from "react";
 import {useTranslation} from "react-i18next";
 
 const {Text, Paragraph} = Typography;
-const {Panel} = Collapse;
 const {Content} = Layout;
 
 /**
@@ -42,33 +41,40 @@ const ErrorContent = () => {
 
     // Detailed info for 404 or other router responses
     extraInfo = (
-      <div style={{textAlign: 'left', marginTop: 16}}>
+      <>
         <Text strong>{t('errorPage.details')}:</Text>
         <Paragraph>
           <Text type="secondary">{t('errorPage.status')}: {error.status}</Text><br/>
           <Text type="secondary">{t('errorPage.statusText')}: {error.statusText}</Text><br/>
           {error.data && (
-            <Collapse ghost size="small">
-              <Panel header={t('errorPage.responseData')} key="data">
-                <pre style={{fontSize: '12px'}}>{JSON.stringify(error.data, null, 2)}</pre>
-              </Panel>
-            </Collapse>
+            <Collapse ghost={true} size="small" items={[
+              {
+                key: 'data',
+                label: t('errorPage.responseData'),
+                children: (
+                  <pre style={{fontSize: '12px'}}>{JSON.stringify(error.data, null, 2)}</pre>
+                )
+              }
+            ]}/>
           )}
         </Paragraph>
-      </div>
+      </>
+
     );
   } else if (error instanceof Error) {
     subTitle = error.message;
     extraInfo = (
-      <Collapse ghost style={{marginTop: 24}}>
-        <Panel header={t('errorPage.technicalDetails')} key="1">
-          <Paragraph>
+      <Collapse ghost style={{marginTop: 24}} items={[
+        {
+          key: '1',
+          label: t('errorPage.technicalDetails'),
+          children: (<Paragraph>
             <Text type="secondary" style={{whiteSpace: 'pre-wrap', fontFamily: 'monospace'}}>
               {error.stack}
             </Text>
-          </Paragraph>
-        </Panel>
-      </Collapse>
+          </Paragraph>)
+        }
+      ]}/>
     );
   } else if (error && typeof error === 'object') {
     // Handle generic object errors (like failed fetch or axios errors)

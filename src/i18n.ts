@@ -5,7 +5,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import enTranslations from './locales/en.json';
 import svTranslations from './locales/sv.json';
 
-i18n
+void i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
@@ -17,7 +17,7 @@ i18n
         translation: svTranslations,
       },
     },
-    fallbackLng: 'sv',
+    fallbackLng: 'en',
     interpolation: {
       escapeValue: false,
     },

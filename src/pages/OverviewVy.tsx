@@ -1,10 +1,11 @@
-import {Card, Col, Row, Statistic, Typography} from "antd";
+import {Card, Col, Row, Statistic, theme, Typography} from "antd";
 import {CheckCircleOutlined, CloseCircleOutlined, DesktopOutlined, TeamOutlined} from "@ant-design/icons";
 import {useDataSammanhang} from "../hooks/useContext.ts";
 import {useTranslation} from "react-i18next";
 
 export const OverviewVy = () => {
-  const {stats} = useDataSammanhang();
+  const {stats, loading} = useDataSammanhang();
+  const {token} = theme.useToken();
   const {t} = useTranslation();
 
   return (
@@ -15,6 +16,7 @@ export const OverviewVy = () => {
           <Card variant={"borderless"}>
             <Statistic
               title={t('overview.totalServers')}
+              loading={loading}
               value={stats.total}
               prefix={<DesktopOutlined/>}
             />
@@ -24,8 +26,9 @@ export const OverviewVy = () => {
           <Card variant={"borderless"}>
             <Statistic
               title={t('overview.online')}
+              loading={loading}
               value={stats.online}
-              valueStyle={{color: '#3f8600'}}
+              styles={{content: {color: token.colorSuccess}}}
               prefix={<CheckCircleOutlined/>}
             />
           </Card>
@@ -34,8 +37,9 @@ export const OverviewVy = () => {
           <Card variant={"borderless"}>
             <Statistic
               title={t('overview.offline')}
+              loading={loading}
               value={stats.offline}
-              valueStyle={{color: '#cf1322'}}
+              styles={{content: {color: token.colorError}}}
               prefix={<CloseCircleOutlined/>}
             />
           </Card>
@@ -44,6 +48,7 @@ export const OverviewVy = () => {
           <Card variant={"borderless"}>
             <Statistic
               title={t('overview.totalPlayers')}
+              loading={loading}
               value={stats.totalPlayers}
               suffix={`/ ${stats.maxPlayers}`}
               prefix={<TeamOutlined/>}
