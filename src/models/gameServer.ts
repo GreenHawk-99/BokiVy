@@ -12,6 +12,7 @@ export interface BaseGameServer {
  * Only includes fields that the user or client provides.
  */
 export type CreateGameServer = BaseGameServer
+
 /*
 export interface CreateGameServer extends BaseGameServer {
   // Additional fields for creation can be added here (e.g., ownerId)

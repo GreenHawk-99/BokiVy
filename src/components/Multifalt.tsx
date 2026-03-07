@@ -72,7 +72,7 @@ export const Multifalt = ({onSearch, viewType, setViewType}: MultifaltProps) => 
           />
         </div>
       </Flex>
-      <SkapaServerModal open={isModalOpen} onCancel={() => setIsModalOpen(false)} />
+      <SkapaServerModal open={isModalOpen} onCancel={() => setIsModalOpen(false)}/>
       <Tour open={open} onClose={() => setOpen(false)} steps={steps}
             indicatorsRender={(current, total) => (
               <span>

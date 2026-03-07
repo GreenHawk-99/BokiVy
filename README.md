@@ -3,13 +3,20 @@
 **Version** 0.1.0
 
 ### Description:
+
 #### EN:
-This is a simple project for learning purposes. Where I'm trying to keep up with the latest stacks, practices and the cleanest code possible.
-Treat this more as a challenge toward my own learning than anything else. I never had any experience with a front end framework before this project.
+
+This is a simple project for learning purposes. Where I'm trying to keep up with the latest stacks, practices and the
+cleanest code possible.
+Treat this more as a challenge toward my own learning than anything else. I never had any experience with a front end
+framework before this project.
 
 #### SV:
-Detta är ett enkelt projekt i utbildningssyfte, där jag försöker hålla mig uppdaterad med de senaste teknikstackarna, metoderna och så ren kod som möjligt.
-Se detta mer som en utmaning för mitt eget lärande än något annat. Jag hade ingen erfarenhet av ett front-end-ramverk före detta projekt.
+
+Detta är ett enkelt projekt i utbildningssyfte, där jag försöker hålla mig uppdaterad med de senaste teknikstackarna,
+metoderna och så ren kod som möjligt.
+Se detta mer som en utmaning för mitt eget lärande än något annat. Jag hade ingen erfarenhet av ett front-end-ramverk
+före detta projekt.
 
 ### Översättningstabell:
 
