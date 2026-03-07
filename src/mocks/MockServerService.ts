@@ -2,7 +2,7 @@ import {CreateGameServer, GameServer} from "../models/gameServer.ts";
 import {gameServers} from "../data/data.ts";
 
 /**
- * A mock service that simulates CRUD operations for game servers.
+ * A mocks service that simulates CRUD operations for game servers.
  * It uses the initial data from data.ts and keeps an in-memory state.
  */
 class MockServerService {

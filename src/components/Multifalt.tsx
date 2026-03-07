@@ -50,7 +50,7 @@ export const Multifalt = ({onSearch, viewType, setViewType}: MultifaltProps) => 
 
   return (
     <>
-      <Flex justify={"space-between"} align={"center"} style={{width: '100%', marginBottom: "4vh"}}>
+      <Flex justify={"space-between"} align={"center"} style={{width: '100%', marginBottom: "2vh"}}>
 
         <Space.Compact style={{alignItems: "center"}}>
           <Button type={"primary"} ref={ref1} style={{marginBlock: "1vh"}}

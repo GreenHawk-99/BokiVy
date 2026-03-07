@@ -14,6 +14,32 @@ export class UserService {
     window.location.href = (this.api.defaults.baseURL || 'http://localhost:5000/api/v1') + '/auth/steam';
   }
 
+  static saveToken(token: string): void {
+    localStorage.setItem('auth_token', token);
+  }
+
+  static getToken(): string | null {
+    return localStorage.getItem('auth_token');
+  }
+
+  static removeToken(): void {
+    localStorage.removeItem('auth_token');
+  }
+
+  static saveUser(user: { username: string | null, avatar: string | null, steamId: string }): void {
+    localStorage.setItem('steam_user', JSON.stringify(user));
+  }
+
+  static getStoredUser(): { username: string | null, avatar: string | null, steamId: string } | null {
+    const user = localStorage.getItem('steam_user');
+    return user ? JSON.parse(user) : null;
+  }
+
+  static logout(): void {
+    this.removeToken();
+    localStorage.removeItem('steam_user');
+  }
+
   /**
    * Fetches the user profile from the backend API.
    * Currently, mocks the response if the backend is not available.

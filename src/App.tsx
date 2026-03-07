@@ -1,7 +1,7 @@
 import {Layout, theme} from 'antd';
 import {Content} from "antd/es/layout/layout";
 import {Outlet} from "react-router-dom";
-import {Sidhuvud} from "./layout/Sidhuvud.tsx";
+import {Sidhuvud} from "./layouts/Sidhuvud.tsx";
 import {useThemeSammanhang} from "./hooks/useContext.ts";
 
 

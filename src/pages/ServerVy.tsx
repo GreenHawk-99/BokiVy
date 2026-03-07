@@ -73,7 +73,7 @@ export const ServerVy = () => {
       key: 'ipAddress',
       render: (_, record) => (
         <Space>
-          <Typography.Text copyable={{
+          <Typography.Text code={true} copyable={{
             text: ipAddressAndPort(record),
             onCopy: () => void messageApi.info(t('common.copyToClipboard'))
           }}>

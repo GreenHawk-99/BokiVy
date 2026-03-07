@@ -1,12 +1,12 @@
 import {apiRegistry} from './api';
 import {CreateGameServer, GameServer} from "../models/gameServer.ts";
-import {mockServerService} from "../mock/MockServerService.ts";
+import {mockServerService} from "../mocks/MockServerService.ts";
 
 /**
  * Service to handle game server data operations.
  */
 export class ServerService {
-  private static USE_MOCK: boolean = true; // Toggle this to switch between mock and real API
+  private static USE_MOCK: boolean = true; // Toggle this to switch between mocks and real API
 
   private static get api() {
     return apiRegistry.get('yggdrasil');

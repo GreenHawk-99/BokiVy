@@ -9,7 +9,7 @@ interface ProfilModalProps {
 }
 
 export const ProfilModal = ({open, onCancel}: ProfilModalProps) => {
-  const {username, avatar, login, logout} = useUserSammanhang();
+  const {username, avatar, steamId, login, logout} = useUserSammanhang();
   const {t} = useTranslation();
 
   const handleLogout = () => {
@@ -17,20 +17,29 @@ export const ProfilModal = ({open, onCancel}: ProfilModalProps) => {
     onCancel();
   };
 
+  const isAuthenticated = !!steamId;
+  const steamProfileUrl = `https://steamcommunity.com/profiles/${steamId}`;
+
   return (
     <Modal
-      title={username ? t('common.profile') : t('common.signIn')}
+      title={isAuthenticated ? t('common.profile') : t('common.signIn')}
       open={open}
       onCancel={onCancel}
       centered
       footer={null}
       maskClosable={false}
     >
-      {username ? (
+      {isAuthenticated ? (
         <div style={{textAlign: 'center', padding: '20px 0'}}>
-          <Avatar size={100} src={avatar} icon={<UserOutlined/>} style={{marginBottom: 16}}/>
-          <Typography.Title level={3}>{username}</Typography.Title>
-          <Typography.Text type="secondary" style={{marginBottom: 24}}>
+          <a href={steamProfileUrl} target="_blank" rel="noopener noreferrer">
+            <Avatar size={100} src={avatar} icon={<UserOutlined/>} style={{marginBottom: 16, cursor: 'pointer'}}/>
+          </a>
+          <Typography.Title level={3}>
+            <a href={steamProfileUrl} target="_blank" rel="noopener noreferrer" style={{color: 'inherit'}}>
+              {username}
+            </a>
+          </Typography.Title>
+          <Typography.Text type="secondary" style={{display: 'block', marginBottom: 24}}>
             {t('common.loggedInWithSteam')}
           </Typography.Text>
           <Button

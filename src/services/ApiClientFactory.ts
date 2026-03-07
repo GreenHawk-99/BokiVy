@@ -16,6 +16,15 @@ export class ApiClientFactory {
       withCredentials: false
     });
 
+    // Add request interceptor for JWT
+    client.interceptors.request.use((config) => {
+      const token = localStorage.getItem('auth_token');
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    });
+
     // Add retry logic if configured
     if (apiConfig.retryAttempts) {
       client.interceptors.response.use(

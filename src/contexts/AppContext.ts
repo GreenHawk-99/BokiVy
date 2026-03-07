@@ -31,6 +31,7 @@ export const MessageSammanhang = createContext<MessageContextType | undefined>(u
 interface UserContextType {
   username: string | null;
   avatar: string | null;
+  steamId: string | null;
   isLoading: boolean;
   login: () => Promise<void>;
   logout: () => void;
