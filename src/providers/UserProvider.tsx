@@ -1,6 +1,6 @@
 import {ReactNode, useEffect, useState} from 'react';
-import {UserService} from '../services/UserService';
-import {UserSammanhang} from "./AppContext.ts";
+import {UserService} from '../services/UserService.ts';
+import {UserSammanhang} from "../contexts/AppContext.ts";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {parseJwt} from "../utils/jwt.ts";
 

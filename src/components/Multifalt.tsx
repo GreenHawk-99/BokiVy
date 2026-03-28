@@ -2,7 +2,7 @@ import {Button, Flex, Input, Segmented, Space, Tour, TourProps} from "antd";
 import {AppstoreAddOutlined, AppstoreOutlined, InfoCircleOutlined, TableOutlined} from "@ant-design/icons";
 import {useRef, useState} from "react";
 import {useTranslation} from "react-i18next";
-import {ViewType} from "../type/component.ts";
+import {ViewType} from "../types/component.ts";
 import {SkapaServerModal} from "./SkapaServerModal.tsx";
 
 

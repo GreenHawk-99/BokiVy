@@ -1,6 +1,6 @@
 import {ReactNode} from 'react';
 import {message} from 'antd';
-import {MessageSammanhang} from "./AppContext.ts";
+import {MessageSammanhang} from "../contexts/AppContext.ts";
 
 
 /**

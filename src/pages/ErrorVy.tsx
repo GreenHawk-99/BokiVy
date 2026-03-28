@@ -1,6 +1,6 @@
 import {isRouteErrorResponse, useNavigate, useRouteError} from "react-router-dom";
 import {Button, Collapse, Layout, Result, Space, theme, Typography} from 'antd';
-import {ThemeProvider} from "../contexts/ThemeProvider.tsx";
+import {ThemeProvider} from "../providers/ThemeProvider.tsx";
 import {useThemeSammanhang} from "../hooks/useContext.ts";
 import {FontSizeOutlined, HomeOutlined, ReloadOutlined} from '@ant-design/icons';
 import {ReactNode} from "react";

@@ -7,7 +7,7 @@ import {Multifalt} from "../components/Multifalt.tsx";
 import {useDataSammanhang, useMessageSammanhang} from "../hooks/useContext.ts";
 import {useLocalStorage} from "../hooks/useLocalStorage.ts";
 import {ColumnsType} from "antd/es/table";
-import {ViewType} from "../type/component.ts";
+import {ViewType} from "../types/component.ts";
 import {ServerKord} from "../components/ServerKord.tsx";
 
 /**

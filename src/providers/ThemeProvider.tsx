@@ -1,6 +1,6 @@
 import {ReactNode, useMemo, useState} from 'react';
 import {ConfigProvider, ThemeConfig} from 'antd';
-import {ThemeSammanhang} from "./AppContext.ts";
+import {ThemeSammanhang} from "../contexts/AppContext.ts";
 import {darkTheme, lightTheme} from "../config/theme.ts";
 
 

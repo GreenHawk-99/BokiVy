@@ -1,8 +1,8 @@
 import {ReactNode, useEffect, useState} from 'react';
 import axios from 'axios';
-import {Config} from '../models/config';
+import {Config} from '../models/config.ts';
 import {apiRegistry} from "../services/api.ts";
-import {ConfigSammanhang} from "./AppContext.ts";
+import {ConfigSammanhang} from "../contexts/AppContext.ts";
 
 /**
  * Provider component for managing application configuration.
