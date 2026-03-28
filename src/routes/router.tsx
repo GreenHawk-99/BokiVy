@@ -1,11 +1,11 @@
-import {createBrowserRouter} from 'react-router-dom';
+import {createHashRouter} from 'react-router-dom';
 import {OverviewVy} from '../pages/OverviewVy';
 import {ServerVy} from '../pages/ServerVy.tsx';
 import {BenchmarkVy} from '../pages/BenchmarkVy.tsx';
 import ErrorVy from '../pages/ErrorVy.tsx';
 import {RootProvider} from "../providers/RootProvider.tsx";
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: "/",
     element: <RootProvider/>,
