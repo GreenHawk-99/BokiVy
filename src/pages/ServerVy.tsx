@@ -1,7 +1,8 @@
 import {Flex, List, Space, Table, Tag, Typography} from "antd";
 import {MinusCircleOutlined, SyncOutlined} from "@ant-design/icons";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useCallback} from "react";
 import {useTranslation} from "react-i18next";
+import {useLocation} from "react-router-dom";
 import {GameServer} from "../models/gameServer.ts";
 import {Multifalt} from "../components/Multifalt.tsx";
 import {useDataSammanhang, useMessageSammanhang} from "../hooks/useContext.ts";
@@ -15,24 +16,44 @@ import {ServerKord} from "../components/ServerKord.tsx";
  */
 export const ServerVy = () => {
   const {servers, loading} = useDataSammanhang();
+  const location = useLocation();
   const [viewType, setViewType] = useLocalStorage<ViewType>('viewType', 'cart');
   const [filteredServers, setFilteredServers] = useState<GameServer[]>([]);
+  const [searchText, setSearchText] = useState<string>('');
+  const [statusFilter, setStatusFilter] = useState<string>('all');
   const messageApi = useMessageSammanhang();
   const {t} = useTranslation();
 
   useEffect(() => {
-    setFilteredServers(servers);
-  }, [servers]);
+    if (location.state && (location.state as any).filter === 'online') {
+      setStatusFilter('online');
+    }
+  }, [location.state]);
+
+  const applyFilters = useCallback((search: string, status: string, serverList: GameServer[]) => {
+    let filtered = serverList.filter(server =>
+      server.name.toLowerCase().includes(search.toLowerCase()) ||
+      server.ipAddress.includes(search)
+    );
+
+    if (status === 'online') {
+      filtered = filtered.filter(server => server.status);
+    } else if (status === 'offline') {
+      filtered = filtered.filter(server => !server.status);
+    }
+
+    setFilteredServers(filtered);
+  }, []);
+
+  useEffect(() => {
+    applyFilters(searchText, statusFilter, servers);
+  }, [servers, searchText, statusFilter, applyFilters]);
 
   /**
    * Filters the server list based on the search term.
    */
   const handleSearch = (value: string) => {
-    const filtered = servers.filter(server =>
-      server.name.toLowerCase().includes(value.toLowerCase()) ||
-      server.ipAddress.includes(value)
-    );
-    setFilteredServers(filtered);
+    setSearchText(value);
   };
 
   const ipAddressAndPort = (server: GameServer) => (
@@ -45,12 +66,15 @@ export const ServerVy = () => {
       dataIndex: 'game',
       key: 'game',
       render: (game) => <Typography.Text strong>{game}</Typography.Text>,
+      filters: Array.from(new Set(servers.map(s => s.game))).map(game => ({text: game, value: game})),
+      onFilter: (value, record) => record.game === value,
     },
     {
       title: t('common.name'),
       dataIndex: 'name',
       key: 'name',
       render: (name) => <Typography.Text strong>{name}</Typography.Text>,
+      sorter: (a, b) => a.name.localeCompare(b.name),
     },
     {
       title: t('common.status'),
@@ -60,6 +84,11 @@ export const ServerVy = () => {
         <Tag icon={status ? <SyncOutlined spin/> : <MinusCircleOutlined/>}
              color={status ? "green" : "red"}>{status ? t('common.running') : t('common.offline')}</Tag>
       ),
+      filters: [
+        {text: t('common.running'), value: true},
+        {text: t('common.offline'), value: false},
+      ],
+      onFilter: (value, record) => record.status === value,
     },
     {
       title: t('common.players'),
@@ -87,8 +116,13 @@ export const ServerVy = () => {
   return (
     <>
       <Flex justify={"space-between"} align={"flex-end"}>
-        <Multifalt onSearch={handleSearch} viewType={viewType}
-                   setViewType={setViewType}/>
+        <Multifalt
+          onSearch={handleSearch}
+          statusFilter={statusFilter}
+          setStatusFilter={setStatusFilter}
+          viewType={viewType}
+          setViewType={setViewType}
+        />
       </Flex>
       {viewType === 'table' ? (
         <Table

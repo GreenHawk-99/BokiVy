@@ -1,5 +1,5 @@
-import {CreateGameServer, GameServer} from "../models/gameServer.ts";
-import {gameServers} from "../data/data.ts";
+import {BackendApp, CreateGameServer, GameServer, PlayerHistory} from "../models/gameServer.ts";
+import {backendApps, gameServers, playerHistory} from "../data/data.ts";
 
 /**
  * A mocks service that simulates CRUD operations for game servers.
@@ -26,6 +26,28 @@ class MockServerService {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(this.servers.find((s: GameServer): boolean => s.id === id));
+      }, 300);
+    });
+  }
+
+  /**
+   * Retrieves player history for graphs.
+   */
+  async getPlayerHistory(): Promise<PlayerHistory[]> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve([...playerHistory]);
+      }, 300);
+    });
+  }
+
+  /**
+   * Retrieves all backend applications.
+   */
+  async getBackendApps(): Promise<BackendApp[]> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve([...backendApps]);
       }, 300);
     });
   }

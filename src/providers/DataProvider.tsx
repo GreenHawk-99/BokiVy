@@ -1,5 +1,5 @@
 import {ReactNode, useEffect, useMemo, useState} from 'react';
-import {CreateGameServer, GameServer} from '../models/gameServer.ts';
+import {CreateGameServer, GameServer, PlayerHistory, BackendApp} from '../models/gameServer.ts';
 import {ServerService} from '../services/ServerService.ts';
 import {DataSammanhang} from "../contexts/AppContext.ts";
 
@@ -9,15 +9,23 @@ import {DataSammanhang} from "../contexts/AppContext.ts";
  */
 export const DataProvider = ({children}: { children: ReactNode }) => {
   const [servers, setServers] = useState<GameServer[]>([]);
+  const [playerHistory, setPlayerHistory] = useState<PlayerHistory[]>([]);
+  const [backendApps, setBackendApps] = useState<BackendApp[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   const refreshData = async () => {
     setLoading(true);
     try {
-      const data = await ServerService.getServers();
-      setServers([...data]);
+      const [serverData, historyData, backendData] = await Promise.all([
+        ServerService.getServers(),
+        ServerService.getPlayerHistory(),
+        ServerService.getBackendApps()
+      ]);
+      setServers([...serverData]);
+      setPlayerHistory([...historyData]);
+      setBackendApps([...backendData]);
     } catch (error) {
-      console.error("Failed to fetch servers", error);
+      console.error("Failed to fetch data", error);
     } finally {
       setLoading(false);
     }
@@ -44,7 +52,7 @@ export const DataProvider = ({children}: { children: ReactNode }) => {
   }, [servers]);
 
   return (
-    <DataSammanhang.Provider value={{servers, loading, stats, refreshData, createServer}}>
+    <DataSammanhang.Provider value={{servers, loading, playerHistory, backendApps, stats, refreshData, createServer}}>
       {children}
     </DataSammanhang.Provider>
   );

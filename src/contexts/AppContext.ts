@@ -1,6 +1,6 @@
 import {MessageInstance} from "antd/es/message/interface";
 import {createContext} from "react";
-import {CreateGameServer, GameServer} from "../models/gameServer.ts";
+import {CreateGameServer, GameServer, PlayerHistory, BackendApp} from "../models/gameServer.ts";
 import {Config} from "../models/config.ts";
 
 // Config Context
@@ -43,12 +43,17 @@ export const UserSammanhang = createContext<UserContextType | undefined>(undefin
 interface DataContextType {
   servers: GameServer[];
   loading: boolean;
+  playerHistory: PlayerHistory[];
+  backendApps: BackendApp[];
   stats: {
     total: number;
     online: number;
     offline: number;
     totalPlayers: number;
     maxPlayers: number;
+    avgUptime: number;
+    totalCPU: number;
+    totalMemory: number;
   };
   refreshData: () => Promise<void>;
   createServer: (server: CreateGameServer) => Promise<void>;

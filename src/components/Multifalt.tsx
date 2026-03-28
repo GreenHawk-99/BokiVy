@@ -8,6 +8,8 @@ import {SkapaServerModal} from "./SkapaServerModal.tsx";
 
 interface MultifaltProps {
   onSearch: (value: string) => void;
+  statusFilter: string;
+  setStatusFilter: (status: string) => void;
   viewType: ViewType;
   setViewType: (view: ViewType) => void;
 }
@@ -18,7 +20,7 @@ interface MultifaltProps {
  * @param viewType
  * @param setViewType
  */
-export const Multifalt = ({onSearch, viewType, setViewType}: MultifaltProps) => {
+export const Multifalt = ({onSearch, statusFilter, setStatusFilter, viewType, setViewType}: MultifaltProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const {t} = useTranslation();
@@ -61,16 +63,27 @@ export const Multifalt = ({onSearch, viewType, setViewType}: MultifaltProps) => 
           </div>
           <Button type={"primary"} onClick={() => setOpen(true)}><InfoCircleOutlined/></Button>
         </Space.Compact>
-        <div ref={ref4}>
+        <Space>
           <Segmented
-            value={viewType}
-            onChange={(value) => setViewType(value as ViewType)}
+            value={statusFilter}
+            onChange={(value) => setStatusFilter(value as string)}
             options={[
-              {value: 'cart', icon: <AppstoreOutlined/>, label: t('multifalt.viewType.card')},
-              {value: 'table', icon: <TableOutlined/>, label: t('multifalt.viewType.table')},
+              {value: 'all', label: t('common.all', 'All')},
+              {value: 'online', label: t('common.running', 'Online')},
+              {value: 'offline', label: t('common.offline', 'Offline')},
             ]}
           />
-        </div>
+          <div ref={ref4}>
+            <Segmented
+              value={viewType}
+              onChange={(value) => setViewType(value as ViewType)}
+              options={[
+                {value: 'cart', icon: <AppstoreOutlined/>, label: t('multifalt.viewType.card')},
+                {value: 'table', icon: <TableOutlined/>, label: t('multifalt.viewType.table')},
+              ]}
+            />
+          </div>
+        </Space>
       </Flex>
       <SkapaServerModal open={isModalOpen} onCancel={() => setIsModalOpen(false)}/>
       <Tour open={open} onClose={() => setOpen(false)} steps={steps}

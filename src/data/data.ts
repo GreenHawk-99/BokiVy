@@ -1,4 +1,4 @@
-import {Game, GameServer} from "../models/gameServer.ts";
+import {BackendApp, Game, GameServer, PlayerHistory} from "../models/gameServer.ts";
 
 export const gameServers: Array<GameServer> = [
   {
@@ -9,7 +9,11 @@ export const gameServers: Array<GameServer> = [
     port: "4040",
     status: true,
     currentPlayer: 8,
-    maxPlayers: 10
+    maxPlayers: 10,
+    uptime: 98.5,
+    lastSeen: new Date().toISOString(),
+    cpuUsage: 12.5,
+    memoryUsage: 1024,
   },
   {
     id: "2",
@@ -19,7 +23,11 @@ export const gameServers: Array<GameServer> = [
     port: "4040",
     status: true,
     currentPlayer: 4,
-    maxPlayers: 12
+    maxPlayers: 12,
+    uptime: 99.2,
+    lastSeen: new Date().toISOString(),
+    cpuUsage: 8.1,
+    memoryUsage: 512,
   },
   {
     id: "3",
@@ -29,7 +37,11 @@ export const gameServers: Array<GameServer> = [
     port: "4040",
     status: true,
     currentPlayer: 16,
-    maxPlayers: 24
+    maxPlayers: 24,
+    uptime: 95.8,
+    lastSeen: new Date().toISOString(),
+    cpuUsage: 45.2,
+    memoryUsage: 4096,
   },
   {
     id: "4",
@@ -39,7 +51,11 @@ export const gameServers: Array<GameServer> = [
     port: "4040",
     status: true,
     currentPlayer: 4,
-    maxPlayers: 4
+    maxPlayers: 4,
+    uptime: 100,
+    lastSeen: new Date(Date.now() - 3600000).toISOString(),
+    cpuUsage: 2.3,
+    memoryUsage: 256,
   },
   {
     id: "5",
@@ -49,7 +65,11 @@ export const gameServers: Array<GameServer> = [
     port: "4040",
     status: false,
     currentPlayer: 0,
-    maxPlayers: 8
+    maxPlayers: 8,
+    uptime: 85.0,
+    lastSeen: new Date(Date.now() - 86400000).toISOString(),
+    cpuUsage: 0,
+    memoryUsage: 0,
   },
   {
     id: "6",
@@ -143,6 +163,21 @@ export const gameServers: Array<GameServer> = [
   },
 ]
 
+export const playerHistory: PlayerHistory[] = [
+  { timestamp: "12:00", count: 12 },
+  { timestamp: "13:00", count: 15 },
+  { timestamp: "14:00", count: 18 },
+  { timestamp: "15:00", count: 25 },
+  { timestamp: "16:00", count: 32 },
+  { timestamp: "17:00", count: 45 },
+  { timestamp: "18:00", count: 50 },
+  { timestamp: "19:00", count: 48 },
+  { timestamp: "20:00", count: 55 },
+  { timestamp: "21:00", count: 60 },
+  { timestamp: "22:00", count: 58 },
+  { timestamp: "23:00", count: 40 },
+];
+
 export const supportedGames: Game[] = [
   {
     id: "1",
@@ -205,3 +240,48 @@ export const supportedGames: Game[] = [
     image: "https://cdn2.steamgriddb.com/grid/0662aa1719017e0efa5fa8daf0880c6e.png"
   }
 ]
+
+export const backendApps: BackendApp[] = [
+  {
+    id: "b1",
+    name: "Yggdrasil API",
+    status: 'online',
+    version: "1.4.2",
+    uptime: "15d 4h",
+    lastBackup: new Date().toISOString(),
+    endpoints: 24,
+    errorRate: 0.02,
+    responseTime: 45
+  },
+  {
+    id: "b2",
+    name: "Bifrost Auth",
+    status: 'online',
+    version: "2.1.0",
+    uptime: "45d 12h",
+    lastBackup: new Date(Date.now() - 3600000).toISOString(),
+    endpoints: 12,
+    errorRate: 0.001,
+    responseTime: 12
+  },
+  {
+    id: "b3",
+    name: "Mimir Analytics",
+    status: 'degraded',
+    version: "0.9.5-beta",
+    uptime: "2d 1h",
+    endpoints: 8,
+    errorRate: 4.5,
+    responseTime: 350
+  },
+  {
+    id: "b4",
+    name: "Heimdall Logs",
+    status: 'offline',
+    version: "1.0.1",
+    uptime: "0s",
+    endpoints: 5,
+    errorRate: 100,
+    responseTime: 0
+  }
+];

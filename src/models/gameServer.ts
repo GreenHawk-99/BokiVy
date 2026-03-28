@@ -29,6 +29,15 @@ export interface GameServer extends BaseGameServer {
   port: string;
   status: boolean;
   currentPlayer: number;
+  uptime?: number; // percentage
+  lastSeen?: string; // ISO date
+  cpuUsage?: number; // percentage
+  memoryUsage?: number; // MB
+}
+
+export interface PlayerHistory {
+  timestamp: string;
+  count: number;
 }
 
 export interface Game {
@@ -36,4 +45,16 @@ export interface Game {
   name: string;
   description: string;
   image: string;
+}
+
+export interface BackendApp {
+  id: string;
+  name: string;
+  status: 'online' | 'offline' | 'degraded';
+  version: string;
+  uptime: string;
+  lastBackup?: string;
+  endpoints: number;
+  errorRate: number;
+  responseTime: number; // ms
 }

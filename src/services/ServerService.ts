@@ -1,5 +1,5 @@
 import {apiRegistry} from './api';
-import {CreateGameServer, GameServer} from "../models/gameServer.ts";
+import {BackendApp, CreateGameServer, GameServer, PlayerHistory} from "../models/gameServer.ts";
 import {mockServerService} from "../mocks/MockServerService.ts";
 
 /**
@@ -56,6 +56,28 @@ export class ServerService {
   }
 
   /**
+   * Retrieves player history for statistics.
+   */
+  static async getPlayerHistory(): Promise<PlayerHistory[]> {
+    if (this.USE_MOCK) {
+      return mockServerService.getPlayerHistory();
+    }
+    const response = await this.api.get('/player-history');
+    return response.data;
+  }
+
+  /**
+   * Retrieves all backend applications.
+   */
+  static async getBackendApps(): Promise<BackendApp[]> {
+    if (this.USE_MOCK) {
+      return mockServerService.getBackendApps();
+    }
+    const response = await this.api.get('/backend-apps');
+    return response.data;
+  }
+
+  /**
    * Calculates statistics for a given set of game servers.
    */
   static calculateStats(servers: GameServer[]) {
@@ -63,12 +85,23 @@ export class ServerService {
     const totalPlayers = servers.reduce((acc, s) => acc + s.currentPlayer, 0);
     const maxPlayers = servers.reduce((acc, s) => acc + s.maxPlayers, 0);
 
+    const serversWithUptime = servers.filter(s => s.uptime !== undefined);
+    const avgUptime = serversWithUptime.length > 0
+      ? serversWithUptime.reduce((acc, s) => acc + (s.uptime || 0), 0) / serversWithUptime.length
+      : 0;
+
+    const totalCPU = servers.reduce((acc, s) => acc + (s.cpuUsage || 0), 0);
+    const totalMemory = servers.reduce((acc, s) => acc + (s.memoryUsage || 0), 0);
+
     return {
       total: servers.length,
       online: onlineServers,
       offline: servers.length - onlineServers,
       totalPlayers,
-      maxPlayers
+      maxPlayers,
+      avgUptime,
+      totalCPU,
+      totalMemory
     };
   }
 }
