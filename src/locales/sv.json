@@ -8,7 +8,7 @@
     "loggedInWithSteam": "Inloggad via Steam",
     "copyToClipboard": "Kopierad till urklipp",
     "running": "Körs",
-    "offline": "offline",
+    "offline": "Offline",
     "name": "Namn",
     "game": "Spel",
     "status": "Status",
@@ -28,7 +28,8 @@
     "no": "Nej",
     "success": "Framgång",
     "error": "Fel",
-    "required": "Obligatoriskt fält"
+    "required": "Obligatoriskt fält",
+    "all": "Alla"
   },
   "form": {
     "placeholderGame": "Välj ett spel...",
@@ -53,8 +54,7 @@
   },
   "menu": {
     "applications": "Applikationer",
-    "overview": "Översikt",
-    "benchmark": "Benchmark"
+    "overview": "Översikt"
   },
   "multifalt": {
     "searchPlaceholder": "Sök servrar...",
@@ -87,21 +87,34 @@
     "totalServers": "Totala servrar",
     "online": "Online",
     "offline": "Offline",
-    "totalPlayers": "Totala spelare"
-  },
-  "benchmark": {
-    "title": "UI Benchmark Playground",
-    "description": "Denna sida är dedikerad till att testa UI-komponenter och benchmarka Ant Design-funktioner.",
-    "formTitle": "Ant Design Form Benchmark (Vertikal layout)",
-    "coverName": "Omslagsnamn (TextArea)",
-    "coverNamePlaceholder": "Ange ett omslagsnamn här...",
-    "coverNameRequired": "Vänligen ange ett omslagsnamn!",
-    "fileUpload": "Filuppladdning (Dragger)",
-    "fileUploadRequired": "Vänligen ladda upp en fil!",
-    "fileUploadText": "Klicka eller dra filen till detta område för att ladda upp",
-    "fileUploadHint": "Stöd för enstaka eller massuppladdning. Strängt förbjudet att ladda upp företagsdata eller andra förbjudna filer.",
-    "formSuccess": "Formuläret har skickats!",
-    "formError": "Kontrollera formuläret för fel."
+    "totalPlayers": "Totala spelare",
+    "avgUptime": "Genomsnittlig drifttid",
+    "backendSystems": "Stöd för backend-system",
+    "serverSupervision": "Serverövervakning",
+    "resourceUsage": "Resursanvändning",
+    "totalCpu": "Total CPU-belastning",
+    "totalMemory": "Total minnesanvändning",
+    "playerActivity": "Senaste aktivitet",
+    "details": "Systemdetaljer",
+    "status": "Status",
+    "version": "Version",
+    "uptime": "Drifttid",
+    "responseTime": "Svarstid",
+    "errorRate": "Felmarginal",
+    "endpoints": "Aktiva slutpunkter",
+    "endpointsCount": "övervakade slutpunkter",
+    "lastBackup": "Senaste säkerhetskopia",
+    "onlineTooltip": "Klicka för att se endast aktiva servrar",
+    "serverName": "Servernamn",
+    "game": "Spel",
+    "players": "Spelare",
+    "cpu": "CPU",
+    "memory": "Minne",
+    "statusTypes": {
+      "online": "ONLINE",
+      "degraded": "DEGRADERAD",
+      "offline": "OFFLINE"
+    }
   },
   "errorPage": {
     "unexpectedError": "Oväntat fel",

@@ -1,4 +1,4 @@
-import {Badge, Card, Col, Modal, Progress, Row, Statistic, Table, theme, Typography} from "antd";
+import {Badge, Card, Col, Modal, Progress, Row, Statistic, Table, theme, Tooltip, Typography} from "antd";
 import {
   CheckCircleOutlined,
   CloudServerOutlined,
@@ -38,7 +38,7 @@ export const OverviewVy = () => {
 
   const columns = [
     {
-      title: t('overview.serverName', 'Server Name'),
+      title: t('overview.serverName'),
       dataIndex: 'name',
       key: 'name',
       render: (text: string, record: GameServer) => (
@@ -49,12 +49,12 @@ export const OverviewVy = () => {
       ),
     },
     {
-      title: t('overview.game', 'Game'),
+      title: t('overview.game'),
       dataIndex: 'game',
       key: 'game',
     },
     {
-      title: t('overview.players', 'Players'),
+      title: t('overview.players'),
       key: 'players',
       render: (_: any, record: GameServer) => (
         <Progress
@@ -66,19 +66,19 @@ export const OverviewVy = () => {
       ),
     },
     {
-      title: t('overview.cpu', 'CPU'),
+      title: t('overview.cpu'),
       dataIndex: 'cpuUsage',
       key: 'cpu',
       render: (cpu?: number) => cpu !== undefined ? `${cpu}%` : '-',
     },
     {
-      title: t('overview.memory', 'Memory'),
+      title: t('overview.memory'),
       dataIndex: 'memoryUsage',
       key: 'memory',
       render: (mem?: number) => mem !== undefined ? `${mem} MB` : '-',
     },
     {
-      title: t('overview.uptime', 'Uptime'),
+      title: t('overview.uptime'),
       dataIndex: 'uptime',
       key: 'uptime',
       render: (uptime?: number) => uptime !== undefined ? (
@@ -106,20 +106,22 @@ export const OverviewVy = () => {
           </Card>
         </Col>
         <Col xs={24} sm={12} lg={6}>
-          <Card variant={"borderless"} hoverable onClick={() => navigate('/', {state: {filter: 'online'}})}>
-            <Statistic
-              title={t('overview.online')}
-              loading={loading}
-              value={stats.online}
-              styles={{content: {color: token.colorSuccess}}}
-              prefix={<CheckCircleOutlined/>}
-            />
-          </Card>
+          <Tooltip title={t('overview.onlineTooltip')}>
+            <Card variant={"borderless"} hoverable onClick={() => navigate('/', {state: {filter: 'online'}})}>
+              <Statistic
+                title={t('overview.online')}
+                loading={loading}
+                value={stats.online}
+                styles={{content: {color: token.colorSuccess}}}
+                prefix={<CheckCircleOutlined/>}
+              />
+            </Card>
+          </Tooltip>
         </Col>
         <Col xs={24} sm={12} lg={6}>
           <Card variant={"borderless"}>
             <Statistic
-              title={t('overview.avgUptime', 'Avg. Uptime')}
+              title={t('overview.avgUptime')}
               loading={loading}
               value={stats.avgUptime}
               precision={1}
@@ -144,7 +146,7 @@ export const OverviewVy = () => {
       <Row gutter={[16, 16]} style={{marginTop: '24px'}}>
         <Col span={24}>
           <Card
-            title={<span><CloudServerOutlined style={{marginRight: 8}}/> {t('overview.backendSystems', 'Backend Systems Support')}</span>}
+            title={<span><CloudServerOutlined style={{marginRight: 8}}/> {t('overview.backendSystems')}</span>}
             variant={"borderless"}
           >
             <Row gutter={[16, 16]}>
@@ -163,7 +165,7 @@ export const OverviewVy = () => {
                   >
                     <Typography.Text strong>{app.name}</Typography.Text>
                     <div style={{marginTop: 8}}>
-                      <Badge color={getStatusColor(app.status)} text={app.status.toUpperCase()}/>
+                      <Badge color={getStatusColor(app.status)} text={t(`overview.statusTypes.${app.status}`)}/>
                     </div>
                   </Card>
                 </Col>
@@ -176,7 +178,7 @@ export const OverviewVy = () => {
       <Row gutter={[16, 16]} style={{marginTop: '24px'}}>
         <Col span={16}>
           <Card
-            title={<span><DesktopOutlined style={{marginRight: 8}}/> {t('overview.serverSupervision', 'Server Supervision')}</span>}
+            title={<span><DesktopOutlined style={{marginRight: 8}}/> {t('overview.serverSupervision')}</span>}
             variant={"borderless"}
           >
             <Table
@@ -191,13 +193,13 @@ export const OverviewVy = () => {
         </Col>
         <Col span={8}>
           <Card
-            title={<span><DeliveredProcedureOutlined style={{marginRight: 8}}/> {t('overview.resourceUsage', 'Resource Usage')}</span>}
+            title={<span><DeliveredProcedureOutlined style={{marginRight: 8}}/> {t('overview.resourceUsage')}</span>}
             variant={"borderless"}
           >
-            <Typography.Text type="secondary">{t('overview.totalCpu', 'Total CPU Load')}</Typography.Text>
+            <Typography.Text type="secondary">{t('overview.totalCpu')}</Typography.Text>
             <Progress percent={Math.min(100, stats.totalCPU)} status="active" strokeColor={token.colorInfo}/>
             <div style={{marginTop: 24}}>
-              <Typography.Text type="secondary">{t('overview.totalMemory', 'Total Memory Usage')}</Typography.Text>
+              <Typography.Text type="secondary">{t('overview.totalMemory')}</Typography.Text>
               <Progress
                 percent={Math.min(100, (stats.totalMemory / 16384) * 100)}
                 format={() => `${stats.totalMemory} MB / 16GB`}
@@ -207,23 +209,23 @@ export const OverviewVy = () => {
           </Card>
 
           <Card
-            title={<span><HistoryOutlined style={{marginRight: 8}}/> {t('overview.playerActivity', 'Recent Activity')}</span>}
+            title={<span><HistoryOutlined style={{marginRight: 8}}/> {t('overview.playerActivity')}</span>}
             variant={"borderless"}
             style={{marginTop: 16}}
           >
             <div style={{display: 'flex', alignItems: 'flex-end', height: '100px', gap: '4px'}}>
               {playerHistory.map((h, i) => (
-                <div
-                  key={i}
-                  title={`${h.timestamp}: ${h.count} players`}
-                  style={{
-                    flex: 1,
-                    backgroundColor: token.colorPrimary,
-                    height: `${(h.count / 60) * 100}%`,
-                    borderRadius: '2px 2px 0 0',
-                    opacity: 0.6 + (h.count / 60) * 0.4
-                  }}
-                />
+                <Tooltip key={i} title={`${h.timestamp}: ${h.count} ${t('common.players').toLowerCase()}`}>
+                  <div
+                    style={{
+                      flex: 1,
+                      backgroundColor: token.colorPrimary,
+                      height: `${(h.count / 60) * 100}%`,
+                      borderRadius: '2px 2px 0 0',
+                      opacity: 0.6 + (h.count / 60) * 0.4
+                    }}
+                  />
+                </Tooltip>
               ))}
             </div>
             <div style={{display: 'flex', justifyContent: 'space-between', marginTop: 8}}>
@@ -235,7 +237,7 @@ export const OverviewVy = () => {
       </Row>
 
       <Modal
-        title={<span><InfoCircleOutlined style={{marginRight: 8}}/> {selectedApp?.name} - {t('overview.details', 'System Details')}</span>}
+        title={<span><InfoCircleOutlined style={{marginRight: 8}}/> {selectedApp?.name} - {t('overview.details')}</span>}
         open={!!selectedApp}
         onCancel={() => setSelectedApp(null)}
         footer={null}
@@ -244,19 +246,19 @@ export const OverviewVy = () => {
         {selectedApp && (
           <Row gutter={[16, 16]}>
             <Col span={12}>
-              <Statistic title={t('overview.status', 'Status')} value={selectedApp.status.toUpperCase()} valueStyle={{color: getStatusColor(selectedApp.status), fontSize: '18px'}} />
+              <Statistic title={t('overview.status')} value={t(`overview.statusTypes.${selectedApp.status}`)} valueStyle={{color: getStatusColor(selectedApp.status), fontSize: '18px'}} />
             </Col>
             <Col span={12}>
-              <Statistic title={t('overview.version', 'Version')} value={selectedApp.version} valueStyle={{fontSize: '18px'}} />
+              <Statistic title={t('overview.version')} value={selectedApp.version} valueStyle={{fontSize: '18px'}} />
             </Col>
             <Col span={12}>
-              <Statistic title={t('overview.uptime', 'Uptime')} value={selectedApp.uptime} valueStyle={{fontSize: '18px'}} />
+              <Statistic title={t('overview.uptime')} value={selectedApp.uptime} valueStyle={{fontSize: '18px'}} />
             </Col>
             <Col span={12}>
-              <Statistic title={t('overview.responseTime', 'Response Time')} value={selectedApp.responseTime} suffix="ms" valueStyle={{fontSize: '18px'}} />
+              <Statistic title={t('overview.responseTime')} value={selectedApp.responseTime} suffix="ms" valueStyle={{fontSize: '18px'}} />
             </Col>
             <Col span={24}>
-              <Typography.Text type="secondary">{t('overview.errorRate', 'Error Rate')}</Typography.Text>
+              <Typography.Text type="secondary">{t('overview.errorRate')}</Typography.Text>
               <Progress
                 percent={selectedApp.errorRate}
                 status={selectedApp.errorRate > 5 ? 'exception' : 'active'}
@@ -265,15 +267,15 @@ export const OverviewVy = () => {
               />
             </Col>
             <Col span={24}>
-              <Typography.Text type="secondary">{t('overview.endpoints', 'Active Endpoints')}</Typography.Text>
+              <Typography.Text type="secondary">{t('overview.endpoints')}</Typography.Text>
               <div style={{display: 'flex', alignItems: 'center', gap: '8px', marginTop: '4px'}}>
                 <LineChartOutlined style={{color: token.colorPrimary}} />
-                <Typography.Text>{selectedApp.endpoints} {t('overview.endpointsCount', 'monitored endpoints')}</Typography.Text>
+                <Typography.Text>{selectedApp.endpoints} {t('overview.endpointsCount')}</Typography.Text>
               </div>
             </Col>
             {selectedApp.lastBackup && (
               <Col span={24}>
-                <Typography.Text type="secondary">{t('overview.lastBackup', 'Last Backup')}</Typography.Text>
+                <Typography.Text type="secondary">{t('overview.lastBackup')}</Typography.Text>
                 <div>{new Date(selectedApp.lastBackup).toLocaleString()}</div>
               </Col>
             )}

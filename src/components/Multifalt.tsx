@@ -68,9 +68,9 @@ export const Multifalt = ({onSearch, statusFilter, setStatusFilter, viewType, se
             value={statusFilter}
             onChange={(value) => setStatusFilter(value as string)}
             options={[
-              {value: 'all', label: t('common.all', 'All')},
-              {value: 'online', label: t('common.running', 'Online')},
-              {value: 'offline', label: t('common.offline', 'Offline')},
+              {value: 'all', label: t('common.all')},
+              {value: 'online', label: t('common.running')},
+              {value: 'offline', label: t('common.offline')},
             ]}
           />
           <div ref={ref4}>

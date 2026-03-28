@@ -1,6 +1,6 @@
 import {Flex, List, Space, Table, Tag, Typography} from "antd";
 import {MinusCircleOutlined, SyncOutlined} from "@ant-design/icons";
-import {useEffect, useState, useCallback} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useLocation} from "react-router-dom";
 import {GameServer} from "../models/gameServer.ts";
@@ -74,7 +74,7 @@ export const ServerVy = () => {
       dataIndex: 'name',
       key: 'name',
       render: (name) => <Typography.Text strong>{name}</Typography.Text>,
-      sorter: (a, b) => a.name.localeCompare(b.name),
+      sorter: (a: GameServer, b: GameServer) => a.name.localeCompare(b.name),
     },
     {
       title: t('common.status'),

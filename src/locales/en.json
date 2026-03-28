@@ -28,7 +28,8 @@
     "no": "No",
     "success": "Success",
     "error": "Error",
-    "required": "Required field"
+    "required": "Required field",
+    "all": "All"
   },
   "form": {
     "placeholderGame": "Select a game...",
@@ -53,8 +54,7 @@
   },
   "menu": {
     "applications": "Applications",
-    "overview": "Overview",
-    "benchmark": "Benchmark"
+    "overview": "Overview"
   },
   "multifalt": {
     "searchPlaceholder": "Search servers...",
@@ -87,21 +87,34 @@
     "totalServers": "Total Servers",
     "online": "Online",
     "offline": "Offline",
-    "totalPlayers": "Total Players"
-  },
-  "benchmark": {
-    "title": "UI Benchmark Playground",
-    "description": "This page is dedicated to testing UI components and benchmarking Ant Design features.",
-    "formTitle": "Ant Design Form Benchmark (Vertical Layout)",
-    "coverName": "Cover Name (TextArea)",
-    "coverNamePlaceholder": "Enter a cover name here...",
-    "coverNameRequired": "Please enter a cover name!",
-    "fileUpload": "File Upload (Dragger)",
-    "fileUploadRequired": "Please upload one file!",
-    "fileUploadText": "Click or drag file to this area to upload",
-    "fileUploadHint": "Support for a single or bulk upload. Strictly prohibited from uploading company data or other banned files.",
-    "formSuccess": "Form submitted successfully!",
-    "formError": "Please check the form for errors."
+    "totalPlayers": "Total Players",
+    "avgUptime": "Avg. Uptime",
+    "backendSystems": "Backend Systems Support",
+    "serverSupervision": "Server Supervision",
+    "resourceUsage": "Resource Usage",
+    "totalCpu": "Total CPU Load",
+    "totalMemory": "Total Memory Usage",
+    "playerActivity": "Recent Activity",
+    "details": "System Details",
+    "status": "Status",
+    "version": "Version",
+    "uptime": "Uptime",
+    "responseTime": "Response Time",
+    "errorRate": "Error Rate",
+    "endpoints": "Active Endpoints",
+    "endpointsCount": "monitored endpoints",
+    "lastBackup": "Last Backup",
+    "onlineTooltip": "Click to see only online servers",
+    "serverName": "Server Name",
+    "game": "Game",
+    "players": "Players",
+    "cpu": "CPU",
+    "memory": "Memory",
+    "statusTypes": {
+      "online": "ONLINE",
+      "degraded": "DEGRADED",
+      "offline": "OFFLINE"
+    }
   },
   "errorPage": {
     "unexpectedError": "Unexpected error",

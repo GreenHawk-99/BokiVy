@@ -69,7 +69,7 @@ export const Sidhuvud = () => {
       icon: <RadarChartOutlined/>,
     },
     {
-      label: t('menu.benchmark'),
+      label: 'Benchmark',
       key: 'benchmark',
       icon: <ExperimentOutlined/>,
     },

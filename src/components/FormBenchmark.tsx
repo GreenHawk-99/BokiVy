@@ -2,8 +2,6 @@ import {useEffect, useState} from 'react';
 import {Button, Card, Form, Input, Space, Typography, Upload, UploadProps} from 'antd';
 import {ExperimentOutlined, InboxOutlined} from '@ant-design/icons';
 import {useMessageSammanhang} from "../hooks/useContext.ts";
-import {RcFile} from "antd/es/upload";
-import {useTranslation} from "react-i18next";
 
 const {Title, Paragraph} = Typography;
 const {Dragger} = Upload;
@@ -20,7 +18,6 @@ interface BenchmarkForm {
 export const FormBenchmark = () => {
   const [form] = Form.useForm<BenchmarkForm>();
   const messageApi = useMessageSammanhang();
-  const {t} = useTranslation();
   const [submittable, setSubmittable] = useState<boolean>(false);
 
   // Watch all values to trigger re-render on any change
@@ -41,12 +38,12 @@ export const FormBenchmark = () => {
     formData.append('file', rawFile);
 
     console.log('Final data for Service:', {name: values.name, file: rawFile});
-    void messageApi.success(t('benchmark.formSuccess'));
+    void messageApi.success('Form submitted successfully!');
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
-    void messageApi.error(t('benchmark.formError'));
+    void messageApi.error('Please check the form for errors.');
   };
 
   const uploadProps: UploadProps = {
@@ -69,15 +66,14 @@ export const FormBenchmark = () => {
     <Space direction="vertical" size="large" style={{width: '100%'}}>
       <Card variant="outlined">
         <Title level={2}>
-          <ExperimentOutlined/> {t('benchmark.title')} (v6.2.0)
+          <ExperimentOutlined/> UI Benchmark Playground (v6.2.0)
         </Title>
         <Paragraph>
-          {t('benchmark.description')}
-          Currently showcasing <b>Ant Design v6.2.0</b> features like Form variants and Dragger upload.
+          This page is dedicated to testing UI components and benchmarking Ant Design features. Currently showcasing Ant Design v6.2.0 features like Form variants and Dragger upload.
         </Paragraph>
       </Card>
 
-      <Card title={t('benchmark.formTitle')} variant="outlined">
+      <Card title="Ant Design Form Benchmark (Vertical Layout)" variant="outlined">
         <Form
           form={form}
           name="benchmark_form"
@@ -89,37 +85,37 @@ export const FormBenchmark = () => {
           variant="filled"
         >
           <Form.Item
-            label={t('benchmark.coverName')}
+            label="Cover Name (TextArea)"
             name="name"
-            rules={[{required: true, message: t('benchmark.coverNameRequired')}]}
+            rules={[{required: true, message: 'Please enter a cover name!'}]}
           >
             <Input
-              placeholder={t('benchmark.coverNamePlaceholder')}
+              placeholder="Enter a cover name here..."
               maxLength={20}
             />
           </Form.Item>
 
           <Form.Item
-            label={t('benchmark.fileUpload')}
+            label="File Upload (Dragger)"
             name="file"
             getValueProps={(value) => ({fileList: value ? [value] : []})}
             getValueFromEvent={normFile}
-            rules={[{required: true, message: t('benchmark.fileUploadRequired')}]}
+            rules={[{required: true, message: 'Please upload one file!'}]}
           >
             <Dragger {...uploadProps} style={{padding: '20px'}}>
               <p className="ant-upload-drag-icon">
                 <InboxOutlined/>
               </p>
-              <p className="ant-upload-text">{t('benchmark.fileUploadText')}</p>
+              <p className="ant-upload-text">Click or drag file to this area to upload</p>
               <p className="ant-upload-hint">
-                {t('benchmark.fileUploadHint')}
+                Support for a single or bulk upload. Strictly prohibited from uploading company data or other banned files.
               </p>
             </Dragger>
           </Form.Item>
 
           <Form.Item>
             <Button type="primary" htmlType="submit" disabled={!submittable}>
-              {t('common.send')}
+              Send
             </Button>
           </Form.Item>
         </Form>
